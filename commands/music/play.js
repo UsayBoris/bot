@@ -31,6 +31,7 @@ module.exports = {
                 volume: 1,
                 playing: true,
                 loop: false,
+                timeout: 3
             }
 
             message.client.queue.set(message.guild.id, queueConstruct);
@@ -67,7 +68,7 @@ module.exports = {
                 if (!song){
                     serverQueue.dispatcher.emit('end');
                 }
-            }, 180000, song);
+            }, 3 * 60 * 1000, song);
         }
 
         clearTimeout(timeout);
