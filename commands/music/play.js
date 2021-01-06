@@ -1,4 +1,4 @@
-const { checkPermissions, checkIfVoice } = require('./checkPermissions');
+const {checkPermissions, checkIfVoice} = require('./checkPermissions');
 let Youtube = require('discord-youtube-api');
 const ytdl = require('ytdl-core');
 const logger = require("../../logger");
@@ -30,7 +30,7 @@ module.exports = {
                 songs: [],
                 volume: 1,
                 playing: true,
-                loop: true,
+                loop: false,
             }
 
             message.client.queue.set(message.guild.id, queueConstruct);
@@ -60,11 +60,17 @@ module.exports = {
         const guild = message.guild;
         const serverQueue = queue.get(message.guild.id);
 
+        let timeout = null;
+
         if (!song) {
-            serverQueue.voiceChannel.leave();
-            queue.delete(guild.id);
-            return;
+            timeout = setTimeout((song) => {
+                if (!song){
+                    serverQueue.dispatcher.emit('end');
+                }
+            }, 180000, song);
         }
+
+        clearTimeout(timeout);
 
         const stream = ytdl(song.url, {
             quality: 'highestaudio',
@@ -78,7 +84,10 @@ module.exports = {
                 if (serverQueue.loop) serverQueue.songs.push(currentSong);
                 this.play(message, serverQueue.songs[0]);
             })
-            .on('error', error => logger.error(error.message));
+            .on('end', () => {
+
+            })
+            .on('error', error => logger.error(error.message))
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
         serverQueue.textChannel.send(`🎶 Start playing: **${song.title}**`);
     }

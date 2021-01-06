@@ -5,7 +5,10 @@ module.exports = {
     execute: async function (message, client, args) {
         if(!checkIfVoice(message)) return;
 
-        await message.client.leave();
+        const serverQueue = message.client.queue.get(message.guild.id);
+        if (!serverQueue) return message.channel.send("I'm not in a voice chat!");
+
+        await serverQueue.voiceChannel.leave();
     },
     help: async function (message, prefix) {
 
