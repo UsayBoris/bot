@@ -8,7 +8,8 @@ module.exports = {
         const serverQueue = message.client.queue.get(message.guild.id);
         if (!serverQueue) return message.channel.send("I'm not in a voice chat!");
 
-        await serverQueue.voiceChannel.leave();
+
+        await serverQueue.connection.disconnect();
     },
     help: async function (message, prefix) {
 

@@ -31,7 +31,8 @@ module.exports = {
                 volume: 1,
                 playing: true,
                 loop: false,
-                timeout: 3
+                timeout: 3,
+                timeoutHandler: null
             }
 
             message.client.queue.set(message.guild.id, queueConstruct);
@@ -58,21 +59,9 @@ module.exports = {
     },
     play: function (message, song) {
         const queue = message.client.queue;
-        const guild = message.guild;
         const serverQueue = queue.get(message.guild.id);
 
-        let timeout = null;
-
-        if (!song) {
-            timeout = setTimeout((song) => {
-                if (!song){
-                    serverQueue.dispatcher.emit('end');
-                }
-            }, 3 * 60 * 1000, song);
-            return;
-        }
-
-        clearTimeout(timeout);
+        clearTimeout(serverQueue.timeoutHandler);
 
         const stream = ytdl(song.url, {
             quality: 'highestaudio',
@@ -84,11 +73,16 @@ module.exports = {
             .on('finish', () => {
                 let currentSong = serverQueue.songs.shift();
                 if (serverQueue.loop) serverQueue.songs.push(currentSong);
-                this.play(message, serverQueue.songs[0]);
-            })
-            .on('end', () => {
-                serverQueue.voiceChannel.leave();
-                message.client.queue.delete(message.guild.id);
+                if (!serverQueue.songs[0]) {
+                    serverQueue.timeoutHandler = setTimeout((song) => {
+                        if (!song) {
+                            message.channel.send('Connection timed out');
+                            serverQueue.voiceChannel.leave();
+                            message.client.queue.delete(message.guild.id);
+                        }
+                    }, 0.1 * 60 * 1000, serverQueue.songs[0]);
+                } else
+                    this.play(message, serverQueue.songs[0]);
             })
             .on('error', error => logger.error(error.message))
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
