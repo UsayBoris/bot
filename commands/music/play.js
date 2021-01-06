@@ -69,6 +69,7 @@ module.exports = {
                     serverQueue.dispatcher.emit('end');
                 }
             }, 3 * 60 * 1000, song);
+            return;
         }
 
         clearTimeout(timeout);
@@ -86,7 +87,8 @@ module.exports = {
                 this.play(message, serverQueue.songs[0]);
             })
             .on('end', () => {
-
+                serverQueue.voiceChannel.leave();
+                message.client.queue.delete(message.guild.id);
             })
             .on('error', error => logger.error(error.message))
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
