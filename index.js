@@ -1,10 +1,10 @@
+require('dotenv').config();
 const ElBoris = require("./struct/Client");
 const client = new ElBoris();
 const {commandHandler} = require("./commands");
 const {update_user} = require('./models/user');
 const Guild = require('./models/guild');
 const logger = require('./logger');
-require('dotenv').config();
 
 //TODO pretty embed for everything that needs an embed
 
