@@ -30,7 +30,7 @@ module.exports = {
                 songs: [],
                 volume: 1,
                 playing: true,
-                loop: false,
+                loop: true,
             }
 
             message.client.queue.set(message.guild.id, queueConstruct);
@@ -66,11 +66,13 @@ module.exports = {
             return;
         }
 
+        const stream = ytdl(song.url, {
+            quality: 'highestaudio',
+            highWaterMark: 1 << 25
+        });
+
         const dispatcher = serverQueue.connection
-            .play(ytdl(song.url), {
-                quality: 'highestaudio',
-                highWaterMark: 1 << 25
-            })
+            .play(stream)
             .on('finish', () => {
                 let currentSong = serverQueue.songs.shift();
                 if (serverQueue.loop) serverQueue.songs.push(currentSong);

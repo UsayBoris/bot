@@ -5,7 +5,7 @@ module.exports = {
     execute: async function (message, client, args) {
         if(!checkIfVoice(message)) return;
 
-        await client.voice.leave();
+        await message.client.leave();
     },
     help: async function (message, prefix) {
 
