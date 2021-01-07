@@ -44,7 +44,7 @@ client.on('message', async message => {
 
     await commandHandler(message, client, prefix);              //very well made command handler :)
 
-    logger.info(`User ${message.author.username} send a command to ${message.channel.name} in ${message.guild.name}`);
+    logger.command(`User ${message.author.username} send a command to ${message.channel.name} in ${message.guild.name}`);
 });
 
 //new member added
