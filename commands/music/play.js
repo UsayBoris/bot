@@ -76,11 +76,11 @@ module.exports = {
                 if (!serverQueue.songs[0]) {
                     serverQueue.timeoutHandler = setTimeout((song) => {
                         if (!song) {
-                            message.channel.send('Connection timed out');
-                            serverQueue.voiceChannel.leave();
+                            message.channel.send('Connection timed out (Bot was idle with no music paying)');
+                            serverQueue.connect.disconnect();
                             message.client.queue.delete(message.guild.id);
                         }
-                    }, 0.1 * 60 * 1000, serverQueue.songs[0]);
+                    }, serverQueue.timeout * 60 * 1000, serverQueue.songs[0]);
                 } else
                     this.play(message, serverQueue.songs[0]);
             })

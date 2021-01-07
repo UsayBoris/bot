@@ -10,8 +10,13 @@ module.exports = {
         if (!serverQueue) return message.channel.send('No songs in queue');
         serverQueue.songs = [];
         console.log(serverQueue.connection.dispatcher);
-        serverQueue.connection.dispatcher.end();
-        await message.react('👌');
+        try{
+            serverQueue.connection.dispatcher.end();
+            await message.react('👌');
+        } catch(error){
+            await message.react('👎');
+        }
+
 
     },
     help: async function (message, prefix) {
