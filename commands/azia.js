@@ -5,8 +5,11 @@ module.exports = {
     name: 'azia',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
-        if (!member) member = message.user;
-        let user = await User.findOne({ id: member.user.id })
+
+        if (!member) member = message.author.id;
+        else member = member.user.id;
+
+        let user = await User.findOne({id: member})
         if (user === null) {
             return message.reply("This user hasn't talked in this server yet.");
         }
