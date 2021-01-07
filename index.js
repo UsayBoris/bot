@@ -5,9 +5,6 @@ const {commandHandler} = require("./commands");
 const {update_user} = require('./models/user');
 const Guild = require('./models/guild');
 const logger = require('./logger');
-require('@pm2/io').init({
-    transactions: true
-});
 
 //TODO pretty embed for everything that needs an embed
 
