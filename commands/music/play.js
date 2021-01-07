@@ -3,11 +3,17 @@ let Youtube = require('discord-youtube-api');
 const ytdl = require('ytdl-core');
 const logger = require("../../logger");
 const search = new Youtube(process.env.YOUTUBE_API);
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'play',
     execute: async function (message, client, args) {
         if (!checkPermissions(message, client) || !checkIfVoice(message)) return;
+
+        if (args[0]) {
+            const serverQueue = message.client.queue.get(message.guild.id);
+            if (!serverQueue) return message.channel.send(new Discord.MessageEmbed().setTitle('No songs to play'));
+        }
 
         let channel = message.member.voice.channel;
 

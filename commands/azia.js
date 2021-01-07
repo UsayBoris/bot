@@ -5,17 +5,16 @@ module.exports = {
     name: 'azia',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
+        if (member === undefined) member = message.author;
+        else member = member.user;
 
-        if (!member) member = message.author.id;
-        else member = member.user.id;
-
-        let user = await User.findOne({id: member})
+        let user = await User.findOne({id: member.id})
         if (user === null) {
             return message.reply("This user hasn't talked in this server yet.");
         }
         user.azia += 1;
         user.save();
-        return message.channel.send(`O <@${(member.user.id).toString()}> já aziou ${user.azia} vezes.`);
+        return message.channel.send(`O <@${(member.id).toString()}> já aziou ${user.azia} vezes.`);
 
     },
     help: async function (message, prefix) {

@@ -7,7 +7,8 @@ module.exports = {
         if (!checkIfVoice(message)) return;
 
         const serverQueue = message.client.queue.get(message.guild.id);
-        if (!serverQueue) return message.channel.send('There is nothing playing.');
+        if (!serverQueue) return message.channel.send(new Discord.MessageEmbed()
+            .addField("Queue", "Empty"));
         let queue = serverQueue.songs.map(song => `**-** ${song.title}`).join('\n');
         if (!queue) return message.channel.send(new Discord.MessageEmbed()
             .addField("Queue", "Empty"));
