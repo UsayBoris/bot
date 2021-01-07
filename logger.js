@@ -18,7 +18,7 @@ const myCustomLevels = {
         error: 'red',
         debug: 'green',
         data: 'white',
-        command: 'purple'
+        command: 'brightMagenta'
     }
 }
 
