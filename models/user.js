@@ -48,4 +48,15 @@ async function update_user(message) {
     user.save();
 }
 
-module.exports = {User, update_user};
+async function find_all_users(sort_query){
+    if(!sort_query) sort_query = 'xp';
+    let users = await User.find({}).sort([[sort_query, "desc"]]);
+    let result = []
+    for (let i = 0; i < 10; i++){
+        result[i] = users[i];
+    }
+    return result;
+
+}
+
+module.exports = {User, update_user, find_all_users};
