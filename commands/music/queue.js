@@ -10,7 +10,7 @@ module.exports = {
         if (!serverQueue) return message.channel.send('There is nothing playing.');
         let queue = serverQueue.songs.map(song => `**-** ${song.title}`).join('\n');
         if (!queue) return message.channel.send(new Discord.MessageEmbed()
-            .addField("The Queue is empty", " ", true));
+            .addField("Queue", "Empty"));
 
         let current = serverQueue.songs[0].title;
         return message.channel.send(new Discord.MessageEmbed()
