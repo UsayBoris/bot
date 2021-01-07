@@ -24,8 +24,8 @@ async function commandHandler(message, client, prefix) {
         try {
             await commands[command].execute(message, client, args);
         } catch (e) {
-            logger.error(e);
-            message.reply(e);
+            logger.error(e.message);
+            message.reply(e.message);
         }
     } else message.reply(`"${command}" is not a valid command!`);
 }
