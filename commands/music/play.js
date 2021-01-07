@@ -61,6 +61,8 @@ module.exports = {
         const queue = message.client.queue;
         const serverQueue = queue.get(message.guild.id);
 
+        //TODO make it so that it doesn't shift, using a index maybe
+
         clearTimeout(serverQueue.timeoutHandler);
 
         const stream = ytdl(song.url, {
@@ -77,7 +79,7 @@ module.exports = {
                     serverQueue.timeoutHandler = setTimeout((song) => {
                         if (!song) {
                             message.channel.send('Connection timed out (Bot was idle with no music paying)');
-                            serverQueue.connect.disconnect();
+                            serverQueue.connection.disconnect();
                             message.client.queue.delete(message.guild.id);
                         }
                     }, serverQueue.timeout * 60 * 1000, serverQueue.songs[0]);
