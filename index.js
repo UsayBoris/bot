@@ -5,6 +5,9 @@ const {commandHandler} = require("./commands");
 const {update_user} = require('./models/user');
 const Guild = require('./models/guild');
 const logger = require('./logger');
+require('@pm2/io').init({
+    transactions: true
+});
 
 //TODO pretty embed for everything that needs an embed
 
@@ -48,7 +51,7 @@ client.on('message', async message => {
 });
 
 //new member added
-client.on('guildMemberAdd', async member =>{
+client.on('guildMemberAdd', async member => {
     logger.info(`New User ${member.user.username} has joined ${member.guild.name}`);
     await member.guild.channels.find(c => c.name === "welcome").send(`${member.user.username} has joined this server`);
 });
