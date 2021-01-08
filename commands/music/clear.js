@@ -16,10 +16,8 @@ module.exports = {
         } catch(error){
             await message.react('👎');
         }
-
-
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     }
 };

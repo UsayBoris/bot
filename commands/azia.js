@@ -17,10 +17,10 @@ module.exports = {
         return message.channel.send(`O <@${(member.id).toString()}> já aziou ${user.azia} vezes.`);
 
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Azia';
         const _description = 'Azia alguém';
-        const _usage = `${prefix}azia {user tag}`;
+        const _usage = `azia {user tag}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

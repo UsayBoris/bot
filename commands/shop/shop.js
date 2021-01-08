@@ -7,10 +7,10 @@ module.exports = {
         await message.channel.send("In Progress...");
 
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Shop';
         const _description = 'Displays the full or specific shops';
-        const _usage = `${prefix}shop {optional: specific shop}`;
+        const _usage = `shop {optional: specific shop}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

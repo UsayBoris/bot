@@ -12,10 +12,10 @@ module.exports = {
             .then(messages => message.reply(`bulk deleted ${messages.size} messages`))
             .catch(error => message.reply(`Couldn't delete messages because of: ${error.message}`))
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Purge';
         const _description = 'Deletes a number of given messages';
-        const _usage = `${prefix}purge {number of messages}`;
+        const _usage = `purge {number of messages}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

@@ -15,10 +15,10 @@ module.exports = {
             .addField("Stats",`**Level: ${user.level}**\nAzia: **${user.azia}**`)
         return message.channel.send(embed);
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Look At';
         const _description = 'Look at a user profile';
-        const _usage = `${prefix}look_at {user tag}`;
+        const _usage = `look_at {user tag}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

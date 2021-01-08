@@ -18,7 +18,7 @@ module.exports = {
             .addField("Song queue", queue)
             .addField('Now Playing', current));
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     }
 };

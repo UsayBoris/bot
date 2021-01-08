@@ -10,7 +10,7 @@ module.exports = {
 
         await serverQueue.connection.disconnect();
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     }
 };

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const logger = require('./logger');
 
-let commands = {};
+const commands = {};
 const defaultCommands = fs.readdirSync('./commands')
 for (const outer of defaultCommands) {
     if (outer.endsWith('.js')) {
@@ -14,12 +14,15 @@ for (const outer of defaultCommands) {
         }
     }
 }
+logger.info(`Loaded ${Object.keys(commands).length} Commands`);
+
 
 async function commandHandler(message, client, prefix) {
     const args = message.content.slice(prefix.length).trim().split(/ +/g); //splits message content by space
     const command = args.shift().toLowerCase();                                   //finds the first value (group or default)
 
-    //TODO need to change this
+    //TODO need to change this (it is working?)
+    //TODO help command needs to be different
     if (Object.keys(commands).includes(command)) {
         try {
             await commands[command].execute(message, client, args);
@@ -27,7 +30,10 @@ async function commandHandler(message, client, prefix) {
             logger.error(e.message);
             message.reply(e.message);
         }
-    } else message.reply(`"${command}" is not a valid command!`);
+    } else if (command === 'help'){
+        await commands[args[0]].help(message);
+    }
+    else message.reply(`"${command}" is not a valid command!`);
 }
 
-module.exports = {commandHandler};
+module.exports = {commandHandler, commands};

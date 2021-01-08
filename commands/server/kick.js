@@ -21,10 +21,10 @@ module.exports = {
             .then(() => message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because : ${reason}`))
             .catch(e => message.reply(`I couldn't kick because of : ${e}`));
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Kick';
         const _description = 'Kick someone for the given reason';
-        const _usage = `${prefix}kick {user tag} {'Reason'}`;
+        const _usage = `kick {user tag} {'Reason'}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

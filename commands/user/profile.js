@@ -13,10 +13,10 @@ module.exports = {
         return message.channel.send(embed);
 
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Profile';
         const _description = 'Looks at your user profile';
-        const _usage = `${prefix}profile`;
+        const _usage = `profile`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

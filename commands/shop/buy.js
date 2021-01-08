@@ -5,10 +5,10 @@ module.exports = {
     execute: async function (message, client, args) {
         return message.channel.send('In Progress...');
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Buy';
         const _description = 'Buys a specific item from the shop';
-        const _usage = `${prefix}buy {item name or id}`;
+        const _usage = `buy {item name or id}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

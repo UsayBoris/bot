@@ -11,8 +11,7 @@ module.exports = {
         if (serverQueue.loop) return message.channel.send("Now looping the queue");
         return message.channel.send("Now (un)looping the queue");
     },
-
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     }
 };

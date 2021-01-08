@@ -15,10 +15,10 @@ module.exports = {
             })
         })
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Inspire';
         const _description = 'If in need of some Inspiration';
-        const _usage = `${prefix}inspire`;
+        const _usage = "inspire";
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

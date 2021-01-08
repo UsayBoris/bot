@@ -12,7 +12,7 @@ module.exports = {
         serverQueue.connection.dispatcher.end();
     },
 
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     }
 };

@@ -18,7 +18,17 @@ module.exports = {
         await message.channel.send("```\nHighscores\n" + table.toString() + "\n```");
 
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
+        const _name = 'Highscores';
+        const _description = 'Check highscores';
+        const _usage = "highscores {sort query}";
 
+        const embed = new Discord.MessageEmbed()
+            .setColor("0xFFFE00")
+            .setTitle(`Help Command`)
+            .setThumbnail("https://image.flaticon.com/icons/png/512/36/36601.png")
+            .addField(_name, `**Description:** ${_description}\n**Usage:** ${_usage}`);
+
+        return message.channel.send(embed);
     }
 };

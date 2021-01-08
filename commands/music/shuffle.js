@@ -14,7 +14,7 @@ module.exports = {
 
         message.client.queue.set(message.guild.id, serverQueue)
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     }
 };

@@ -16,10 +16,10 @@ module.exports = {
             .then(() => { message.channel.send(`Prefix changed to ${new_prefix}`) });
 
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Prefix';
         const _description = 'Change the prefix for the bot';
-        const _usage = `${prefix}prefix {new prefix}`;
+        const _usage = `prefix {new prefix}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

@@ -10,10 +10,10 @@ module.exports = {
         message.delete().catch(O_o => { });
         message.channel.send(sayMessage);
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Say';
         const _description = 'Makes the bot say a sentence';
-        const _usage = `${prefix}say {sentence}`;
+        const _usage = "say {sentence}";
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

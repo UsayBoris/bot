@@ -19,10 +19,10 @@ module.exports = {
                 message.reply({ files: [responseFinal.images.fixed_height.url] })
             })
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Giphy Search';
         const _description = 'Finds a random gif';
-        const _usage = `${prefix}giphy {search query}`;
+        const _usage = `giphy {search query}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")

@@ -60,7 +60,7 @@ module.exports = {
             return message.channel.send(`✅ **${song.title}** has been added to the queue!`).catch(logger.error);
         }
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
 
     },
     play: function (message, song) {

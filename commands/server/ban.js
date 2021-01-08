@@ -21,10 +21,10 @@ module.exports = {
             .then(() => message.reply(`${member.user.tag} has been banned by ${message.author.tag} because : ${reason}`))
             .catch(e => message.reply(`I couldn't ban because of : ${e}`));
     },
-    help: async function (message, prefix) {
+    help: async function (message) {
         const _name = 'Ban';
         const _description = 'Bans someone for the given reason';
-        const _usage = `${prefix}ban {user tag} {'Reason'}`;
+        const _usage = `ban {user tag} {'Reason'}`;
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")
