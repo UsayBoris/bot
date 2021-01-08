@@ -25,15 +25,12 @@ async function commandHandler(message, client, prefix) {
     //TODO help command needs to be different
     if (Object.keys(commands).includes(command)) {
         try {
-            await commands[command].execute(message, client, args);
+            await commands[command].execute(message, client, args, commands);
         } catch (e) {
             logger.error(e.message);
             message.reply(e.message);
         }
-    } else if (command === 'help'){
-        await commands[args[0]].help(message);
-    }
-    else message.reply(`"${command}" is not a valid command!`);
+    } else message.reply(`"${command}" is not a valid command!`);
 }
 
 module.exports = {commandHandler, commands};

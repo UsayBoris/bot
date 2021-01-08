@@ -12,9 +12,6 @@ module.exports = {
         result.forEach(user => {
             table.addRow(rank++, user.name, user.level, user.azia);
         });
-        const Embed = new Discord.MessageEmbed()
-            .addField( 'Highscores',table.toString())
-            .setDescription(table.toString());
         await message.channel.send("```\nHighscores\n" + table.toString() + "\n```");
 
     },
