@@ -6,7 +6,9 @@ const search = new Youtube(process.env.YOUTUBE_API);
 const Discord = require('discord.js');
 
 module.exports = {
-    name: 'play',
+    name: 'Play',
+    description: 'Plays a given song',
+    usage: 'play {song name or url}',
     execute: async function (message, client, args) {
         if (!checkPermissions(message, client) || !checkIfVoice(message)) return;
 
