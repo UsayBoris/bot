@@ -7,17 +7,18 @@ module.exports = {
     usage: 'mine',
     execute: async function (message, client, args) {
         if(talkedRecently.has(message.author.id)){
-            message.reply('this command is still on cooldown for you');
+            message.reply('you are still mining!');
         }
         else {
             const bonus_coins = Math.floor(Math.random() * 5);
-            let user = await User.findOne({id: message.author.id});
-            user.coins += bonus_coins;
-            user.save();
-            message.reply(`you have mined ${bonus_coins}`);
+            message.channel.send('Mining has started!')
             talkedRecently.add(message.author.id);
-            setTimeout(() => {
+            setTimeout(async () => {
                 talkedRecently.delete(message.author.id);
+                let user = await User.findOne({id: message.author.id});
+                user.coins += bonus_coins;
+                message.reply(`you have mined ${bonus_coins} coins, you now have ${user.coins} BorisCoins`);
+                user.save();
             }, 60000);
         }
     },
