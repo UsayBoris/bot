@@ -35,6 +35,10 @@ client.on("guildDelete", guild => {
 client.on('message', async message => {
     if (message.author.bot) return;
 
+    if (message.content === '@everyone') {
+        return message.reply('@everyone ping ping @everyone');
+    }
+
     await update_user(message);
 
     const guild = await Guild.findOne({id: message.guild.id});  //the guild should be created when it joins, so no fail check here
