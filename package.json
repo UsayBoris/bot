@@ -1,6 +1,6 @@
 {
   "name": "js_bot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,9 @@
     "moment": "^2.29.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.20",
+    "node-opus": "^0.3.3",
     "nodemon": "^2.0.7",
+    "opusscript": "0.0.7",
     "winston": "^3.3.3",
     "ytdl": "^1.3.5",
     "ytdl-core": "^4.0.6"

@@ -2,3 +2,4 @@ node_modules
 .idea
 ffmpeg.exe
 .env
+ecosystem.config.json
