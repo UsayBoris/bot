@@ -39,6 +39,7 @@ async function update_user(message) {
         await User.create({name: message.author.username, id: message.author.id});
         return logger.warn('New User Created');
     }
+    user.name = message.author.username;
     user.xp += 1;
     //TODO change this
     if (user.xp >= level_table[`${user.level + 1}`]) {

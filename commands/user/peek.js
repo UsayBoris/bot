@@ -13,6 +13,7 @@ module.exports = {
             .setColor(0x00AE86)
             .setTitle(`${member.user.username} Profile`)
             .addField("Stats",`**Level: ${user.level}**\nAzia: **${user.azia}**`)
+            .setThumbnail(member.user.avatarURL());
         return message.channel.send(embed);
     },
     help: async function (message) {

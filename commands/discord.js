@@ -1,18 +1,21 @@
 const Discord = require('discord.js');
+const {invite} = require('../config.json');
 
 module.exports = {
-    name: 'highscores',
+    name: 'discord',
     execute: async function (message, client, args, commands) {
-        if (!args.length){
-            return message.channel.send('help command');
-        } else if (Object.keys(commands).includes(args[0])){
-            await commands[args[0]].help(message);
-        } else return message.reply('This command is not in the command list');
+        const embed = new Discord.MessageEmbed()
+            .setColor("0xACA19D")
+            .setTitle('Discord server invite')
+            .setThumbnail(client.user.avatarURL())
+            .addField('Link', invite);
+
+        return message.channel.send(embed);
     },
     help: async function (message) {
-        const _name = 'help';
-        const _description = 'Help for the other commands';
-        const _usage = "highscores {sort query}";
+        const _name = 'discord';
+        const _description = 'Get the invite for the official bot server';
+        const _usage = "discord";
 
         const embed = new Discord.MessageEmbed()
             .setColor("0xFFFE00")
