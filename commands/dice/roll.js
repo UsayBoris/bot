@@ -1,0 +1,1 @@
+//TODO ask a player to gamble and bet some coins (can't bet more than what he has)

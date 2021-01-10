@@ -1,7 +1,9 @@
 const { checkIfVoice } = require('./checkPermissions');
 
 module.exports = {
-    name: 'shuffle',
+    name: 'Shuffle',
+    description: 'Shuffles the queue to random',
+    usage: 'shuffle',
     execute: async function (message, client, args) {
         if(!checkIfVoice(message)) return;
 
@@ -13,8 +15,5 @@ module.exports = {
         }
 
         message.client.queue.set(message.guild.id, serverQueue)
-    },
-    help: async function (message) {
-
     }
 };

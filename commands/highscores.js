@@ -3,7 +3,9 @@ const {find_all_users} = require('../models/user');
 const AsciiTable = require('ascii-table');
 
 module.exports = {
-    name: 'highscores',
+    name: 'Highscores',
+    description: 'Check highscores' ,
+    usage: 'highscores {sort query}',
     execute: async function (message, client, args) {
         if (!['azia', 'xp', null].includes(args[0])) return message.reply('not a valid sorting query');
         let result = await find_all_users(args[0]);

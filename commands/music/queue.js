@@ -2,7 +2,9 @@ const Discord = require("discord.js");
 const {checkIfVoice} = require('./checkPermissions');
 
 module.exports = {
-    name: 'queue',
+    name: 'Queue',
+    description: 'Checks the current server queue',
+    usage: 'queue',
     execute: async function (message, client, args) {
         if (!checkIfVoice(message)) return;
 
@@ -17,8 +19,5 @@ module.exports = {
         return message.channel.send(new Discord.MessageEmbed()
             .addField("Song queue", queue)
             .addField('Now Playing', current));
-    },
-    help: async function (message) {
-
     }
 };

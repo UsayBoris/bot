@@ -1,8 +1,9 @@
 const {User} = require('../models/user');
-const Discord = require('discord.js');
 
 module.exports = {
-    name: 'azia',
+    name: 'Azia',
+    description: 'Azia alguém',
+    usage: 'azia {user tag}',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         if (member === undefined) member = message.author;
@@ -15,19 +16,5 @@ module.exports = {
         user.azia += 1;
         user.save();
         return message.channel.send(`O <@${(member.id).toString()}> já aziou ${user.azia} vezes.`);
-
-    },
-    help: async function (message) {
-        const _name = 'Azia';
-        const _description = 'Azia alguém';
-        const _usage = `azia {user tag}`;
-
-        const embed = new Discord.MessageEmbed()
-            .setColor("0xFFFE00")
-            .setTitle(`Help Command`)
-            .setThumbnail("https://image.flaticon.com/icons/png/512/36/36601.png")
-            .addField(_name, `**Description:** ${_description}\n**Usage:** ${_usage}`);
-
-        return message.channel.send(embed);
     }
 };

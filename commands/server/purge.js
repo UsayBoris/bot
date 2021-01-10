@@ -1,7 +1,9 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: 'purge',
+    name: 'Purge',
+    description: 'Deletes a number of given messages',
+    usage: 'purge {number of messages}',
     execute: async function (message, client, args) {
         const deleteCount = parseInt(args[0], 10);
 
@@ -11,18 +13,5 @@ module.exports = {
         message.channel.bulkDelete(deleteCount)
             .then(messages => message.reply(`bulk deleted ${messages.size} messages`))
             .catch(error => message.reply(`Couldn't delete messages because of: ${error.message}`))
-    },
-    help: async function (message) {
-        const _name = 'Purge';
-        const _description = 'Deletes a number of given messages';
-        const _usage = `purge {number of messages}`;
-
-        const embed = new Discord.MessageEmbed()
-            .setColor("0xFFFE00")
-            .setTitle(`Help Command`)
-            .setThumbnail("https://image.flaticon.com/icons/png/512/36/36601.png")
-            .addField(_name, `**Description:** ${_description}\n**Usage:** ${_usage}`);
-
-        return message.channel.send(embed);
     }
 };

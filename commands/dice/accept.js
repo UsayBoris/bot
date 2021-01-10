@@ -1,0 +1,1 @@
+//TODO accept a bet, making sure it has coins for it

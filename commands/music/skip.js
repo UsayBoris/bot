@@ -1,5 +1,7 @@
 module.exports = {
-    name: 'skip',
+    name: 'Skip',
+    description: 'Skips to the next track is there is one',
+    usage: 'description',
     execute: async function (message, client, args) {
         const { channel } = message.member.voice;
         if (!channel) return message.reply('you need to be in a voice chat to do that');
@@ -10,9 +12,5 @@ module.exports = {
         const serverQueue = message.client.queue.get(message.guild.id);
         if (!serverQueue) return message.channel.send("I'm not playing anything");
         serverQueue.connection.dispatcher.end();
-    },
-
-    help: async function (message) {
-
     }
 };

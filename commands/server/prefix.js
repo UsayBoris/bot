@@ -1,8 +1,9 @@
 const Guild = require('../../models/guild');
-const Discord = require("discord.js");
 
 module.exports = {
-    name: 'prefix',
+    name: 'Prefix',
+    description: 'Change the prefix for the bot in this server',
+    usage: 'prefix {new prefix}',
     execute: async function (message, client, args) {
         let new_prefix = args[0];
 
@@ -12,21 +13,9 @@ module.exports = {
         if (!message.member.hasPermission('KICK_MEMBERS'))
             return message.reply("you don't have permissions to use this!");
 
-        await Guild.findOneAndUpdate({ id: message.guild.id }, { prefix: new_prefix }, { useFindAndModify: false })
-            .then(() => { message.channel.send(`Prefix changed to ${new_prefix}`) });
-
-    },
-    help: async function (message) {
-        const _name = 'Prefix';
-        const _description = 'Change the prefix for the bot';
-        const _usage = `prefix {new prefix}`;
-
-        const embed = new Discord.MessageEmbed()
-            .setColor("0xFFFE00")
-            .setTitle(`Help Command`)
-            .setThumbnail("https://image.flaticon.com/icons/png/512/36/36601.png")
-            .addField(_name, `**Description:** ${_description}\n**Usage:** ${_usage}`);
-
-        return message.channel.send(embed);
+        await Guild.findOneAndUpdate({id: message.guild.id}, {prefix: new_prefix}, {useFindAndModify: false})
+            .then(() => {
+                message.channel.send(`Prefix changed to ${new_prefix}`)
+            });
     }
 };

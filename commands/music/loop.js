@@ -1,7 +1,9 @@
 const { checkIfVoice } = require('./checkPermissions');
 
 module.exports = {
-    name: 'loop',
+    name: 'Loop',
+    description: 'Loops or unloops the queue',
+    usage: 'loop',
     execute: async function (message, client, args) {
         if(!checkIfVoice(message)) return;
 
