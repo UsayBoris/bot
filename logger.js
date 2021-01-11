@@ -1,7 +1,4 @@
 const winston = require('winston');
-const moment = require('moment');
-
-const tsFormat = () => moment().format('YYYY-MM-DD hh:mm:ss').trim();
 
 const myCustomLevels = {
     levels: {

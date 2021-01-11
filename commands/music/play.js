@@ -12,7 +12,7 @@ module.exports = {
     execute: async function (message, client, args) {
         if (!checkPermissions(message, client) || !checkIfVoice(message)) return;
 
-        if (args[0]) {
+        if (!args.length) {
             const serverQueue = message.client.queue.get(message.guild.id);
             if (!serverQueue) return message.channel.send(new Discord.MessageEmbed().setTitle('No songs to play'));
         }
