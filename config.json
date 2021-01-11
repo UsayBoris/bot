@@ -1,5 +1,7 @@
 {
     "invite": "https://discord.gg/5REY8NQbcC",
+    "mining_cooldown": 60,
+    "server_id": 773626087934001192,
     "level_table":{
         "1": 10,
         "2": 20,

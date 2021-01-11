@@ -1,4 +1,4 @@
-- [ ] Change file structure, remove help function
+- [x] Change file structure, remove help function
 - [ ] Change experience calculation (requires database reset)
 - [x] Check how to have static images (changed to emote)
 - [ ] Starter shop and buy options 

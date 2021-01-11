@@ -21,8 +21,6 @@ async function commandHandler(message, client, prefix) {
     const args = message.content.slice(prefix.length).trim().split(/ +/g); //splits message content by space
     const command = args.shift().toLowerCase();                                   //finds the first value (group or default)
 
-    //TODO need to change this (it is working?)
-    //TODO help command needs to be different
     if (Object.keys(commands).includes(command)) {
         try {
             await commands[command].execute(message, client, args, commands);

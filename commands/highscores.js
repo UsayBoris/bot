@@ -14,6 +14,7 @@ module.exports = {
         result.forEach(user => {
             table.addRow(rank++, user.name, user.level, user.azia);
         });
+        //TODO needs to be embed
         await message.channel.send("```\nHighscores\n" + table.toString() + "\n```");
 
     },
