@@ -36,7 +36,7 @@ module.exports = {
                 voiceChannel: message.member.voice.channel,
                 connection: null,
                 songs: [],
-                volume: 1,
+                volume: 2,
                 playing: true,
                 loop: false,
                 timeout: 3,
