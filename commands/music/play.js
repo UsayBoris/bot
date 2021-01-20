@@ -59,7 +59,7 @@ module.exports = {
             }
         } else {
             serverQueue.songs.push(song);
-            if (serverQueue.playing === false) serverQueue.connection.dispatcher.end();
+            //if (serverQueue.playing === false) this.play(message, serverQueue.songs[0]);
             return message.channel.send(`✅ **${song.title}** has been added to the queue!`).catch(logger.error);
         }
     },

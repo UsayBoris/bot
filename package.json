@@ -27,7 +27,7 @@
     "snekfetch": "^4.0.4",
     "winston": "^3.3.3",
     "ytdl": "^1.3.5",
-    "ytdl-core": "^4.0.6"
+    "ytdl-core": "^4.4.4"
   },
   "repository": {
     "url": "https://github.com/vandam71/el_boris"
