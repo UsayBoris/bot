@@ -1,5 +1,5 @@
 const {checkIfVoice} = require('./checkPermissions');
-const Discord = require('discord.js');
+const logger = require("../../logger");
 
 module.exports = {
     name: 'Clear',
@@ -16,6 +16,7 @@ module.exports = {
             serverQueue.connection.dispatcher.end();
             await message.react('👌');
         } catch (error) {
+            logger.error(error.message);
             await message.react('👎');
         }
     }
