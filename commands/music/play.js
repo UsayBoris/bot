@@ -49,7 +49,7 @@ module.exports = {
             try {
                 queueConstruct.connection = await channel.join();
                 await queueConstruct.connection.voice.setSelfDeaf(true);
-                await this.play(message, queueConstruct.songs[0]);
+                this.play(message, queueConstruct.songs[0]);
             } catch (err) {
                 logger.error(err.message);
                 message.client.queue.delete(message.guild.id);
@@ -59,6 +59,7 @@ module.exports = {
             }
         } else {
             serverQueue.songs.push(song);
+            if (serverQueue.playing === false) serverQueue.connection.dispatcher.end();
             return message.channel.send(`✅ **${song.title}** has been added to the queue!`).catch(logger.error);
         }
     },
@@ -81,6 +82,7 @@ module.exports = {
                 let currentSong = serverQueue.songs.shift();
                 if (serverQueue.loop) serverQueue.songs.push(currentSong);
                 if (!serverQueue.songs[0]) {
+                    serverQueue.playing = false;
                     serverQueue.timeoutHandler = setTimeout((song) => {
                         if (!song) {
                             message.channel.send('Connection timed out (Bot was idle with no music paying)');
