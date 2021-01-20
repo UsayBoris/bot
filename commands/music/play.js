@@ -93,7 +93,7 @@ module.exports = {
                 } else
                     this.play(message, serverQueue.songs[0]);
             })
-            .on('error', error => logger.error(error.message))
+            .on('error', error => logger.error(error.message));
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
         serverQueue.textChannel.send(`🎶 Start playing: **${song.title}**`);
     }
