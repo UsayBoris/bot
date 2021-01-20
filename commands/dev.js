@@ -9,7 +9,7 @@ module.exports = {
                     let emoji = emojiList[i].substring(2).slice(0, -1).split(':')
                     emojis[emoji[0]] = emoji[1];
                 }
-                await message.channel.send(emojiList.toString().join('\n'));
+                //await message.channel.send(emojiList.toString().join('\n'));
                 await message.channel.send(JSON.stringify(emojis));
                 break;
         }

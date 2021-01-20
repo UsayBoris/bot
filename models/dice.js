@@ -2,7 +2,7 @@ const mongoose = require('./index');
 
 const Dice = mongoose.model('Dice', {
     player_1: {
-        id: Number,
+        type: Number,
         required: true
     },
     player_2: {
@@ -13,8 +13,8 @@ const Dice = mongoose.model('Dice', {
         type: Number,
         required: true
     },
-    guild: {
-        id: Number,
+    roll: {
+        type: Number,
         required: true
     }
 });
