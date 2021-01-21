@@ -66,6 +66,7 @@ module.exports = {
     play: function (message, song) {
         const queue = message.client.queue;
         const serverQueue = queue.get(message.guild.id);
+        serverQueue.playing = true;
 
         //TODO make it so that it doesn't shift, using a index maybe
 

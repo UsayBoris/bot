@@ -11,6 +11,8 @@ module.exports = {
         const serverQueue = message.client.queue.get(message.guild.id);
         if (!serverQueue) return message.channel.send(new Discord.MessageEmbed()
             .addField("Queue", "Empty"));
+        if (serverQueue.songs.length === 0) return message.channel.send(new Discord.MessageEmbed()
+            .addField("Queue", "Empty"));
         let queue = serverQueue.songs.map(song => `**-** ${song.title}`).join('\n');
         if (!queue) return message.channel.send(new Discord.MessageEmbed()
             .addField("Queue", "Empty"));
