@@ -1,10 +1,12 @@
+const Discord = require('discord.js');
+
 module.exports = {
     name: 'Ping',
     description: 'Returns the Latency from the server and API',
     usage: 'ping',
     execute: async function (message, client, args) {
         //TODO create embed and forget about the edit thing
-        const m = await message.channel.send("Ping?");
-        await m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
+        await message.channel.send(new Discord.MessageEmbed()
+            .setDescription(`Pong! Latency is ${message.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`));
     },
 };

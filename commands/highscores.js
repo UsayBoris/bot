@@ -7,6 +7,7 @@ module.exports = {
     description: 'Check highscores' ,
     usage: 'highscores {sort query}',
     execute: async function (message, client, args) {
+        console.log(client.avatarURL);
         if (!['azia', 'xp', null].includes(args[0])) return message.reply('not a valid sorting query');
         let result = await find_all_users(args[0]);
         let table = new AsciiTable().setHeading('', 'Name', 'Level', 'Azia');
@@ -14,21 +15,8 @@ module.exports = {
         result.forEach(user => {
             table.addRow(rank++, user.name, user.level, user.azia);
         });
-        //TODO needs to be embed
+        //TODO needs to be embed, or just keep the pretty markdown
         await message.channel.send("```\nHighscores\n" + table.toString() + "\n```");
 
     },
-    help: async function (message) {
-        const _name = 'Highscores';
-        const _description = 'Check highscores';
-        const _usage = "highscores {sort query}";
-
-        const embed = new Discord.MessageEmbed()
-            .setColor("0xFFFE00")
-            .setTitle(`Help Command`)
-            .setThumbnail("https://image.flaticon.com/icons/png/512/36/36601.png")
-            .addField(_name, `**Description:** ${_description}\n**Usage:** ${_usage}`);
-
-        return message.channel.send(embed);
-    }
 };

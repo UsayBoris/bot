@@ -8,6 +8,8 @@ module.exports = {
     execute: async function (message, client, args) {
         if (!checkIfVoice(message)) return;
 
+        //TODO change this to markdown with colors
+
         const serverQueue = message.client.queue.get(message.guild.id);
         if (!serverQueue) return message.channel.send(new Discord.MessageEmbed()
             .addField("Queue", "Empty"));

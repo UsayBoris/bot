@@ -20,7 +20,7 @@ module.exports = {
         let channel = message.member.voice.channel;
 
         const songInfo = await search.searchVideos(args.join(' '));
-        if (songInfo === null) return message.reply('song not found');
+        if (songInfo === null) return message.reply('song not found!');
 
         let song = {
             id: songInfo.id,
@@ -60,7 +60,7 @@ module.exports = {
         } else {
             serverQueue.songs.push(song);
             if (serverQueue.playing === false) return this.play(message, serverQueue.songs[0]);
-            return message.channel.send(`✅ **${song.title}** has been added to the queue!`).catch(logger.error);
+            return message.channel.send(new Discord.MessageEmbed().setDescription(`✅ **${song.title}** has been added to the queue!`)).catch(logger.error);
         }
     },
     play: function (message, song) {
@@ -86,9 +86,9 @@ module.exports = {
                     serverQueue.playing = false;
                     serverQueue.timeoutHandler = setTimeout((song) => {
                         if (!song) {
-                            message.channel.send('Connection timed out (Bot was idle with no music paying)');
                             serverQueue.connection.disconnect();
                             message.client.queue.delete(message.guild.id);
+                            return message.channel.send(new Discord.MessageEmbed().setDescription('Connection timed out (Bot was idle with no music paying)')).catch(logger.error);
                         }
                     }, serverQueue.timeout * 60 * 1000, serverQueue.songs[0]);
                 } else
@@ -96,6 +96,6 @@ module.exports = {
             })
             .on('error', error => logger.error(error.message));
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-        serverQueue.textChannel.send(`🎶 Start playing: **${song.title}**`);
+        serverQueue.textChannel.send(new Discord.MessageEmbed().setDescription(`🎶 Start playing: **${song.title}**`)).catch(logger.error);
     }
 };
