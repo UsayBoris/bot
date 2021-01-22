@@ -7,6 +7,6 @@ module.exports = {
     execute: async function (message, client, args) {
         //TODO create embed and forget about the edit thing
         await message.channel.send(new Discord.MessageEmbed()
-            .setDescription(`Pong! Latency is ${message.createdTimestamp - Date.now()}ms. API Latency is ${Math.round(client.ws.ping)}ms`));
+            .setDescription(`Pong! Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`));
     },
 };

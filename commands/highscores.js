@@ -7,7 +7,6 @@ module.exports = {
     description: 'Check highscores' ,
     usage: 'highscores {sort query}',
     execute: async function (message, client, args) {
-        console.log(client.avatarURL);
         if (!['azia', 'xp', null].includes(args[0])) return message.reply('not a valid sorting query');
         let result = await find_all_users(args[0]);
         let table = new AsciiTable().setHeading('', 'Name', 'Level', 'Azia');
@@ -17,6 +16,5 @@ module.exports = {
         });
         //TODO needs to be embed, or just keep the pretty markdown
         await message.channel.send("```\nHighscores\n" + table.toString() + "\n```");
-
     },
 };
