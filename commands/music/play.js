@@ -88,7 +88,7 @@ module.exports = {
                         if (!song) {
                             serverQueue.connection.disconnect();
                             message.client.queue.delete(message.guild.id);
-                            return message.channel.send(new Discord.MessageEmbed().setDescription('Connection timed out (Bot was idle with no music paying)')).catch(logger.error);
+                            return message.channel.send(new Discord.MessageEmbed().setDescription('Connection timed out (Bot was idle with no music playing)')).catch(logger.error);
                         }
                     }, serverQueue.timeout * 60 * 1000, serverQueue.songs[0]);
                 } else
