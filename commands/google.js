@@ -1,6 +1,5 @@
 const google = require('google');
 const Discord = require("discord.js");
-const logger  = require('logger');
 
 module.exports = {
     name: 'Google',
