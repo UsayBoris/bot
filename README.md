@@ -11,7 +11,6 @@
 - [ ] Role Management
 - [ ] Google Search 
 - [x] Split Music and Shop bot to a different command section
-  - [ ] Might need to be better made
 - [ ] Make pretty Embed stuff
 - [x] Fix help command
 &nbsp;

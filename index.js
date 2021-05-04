@@ -54,7 +54,7 @@ client.on('message', async message => {
 //new member added
 client.on('guildMemberAdd', async member => {
     logger.info(`New User ${member.user.username} has joined ${member.guild.name}`);
-    await member.guild.channels.find(c => c.name === "welcome").send(`${member.user.username} has joined this server`);
+    await member.guild.channels.cache.findOne(c => c.name === "welcome").send(`${member.user.username} has joined this server`);
 });
 
 client.on('error', e => logger.error(e));
