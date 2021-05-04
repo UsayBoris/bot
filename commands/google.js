@@ -10,8 +10,7 @@ module.exports = {
         google.resultsPerPage = 5;
         google(args.join(' '), function (err, res){
             if(err){
-                logger.error(err);
-                return;
+                return message.channel.send(err);
             }
             for (let i = 0; i < res.links.length; i++){
                 let link = res.links[i];
