@@ -17,7 +17,6 @@
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
     "giphy-js-sdk-core": "^1.0.6",
-    "google": "^2.1.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7",
