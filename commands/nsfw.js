@@ -14,16 +14,19 @@ module.exports = {
             .setTimestamp();
 
         message.channel.send(lo).then(m => {
-           superagent.get('https://nekobot.xyz/api/image').timeout({response: 5000, deadline: 10000}).query({type: args[0]}).end((err, response)=>{
-               if (err.timeout)
-                   return m.edit('Could not load any image');
-
-               m.edit(new Discord.MessageEmbed()
-                   .setDescription(response.body.message)
-                   .setTimestamp()
-                   .setImage(response.body.message)
-                   .setFooter(client.footer));
-           });
+            superagent.get('https://nekobot.xyz/api/image').timeout({
+                response: 5000,
+                deadline: 10000
+            }).query({type: args[0]}).then(res => {
+                m.edit(new Discord.MessageEmbed()
+                    .setDescription(res.body.message)
+                    .setTimestamp()
+                    .setImage(res.body.message)
+                    .setFooter(client.footer));
+            }, error => {
+                if (error.timeout)
+                     m.edit('Could not load any image');
+            });
         });
     }
 };
