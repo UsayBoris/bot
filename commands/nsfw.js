@@ -14,7 +14,7 @@ module.exports = {
             .setTimestamp();
 
         message.channel.send(lo).then(m => {
-           superagent.get('https://nekobot.xyz/api/image').timeout({response: 5000}).query({type: args[0]}).end((err, response)=>{
+           superagent.get('https://nekobot.xyz/api/image').timeout({response: 5000, deadline: 10000}).query({type: args[0]}).end((err, response)=>{
                if (err.timeout)
                    return m.edit('Could not load any image');
 
