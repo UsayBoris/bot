@@ -14,13 +14,15 @@ module.exports = {
             .setTimestamp();
 
         message.channel.send(lo).then(m => {
-           superagent.get('https://nekobot.xyz/api/image').query({type: args[0]}).end((err, response)=>{
-               var embed_nsfw = new Discord.MessageEmbed()
+           superagent.get('https://nekobot.xyz/api/image').timeout({response: 5000}).query({type: args[0]}).end((err, response)=>{
+               if (err.timeout)
+                   return m.edit('Could not load any image');
+
+               m.edit(new Discord.MessageEmbed()
                    .setDescription(response.body.message)
                    .setTimestamp()
                    .setImage(response.body.message)
-                   .setFooter(client.footer)
-               m.edit(embed_nsfw);
+                   .setFooter(client.footer));
            });
         });
     }
