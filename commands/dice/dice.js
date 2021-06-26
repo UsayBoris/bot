@@ -15,7 +15,7 @@ module.exports = {
             id: message.author.id
         }).then(async user1 => {
 
-            if (!Number.isInteger(args[1])) return message.channel.send('The value you inserted is invalid!');
+            //if (!Number.isInteger(args[1])) return message.channel.send('The value you inserted is invalid!');
             if (user1.coins < args[1]) return message.channel.send('You dont have enough coins to make this challenge');
 
             let roll_1 = Math.floor(Math.random() * 100) + 1;
