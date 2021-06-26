@@ -11,17 +11,11 @@ module.exports = {
         let member = message.mentions.members.first();
         if (member === undefined) return message.channel.send('This is not a valid player');
 
-        /*let existent = await Dice.findOne({
-            player_1: message.author.id,
-            player_2: member.id
-        });*/
-
-        // if (existent !== null) return message.channel.send('You already have an active challenge with this user!');
-
         await User.findOne({
             id: message.author.id
         }).then(async user1 => {
-            if (Number.isInteger(args[1])) return message.channel.send('The value you inserted is invalid!');
+
+            if (!Number.isInteger(args[1])) return message.channel.send('The value you inserted is invalid!');
             if (user1.coins < args[1]) return message.channel.send('You dont have enough coins to make this challenge');
 
             let roll_1 = Math.floor(Math.random() * 100) + 1;
