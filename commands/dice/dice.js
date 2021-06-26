@@ -45,6 +45,7 @@ module.exports = {
                                         .setTitle('Dice Challenge')
                                         .setDescription(`You dont have enough coins to accept this challenge. Cancelled!`));
                                     await dice.reactions.removeAll();
+                                    return;
                                 }
 
                                 let roll_2 = Math.floor(Math.random() * 100) + 1;
