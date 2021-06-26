@@ -16,10 +16,11 @@ module.exports = {
             talkedRecently.add(message.author.id);
             setTimeout(async () => {
                 talkedRecently.delete(message.author.id);
-                let user = await User.findOne({id: message.author.id});
-                user.coins += bonus_coins;
-                message.reply(`you have mined ${bonus_coins} coins, you now have ${user.coins} BorisCoins`);
-                user.save();
+                await User.findOne({id: message.author.id}).then(async user => {
+                    user.coins += bonus_coins;
+                    message.reply(`you have mined ${bonus_coins} coins, you now have ${user.coins} BorisCoins`);
+                    await user.save();
+                });
             }, mining_cooldown * 1000);
         }
     },

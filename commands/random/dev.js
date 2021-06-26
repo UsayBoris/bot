@@ -14,10 +14,6 @@ module.exports = {
             case 'commands':
                 await message.channel.send(Object.keys(commands));
                 break;
-
-            case 'clear_dices':
-                let timeframe = args[1];
-                break;
         }
     },
 };

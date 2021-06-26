@@ -1,5 +1,4 @@
 const logger = require("../../logger");
-const Dice = require("../../models/dice");
 const Discord = require('discord.js');
 const {User} = require("../../models/user");
 

@@ -30,6 +30,9 @@ const User = mongoose.model('User', {
     },
     inventory: {
         type: [Number]
+    },
+    perks: {
+        type: [Number]
     }
 });
 
@@ -49,11 +52,11 @@ async function update_user(message) {
     user.save();
 }
 
-async function find_all_users(sort_query){
-    if(!sort_query) sort_query = 'xp';
+async function find_all_users(sort_query) {
+    if (!sort_query) sort_query = 'xp';
     let users = await User.find({}).sort([[sort_query, "desc"]]);
     let result = []
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < 10; i++) {
         result[i] = users[i];
     }
     return result;
