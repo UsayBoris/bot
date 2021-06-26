@@ -36,7 +36,7 @@ module.exports = {
             }
 
             message.channel.send(embedMessage).then(async dice => {
-                await embedMessage.react('✔').then(() => message.react('❌'));
+                await dice.react('✔').then(() => message.react('❌'));
 
                 dice.awaitReactions(filter, {max: 1, time: 60000, errors: ['time']})
                     .then(async collected => {
