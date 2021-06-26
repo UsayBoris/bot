@@ -11,32 +11,73 @@ module.exports = {
         let member = message.mentions.members.first();
         if (member === undefined) return message.channel.send('This is not a valid player');
 
-        let existent = await Dice.findOne({
+        /*let existent = await Dice.findOne({
             player_1: message.author.id,
             player_2: member.id
-        });
+        });*/
 
-        if (existent !== null) return message.channel.send('You already have an active challenge with this user!');
+        // if (existent !== null) return message.channel.send('You already have an active challenge with this user!');
 
-        let user = await User.findOne({id: message.author.id});
+        await User.findOne({
+            id: message.author.id
+        }).then(async user1 => {
+            if (Number.isInteger(args[1])) return message.channel.send('The value you inserted is invalid!');
+            if (user1.coins < args[1]) return message.channel.send('You dont have enough coins to make this challenge');
 
-        if (user.coins < args[1]) return message.channel.send('You dont have enough coins to make this challenge');
+            let roll_1 = Math.floor(Math.random() * 100) + 1;
 
-        await Dice.create({
-            player_1: message.author.id,
-            player_2: member.id,
-            bet: args[1],
-            roll: Math.floor(Math.random() * 100) + 1
-        }).then(dice => {
-            user.coins -= args[1];
-            user.save();
-            return message.channel.send(new Discord.MessageEmbed()
+            let dice = new Discord.MessageEmbed()
                 .setColor(0xAF873D)
                 .setTitle('Dice Challenge')
-                .setDescription(`You have challenged ${member.displayName} with a roll of ${dice.roll}. Do "+accept {tag}" to proceed`)
-            );
-        })
+                .setDescription(`You have challenged ${member.displayName} with a roll of ${roll_1}. Total value in the bet: ${args[1]} <:boriscoin:798017751842291732>`);
 
+            dice.react('✔').then(() => message.react('❌'));
 
+            const filter = (reaction, user) => {
+                return ['✔', '❌'].includes(reaction.emoji.name) && user.id === member.id;
+            }
+
+            dice.awaitReactions(filter, {max: 1, time: 60000, errors: ['time']})
+                .then(async collected => {
+                    const reaction = collected.first();
+                    switch (reaction.emoji.name) {
+                        case '✔':
+                            await User.findOne({id: member.id}).then(async user2 => {
+                                if (user2.coins < args[1]) {
+                                    dice.setDescription('You dont have enough coins to accept this challenge. Cancelled!');
+                                    await dice.reactions.removeAll();
+                                }
+
+                                let roll_2 = Math.floor(Math.random() * 100) + 1;
+
+                                if (roll_2 > roll_1) {
+                                    user1.coins -= args[1];
+                                    await user1.save();
+                                    user2.coins += args[1];
+                                    await user2.save();
+
+                                    dice.setDescription(`${member.displayName} won the dice with a roll of ${roll_2} vs ${roll_1}, and received ${args[1]} <:boriscoin:798017751842291732>`);
+                                    await dice.reactions.removeAll();
+                                }
+                                else if(roll_1 >= roll_2){
+                                    user1.coins += args[1];
+                                    await user1.save();
+                                    user2.coins -= args[1];
+                                    await user2.save();
+
+                                    dice.setDescription(`${member.displayName} lost the dice with a roll of ${roll_2} vs ${roll_1}, he loses ${args[1]} <:boriscoin:798017751842291732>`);
+                                    await dice.reactions.removeAll();
+                                }
+
+                            })
+                            break;
+                        case '❌':
+                            dice.setDescription(`${member.displayName} declined the dice, better friends next time!`);
+                            await dice.reactions.removeAll();
+                            break;
+                    }
+                });
+            await message.channel.send(dice);
+        });
     }
 }

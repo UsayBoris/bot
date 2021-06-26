@@ -1,6 +1,6 @@
 const talkedRecently = new Set();
-const {User} = require('../models/user');
-const {mining_cooldown} = require('../config.json');
+const {User} = require('../../models/user');
+const {mining_cooldown} = require('../../config.json');
 
 module.exports = {
     name: 'Mine',

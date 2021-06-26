@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const {find_all_users} = require('../models/user');
+const {find_all_users} = require('../../models/user');
 const AsciiTable = require('ascii-table');
 
 module.exports = {

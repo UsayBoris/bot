@@ -16,6 +16,10 @@ const Dice = mongoose.model('Dice', {
     roll: {
         type: Number,
         required: true
+    },
+    timestamp: {
+        type: Number,
+        required: true
     }
 });
 
