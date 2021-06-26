@@ -37,6 +37,8 @@ module.exports = {
                     .then(async collected => {
                         const reaction = collected.first();
 
+                        message.channel.send(reaction.emoji.name);
+
                         if (reaction.emoji.name === '✔') {
                             await User.findOne({id: member.id}).then(async user2 => {
                                 if (user2.coins < args[1]) {
