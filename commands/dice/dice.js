@@ -35,6 +35,8 @@ module.exports = {
 
                 dice.awaitReactions(filter, {max: 1, time: 60000, errors: ['time']})
                     .then(async collected => {
+                        message.channel.send('num funciona');
+
                         const reaction = collected.first();
                         switch (reaction.emoji.name) {
                             case '✔':
