@@ -1,3 +1,5 @@
+const {User} = require('./../../models/User');
+
 module.exports = {
     execute: async function (message, client, args, commands) {
         if (message.author.id !== '90535285909118976') return message.channel.send('you are not a developer');
@@ -13,6 +15,14 @@ module.exports = {
                 break;
             case 'commands':
                 await message.channel.send(Object.keys(commands));
+                break;
+
+            case 'clear':
+                let users = await User.find({});
+                for (let i = 0; i < users.length; i++) {
+                    users[i].xp = 0;
+                    users[i].level = 0;
+                }
                 break;
         }
     },

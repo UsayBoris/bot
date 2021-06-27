@@ -1,5 +1,4 @@
 const mongoose = require('./index');
-const {level_table} = require('../config.json');
 const logger = require('../logger');
 
 const User = mongoose.model('User', {
@@ -37,19 +36,25 @@ const User = mongoose.model('User', {
 });
 
 async function update_user(message) {
-    let user = await User.findOne({id: message.author.id});
-    if (user === null) {
-        await User.create({name: message.author.username, id: message.author.id});
-        return logger.warn('New User Created');
-    }
-    user.name = message.author.username;
-    user.xp += 1;
-    //TODO change this
-    if (user.xp >= level_table[`${user.level + 1}`]) {
-        user.coins += user.level;
-        user.level += 1;
-    }
-    user.save();
+    await User.findOne({id: message.author.id}).then(async user => {
+        if (user === null) {
+            await User.create({name: message.author.username, id: message.author.id});
+            return logger.warn('New User Created');
+        }
+
+        user.name = message.author.username;
+        user.xp += 1;
+
+        let req_xp = 25 * (user.level + 1) * (1 + (user.level + 1));
+
+        if (user.xp >= req_xp) {
+            user.coins += user.level;
+            user.level += 1;
+        }
+        user.save();
+    });
+
+
 }
 
 async function find_all_users(sort_query) {
@@ -60,7 +65,6 @@ async function find_all_users(sort_query) {
         result[i] = users[i];
     }
     return result;
-
 }
 
 module.exports = {User, update_user, find_all_users};
