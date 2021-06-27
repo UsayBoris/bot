@@ -16,14 +16,6 @@ module.exports = {
             case 'commands':
                 await message.channel.send(Object.keys(commands));
                 break;
-
-            case 'clear':
-                let users = await User.find({});
-                for (let i = 0; i < users.length; i++) {
-                    users[i].xp = 0;
-                    users[i].level = 0;
-                }
-                break;
         }
     },
 };

@@ -14,7 +14,8 @@ const User = mongoose.model('User', {
     },
     private: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     azia: {
         type: Number,
@@ -42,6 +43,7 @@ const User = mongoose.model('User', {
 
 async function update_user(message) {
     await User.findOne({id: message.author.id}).then(async user => {
+
         if (user === null) {
             await User.create({name: message.author.username, id: message.author.id});
             return logger.warn('New User Created (first time talking in the presence of the bot)');
@@ -55,12 +57,12 @@ async function update_user(message) {
         if (user.xp >= req_xp) {
             user.coins += user.level;
             user.level += 1;
-            if (!user.private){
+            if (!user.private) {
                 await message.author.send(new Discord.MessageEmbed()
                     .setColor("0xACA19D")
                     .setTitle('You Have leveled up')
                     .setThumbnail(message.author.avatarURL())
-                    .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type +private off in any discord server with this bot.`));
+                    .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`));
             }
         }
         user.save();
