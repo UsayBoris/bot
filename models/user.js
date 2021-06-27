@@ -11,6 +11,10 @@ const User = mongoose.model('User', {
         required: true,
         unique: true
     },
+    private: {
+        type: Boolean,
+        required: true
+    },
     azia: {
         type: Number,
         default: 0
@@ -50,6 +54,7 @@ async function update_user(message) {
         if (user.xp >= req_xp) {
             user.coins += user.level;
             user.level += 1;
+            if (user.private)
         }
         user.save();
     });
