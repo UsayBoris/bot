@@ -54,7 +54,9 @@ async function update_user(message) {
         if (user.xp >= req_xp) {
             user.coins += user.level;
             user.level += 1;
-            if (user.private)
+            if (!user.private){
+                await message.author.send('You have leveled up!')
+            }
         }
         user.save();
     });
