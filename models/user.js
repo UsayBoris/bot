@@ -67,8 +67,6 @@ async function update_user(message) {
         }
         user.save();
     });
-
-
 }
 
 async function find_all_users(sort_query) {
