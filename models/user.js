@@ -39,13 +39,13 @@ async function update_user(message) {
     await User.findOne({id: message.author.id}).then(async user => {
         if (user === null) {
             await User.create({name: message.author.username, id: message.author.id});
-            return logger.warn('New User Created');
+            return logger.warn('New User Created (first time talking in the presence of the bot)');
         }
 
         user.name = message.author.username;
         user.xp += 1;
 
-        let req_xp = 25 * (user.level + 1) * (1 + (user.level + 1));
+        let req_xp = 69 * (user.level + 1) * (1 + (user.level + 1));
 
         if (user.xp >= req_xp) {
             user.coins += user.level;
