@@ -10,7 +10,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setColor('0x00AE86')
-            .setTitle(`${message.author.username} Profile`)
+            .setTitle(`${message.author.username}'s Profile`)
             .addField("Stats", `**Level: ${user.level}**\n<:xp:801554148994056202> Experience: **${user.xp}**\n<:boriscoin:798017751842291732> BorisCoins: **${user.coins}**\nAzia: **${user.azia}**`)
             .addField("Inventory", "Empty")
             .setThumbnail(message.author.avatarURL());

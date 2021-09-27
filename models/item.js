@@ -17,6 +17,14 @@ const Item = mongoose.model('Item', {
     price: {
         type: Number,
         required: true
+    },
+    emote: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
     }
 });
 

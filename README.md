@@ -11,7 +11,7 @@
   - [ ] Jump and remove command, better queue display and song added
 - [x] Better command handler
 - [x] Better Logger - https://stackify.com/winston-logging-tutorial/
-- [ ] Role Management
+- [ ] Role Management - https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/understanding/roles.md
 - [ ] Google Search
 - [ ] Make pretty Embed stuff
 - [x] Fix help command
@@ -20,9 +20,17 @@
 - [ ] Profile perks (mining and other)
 - [ ] Maybe work on a minigame
 
+- [ ] Check requests
+- [ ] Make a suggestions command, that saves requests for bot functions
+
 
 &nbsp;
 
 **SHORT TEAM TODO**
 - [ ] Add teams
   - [ ] Find an API to generate a chart of the most users in each team
+
+**Fixes**
+- [ ] Empty bot command gives an error message "+"
+- [ ] Some music commands don't have embedded
+- [ ] Queue command giving an error when nothing is in queue
