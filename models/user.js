@@ -55,8 +55,8 @@ async function update_user(message) {
         let req_xp = 69 * (user.level + 1) * (1 + (user.level + 1));
 
         if (user.xp >= req_xp) {
-            user.coins += user.level;
             user.level += 1;
+            user.coins += user.level;
             if (!user.private) {
                 await message.author.send(new Discord.MessageEmbed()
                     .setColor("0xACA19D")

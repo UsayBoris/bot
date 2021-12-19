@@ -18,6 +18,7 @@ client.on('ready', () => {
         },
         status: 'online'
     }).then();
+
 });
 
 //When the bot is added to a new server
