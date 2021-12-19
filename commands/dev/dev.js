@@ -16,6 +16,7 @@ module.exports = {
             case 'commands':
                 await message.channel.send(Object.keys(commands));
                 break;
+
         }
     },
 };

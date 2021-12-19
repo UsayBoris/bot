@@ -13,7 +13,7 @@ module.exports = {
             return message.channel.send(new Discord.MessageEmbed()
                 .setColor("0xACA19D")
                 .setTitle("You're almost there")
-                .setDescription(`You still need ${req_xp - user.xp} to reach level ${user.level+1}. Keep spamming!`));
+                .setDescription(`You still need ${req_xp - user.xp} xp to reach level ${user.level+1}. Keep spamming!`));
         });
     }
 };
