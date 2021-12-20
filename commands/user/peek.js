@@ -16,6 +16,6 @@ module.exports = {
             .setTitle(`${member.user.username} Profile`)
             .addField("Stats", `**Level: ${user.level}**\nAzia: **${user.azia}**`)
             .setThumbnail(member.user.avatarURL());
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 };

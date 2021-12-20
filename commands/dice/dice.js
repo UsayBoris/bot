@@ -14,8 +14,8 @@ module.exports = {
             id: message.author.id
         }).then(async user1 => {
 
-            if (!args[1]) return message.channel.send(new Discord.MessageEmbed().setDescription('The value you inserted is invalid!'));
-            if (user1.coins < args[1]) return message.channel.send(new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge'));
+            if (!args[1]) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+            if (user1.coins < args[1]) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});
 
             let roll_1 = Math.floor(Math.random() * 100) + 1;
 
@@ -28,7 +28,7 @@ module.exports = {
                 return ['✔', '❌'].includes(reaction.emoji.name) && user.id === member.id;
             }
 
-            message.channel.send(embedMessage).then(async dice => {
+            message.channel.send({embeds: [embedMessage]}).then(async dice => {
                 await dice.react('✔');
                 await dice.react('❌');
 

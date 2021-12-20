@@ -9,10 +9,11 @@ module.exports = {
             await this.execute(message, client, ['help'], commands);
         } else if (Object.keys(commands).includes(args[0])) {
             let {name, description, usage} = commands[args[0]];
-            return message.channel.send(new Discord.MessageEmbed()
+            let embed = new Discord.MessageEmbed()
                 .setColor("0xFFFE00")
                 .setTitle(`Help Command`)
-                .addField(name, `**Description:** ${description}\n**Usage:** ${usage}`))
+                .addField(name, `**Description:** ${description}\n**Usage:** ${usage}`);
+            return message.channel.send({embeds: [embed]});
         } else return message.reply('This command is not in the command list');
     }
 };

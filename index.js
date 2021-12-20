@@ -32,7 +32,7 @@ client.on("guildDelete", guild => {
 });
 
 //Command handler
-client.on('message', async message => {
+client.on('messageCreate', async message => {
     if (message.author.bot) return;
 
     if (message.content === '@everyone') {

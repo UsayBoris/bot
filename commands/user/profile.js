@@ -6,7 +6,7 @@ module.exports = {
     description: 'Looks at your user profile',
     usage: 'profile',
     execute: async function (message, client, args) {
-        let user = await User.findOne({ id: message.author.id });
+        let user = await User.findOne({id: message.author.id});
 
         let embed = new Discord.MessageEmbed()
             .setColor('0x00AE86')
@@ -15,7 +15,6 @@ module.exports = {
             .addField("Inventory", "Empty")
             .setThumbnail(message.author.avatarURL());
 
-        return message.channel.send(embed);
-
+        return message.channel.send({embeds: [embed]});
     }
 };
