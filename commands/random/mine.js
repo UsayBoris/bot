@@ -1,5 +1,5 @@
 const minedRecently = new Set();
-const {User} = require('../../models/user');
+const Transaction = require('../../struct/Transaction');
 const {mining_cooldown} = require('../../config.json');
 const Discord = require('discord.js');
 
@@ -20,17 +20,13 @@ module.exports = {
         minedRecently.add(message.author.id);
         setTimeout(async () => {
             minedRecently.delete(message.author.id);
-            await User.findOne({id: message.author.id}).then(async user => {
-                const bonus_coins = Math.floor(Math.random() * 5);
+            let value = await new Transaction(message.author.id, Math.floor(Math.random() * 5)).process();
 
-                user.coins += bonus_coins;
-                let newMessage = new Discord.MessageEmbed()
-                    .setColor(0xAF873D)
-                    .setTitle('Mining')
-                    .setDescription(`you have mined ${bonus_coins} coins, you now have ${user.coins} BorisCoins`);
-                await msg.edit({embeds: [newMessage]})
-                await user.save();
-            });
+            let newMessage = new Discord.MessageEmbed()
+                .setColor(0xAF873D)
+                .setTitle('Mining')
+                .setDescription(`you have mined ${value} BorisCoins`);
+            await msg.edit({embeds: [newMessage]})
         }, mining_cooldown * 1000);
     }
 };

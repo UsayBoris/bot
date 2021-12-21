@@ -3,7 +3,6 @@ const {Client, Intents} = require('discord.js');
 module.exports = class extends Client {
     constructor(config) {
         super({
-            disableMentions: 'everyone',
             intents: [Intents.FLAGS.GUILDS,
                 Intents.FLAGS.GUILD_BANS,
                 Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,

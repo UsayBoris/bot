@@ -1,6 +1,6 @@
-const logger = require("../../logger");
 const Discord = require('discord.js');
 const {User} = require("../../models/user");
+const Transaction = require('../../struct/Transaction');
 
 module.exports = {
     name: 'Dice',
@@ -49,6 +49,8 @@ module.exports = {
                                 let roll_2 = Math.floor(Math.random() * 100) + 1;
 
                                 if (roll_2 > roll_1) {
+                                    //await new Transaction(message.author.id, Math.floor(Math.random() * 5)).process();
+                                    //await new Transaction(message.author.id, Math.floor(Math.random() * 5)).process();
                                     user1.coins -= args[1];
                                     await user1.save();
                                     user2.coins += args[1];

@@ -8,7 +8,7 @@ const myCustomLevels = {
         debug: 3,
         data: 2,
         command: 3,
-        transaction: 4
+        transaction: 2
     },
     colors: {
         info: 'blue',
