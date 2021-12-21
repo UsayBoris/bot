@@ -31,6 +31,7 @@
   - [ ] Find an API to generate a chart of the most users in each team
 
 **Fixes**
+- [ ] Fix Dice Command (new Discordjs version)
 - [ ] Empty bot command gives an error message "+"
 - [ ] Some music commands don't have embedded
 - [ ] Queue command giving an error when nothing is in queue

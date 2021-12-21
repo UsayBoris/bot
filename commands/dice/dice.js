@@ -32,18 +32,17 @@ module.exports = {
                 await dice.react('✔');
                 await dice.react('❌');
 
-                dice.awaitReactions(filter, {max: 1, time: 60000, errors: ['time']})
+                dice.awaitReactions({filter, max: 1, time: 60000, errors: ['time']})
                     .then(async collected => {
                         const reaction = collected.first();
 
                         if (reaction.emoji.name === '✔') {
                             await User.findOne({id: member.id}).then(async user2 => {
                                 if (user2.coins < args[1]) {
-                                    await dice.edit(new Discord.MessageEmbed()
+                                    await dice.edit({embeds: [new Discord.MessageEmbed()
                                         .setColor(0xAF873D)
                                         .setTitle('Dice Challenge')
-                                        .setDescription(`You dont have enough coins to accept this challenge. Cancelled!`));
-                                    await dice.reactions.removeAll();
+                                        .setDescription(`You dont have enough coins to accept this challenge. Cancelled!`)]});
                                     return;
                                 }
 
@@ -55,41 +54,37 @@ module.exports = {
                                     user2.coins += args[1];
                                     await user2.save();
 
-                                    await dice.edit(new Discord.MessageEmbed()
+                                    await dice.edit({embeds: [new Discord.MessageEmbed()
                                         .setColor(0xAF873D)
                                         .setTitle('Dice Challenge')
-                                        .setDescription(`**${member.displayName}** won the dice with a roll of **${roll_2}** vs **${roll_1}**, and received **${args[1]}** <:boriscoin:798017751842291732>`));
-                                    await dice.reactions.removeAll();
+                                        .setDescription(`**${member.displayName}** won the dice with a roll of **${roll_2}** vs **${roll_1}**, and received **${args[1]}** <:boriscoin:798017751842291732>`)]});
                                 } else if (roll_1 >= roll_2) {
                                     user1.coins += args[1];
                                     await user1.save();
                                     user2.coins -= args[1];
                                     await user2.save();
 
-                                    await dice.edit(new Discord.MessageEmbed()
+                                    await dice.edit({embeds: [new Discord.MessageEmbed()
                                         .setColor(0xAF873D)
                                         .setTitle('Dice Challenge')
-                                        .setDescription(`**${member.displayName}** lost the dice with a roll of **${roll_2}** vs **${roll_1}**, he loses **${args[1]}** <:boriscoin:798017751842291732>`));
-                                    await dice.reactions.removeAll();
+                                        .setDescription(`**${member.displayName}** lost the dice with a roll of **${roll_2}** vs **${roll_1}**, he loses **${args[1]}** <:boriscoin:798017751842291732>`)]});
                                 }
                             });
                         } else {
-                            await dice.edit(new Discord.MessageEmbed()
+                            await dice.edit({embeds: [new Discord.MessageEmbed()
                                 .setColor(0xAF873D)
                                 .setTitle('Dice Challenge')
-                                .setDescription(`**${member.displayName}** declined the dice, better friends next time!`));
-                            await dice.reactions.removeAll();
+                                .setDescription(`**${member.displayName}** declined the dice, better friends next time!`)]});
                         }
+                        await dice.reactions.removeAll();
                     }).catch(async () => {
-                    await dice.edit(new Discord.MessageEmbed()
+                    await dice.edit({embeds: [new Discord.MessageEmbed()
                         .setColor(0xAF873D)
                         .setTitle('Dice Challenge')
-                        .setDescription(`The Challenge has expired!`));
+                        .setDescription(`The Challenge has expired!`)]});
                     await dice.reactions.removeAll();
                 });
             });
-
-
         });
     }
 }
