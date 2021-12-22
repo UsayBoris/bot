@@ -1,6 +1,6 @@
 const mongoose = require('./index');
 
-const Guild = mongoose.model('Guild', {
+const guildSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -16,5 +16,11 @@ const Guild = mongoose.model('Guild', {
         default: '+'
     }
 });
+
+guildSchema.statics.findById = function (id) {
+    return this.findOne({id: id})
+};
+
+const Guild = mongoose.model('Guild', guildSchema);
 
 module.exports = Guild;

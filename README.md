@@ -20,8 +20,8 @@
 - [ ] Profile perks (mining and other)
 - [ ] Maybe work on a minigame
 
-- [ ] Check requests
-- [ ] Make a suggestions command, that saves requests for bot functions
+
+- [x] Make a suggestions command, that saves requests for bot functions
 
 
 &nbsp;
@@ -29,6 +29,8 @@
 **SHORT TEAM TODO**
 - [ ] Add teams
   - [ ] Find an API to generate a chart of the most users in each team
+  
+- [ ] Probably change everything that access the database to a class
 
 
 **Fixes**

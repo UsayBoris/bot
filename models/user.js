@@ -2,36 +2,36 @@ const mongoose = require('./index');
 const logger = require('../logger');
 const Discord = require('discord.js');
 
-const User = mongoose.model('User', {
+const userSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+            required: true
     },
     id: {
         type: Number,
-        required: true,
-        unique: true
+            required: true,
+            unique: true
     },
     private: {
         type: Boolean,
-        required: true,
-        default: false
+            required: true,
+    default: false
     },
     azia: {
         type: Number,
-        default: 0
+    default: 0
     },
     level: {
         type: Number,
-        default: 0
+    default: 0
     },
     xp: {
         type: Number,
-        default: 1
+    default: 1
     },
     coins: {
         type: Number,
-        default: 0
+    default: 0
     },
     inventory: {
         type: [Number]
@@ -40,6 +40,12 @@ const User = mongoose.model('User', {
         type: [Number]
     }
 });
+
+userSchema.statics.findById = function (id) {
+    return this.findOne({id: id})
+};
+
+const User = mongoose.model('User', userSchema);
 
 async function update_user(message) {
     await User.findOne({id: message.author.id}).then(async user => {
@@ -58,11 +64,11 @@ async function update_user(message) {
             user.level += 1;
             user.coins += user.level;
             if (!user.private) {
-                await message.author.send(new Discord.MessageEmbed()
+                await message.author.send({embeds: [new Discord.MessageEmbed()
                     .setColor("0xACA19D")
                     .setTitle('You Have leveled up')
                     .setThumbnail(message.author.avatarURL())
-                    .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`));
+                    .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`)]});
             }
         }
         user.save();
@@ -80,7 +86,7 @@ async function find_all_users(sort_query) {
 }
 
 async function check_balance(id){
-    let user = await User.findOne({id});
+    let user = await User.findById(id);
     return user.coins;
 }
 
