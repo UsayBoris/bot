@@ -35,7 +35,7 @@
 
 **Fixes**
 - [x] Fix Dice Command (new Discordjs version)
-  - [ ] Dice command is working but need to be redone to support transactions
+  - [x] Dice command is working but need to be redone to support transactions
 
 - [ ] Empty bot command gives an error message "+"
 - [ ] Some music commands don't have embedded

@@ -14,8 +14,7 @@ module.exports = {
                 await message.channel.send(JSON.stringify(emojis));
                 break;
             case 'commands':
-                //TODO not working
-                await message.channel.send(Object.keys(commands));
+                await message.channel.send(Object.keys(commands).toString());
                 break;
 
         }
