@@ -79,4 +79,9 @@ async function find_all_users(sort_query) {
     return result;
 }
 
-module.exports = {User, update_user, find_all_users};
+async function check_balance(id){
+    let user = await User.findOne({id});
+    return user.coins;
+}
+
+module.exports = {User, update_user, find_all_users, check_balance};

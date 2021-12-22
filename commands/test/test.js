@@ -1,9 +1,7 @@
-const Discord = require('discord.js');
-
 module.exports = {
-    name: 'Dice',
-    description: 'Dice against a player',
-    usage: 'dice {tag} {value}',
+    name: 'Test Module',
+    description: 'Currently working on the dice command',
+    usage: '',
     execute: async function (message, client, args) {
 
     }

@@ -17,7 +17,7 @@ const myCustomLevels = {
         debug: 'green',
         data: 'white',
         command: 'brightMagenta',
-        transaction: 'white'
+        transaction: "brightCyan"
     }
 }
 

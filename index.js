@@ -12,10 +12,10 @@ const logger = require('./logger');
 client.on('ready', async () => {
     logger.info(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds`)
     await client.user.setPresence({
-        activity: {
+        activities: [{
             name: '+help',
             type: 'LISTENING'
-        },
+        }],
         status: 'online'
     });
 });
