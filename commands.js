@@ -28,7 +28,7 @@ async function commandHandler(message, client, prefix) {
             logger.error(e.message);
             message.reply(e.message);
         }
-    } else message.reply(`"${command}" is not a valid command!`);
+    } //else message.reply(`"${command}" is not a valid command!`);
 }
 
 module.exports = {commandHandler, commands};

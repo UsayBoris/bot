@@ -36,7 +36,12 @@
 **Fixes**
 - [x] Fix Dice Command (new Discordjs version)
   - [x] Dice command is working but need to be redone to support transactions
-
-- [ ] Empty bot command gives an error message "+"
+- [x] Empty bot command gives an error message "+"
 - [ ] Some music commands don't have embedded
 - [ ] Queue command giving an error when nothing is in queue
+
+
+**Latest**
+- Dice challenge no longer shows first roll;
+- Inspire command now is embed;
+- Empty or non-existent command no longer gives an error;

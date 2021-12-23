@@ -24,7 +24,7 @@ module.exports = {
         let embedMessage = new Discord.MessageEmbed()
             .setColor(0xAF873D)
             .setTitle('Dice Challenge')
-            .setDescription(`You have challenged **${member.displayName}** with a roll of **${roll_1}**. Total value in the bet: **${bet_value}** <:boriscoin:798017751842291732>`)
+            .setDescription(`You have challenged **${member.displayName}**. Total value in the bet: **${bet_value}** <:boriscoin:798017751842291732>`)
 
         message.channel.send({embeds: [embedMessage]}).then(async dice_message => {
             await dice_message.react('✔');
@@ -42,7 +42,7 @@ module.exports = {
                                     .setTitle('Dice Challenge')
                                     .setDescription(`You dont have enough coins to accept this challenge. Cancelled!`)]
                             });
-                            return;
+                            return dice_message.reactions.removeAll();
                         }
                         if (roll_2 > roll_1) {
                             await new Transaction(message.author.id, -bet_value).process();
@@ -60,7 +60,7 @@ module.exports = {
                                 embeds: [new Discord.MessageEmbed()
                                     .setColor(0xAF873D)
                                     .setTitle('Dice Challenge')
-                                    .setDescription(`**${message.author.displayName}** won the dice with a roll of **${roll_2}** vs **${roll_1}**, and received **${bet_value}** <:boriscoin:798017751842291732>`)]
+                                    .setDescription(`**${message.author.username}** won the dice with a roll of **${roll_1}** vs **${roll_2}**, and received **${bet_value}** <:boriscoin:798017751842291732>`)]
                             });
                         }
                     } else {
