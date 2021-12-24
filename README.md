@@ -40,8 +40,9 @@
 - [ ] Some music commands don't have embedded
 - [ ] Queue command giving an error when nothing is in queue
 
+&nbsp;
 
 **Latest**
-- Dice challenge no longer shows first roll;
-- Inspire command now is embed;
-- Empty or non-existent command no longer gives an error;
+- Database changes to allow items and perks;
+- Starter Shop made;
+- Added some static function changes;

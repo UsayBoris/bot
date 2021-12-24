@@ -2,42 +2,58 @@ const mongoose = require('./index');
 const logger = require('../logger');
 const Discord = require('discord.js');
 
-const userSchema = mongoose.Schema({
+const itemSchema = mongoose.Schema({
     name: {
         type: String,
-            required: true
+        required: true
     },
     id: {
         type: Number,
-            required: true,
-            unique: true
+        required: true,
+        unique: true
+    },
+    quantity: {
+      type: Number,
+      required: true
+    }
+});
+
+const userSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    id: {
+        type: Number,
+        required: true,
+        unique: true
     },
     private: {
         type: Boolean,
-            required: true,
-    default: false
+        required: true,
+        default: false
     },
     azia: {
         type: Number,
-    default: 0
+        default: 0
     },
     level: {
         type: Number,
-    default: 0
+        default: 0
     },
     xp: {
         type: Number,
-    default: 1
+        default: 1
     },
     coins: {
         type: Number,
-    default: 0
+        default: 0
     },
     inventory: {
-        type: [Number]
+        type: [itemSchema]
     },
     perks: {
-        type: [Number]
+        type: [itemSchema]
     }
 });
 
@@ -64,11 +80,13 @@ async function update_user(message) {
             user.level += 1;
             user.coins += user.level;
             if (!user.private) {
-                await message.author.send({embeds: [new Discord.MessageEmbed()
-                    .setColor("0xACA19D")
-                    .setTitle('You Have leveled up')
-                    .setThumbnail(message.author.avatarURL())
-                    .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`)]});
+                await message.author.send({
+                    embeds: [new Discord.MessageEmbed()
+                        .setColor("0xACA19D")
+                        .setTitle('You Have leveled up')
+                        .setThumbnail(message.author.avatarURL())
+                        .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`)]
+                });
             }
         }
         user.save();
@@ -85,7 +103,7 @@ async function find_all_users(sort_query) {
     return result;
 }
 
-async function check_balance(id){
+async function check_balance(id) {
     let user = await User.findById(id);
     return user.coins;
 }

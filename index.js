@@ -41,8 +41,7 @@ client.on('messageCreate', async message => {
 
     await update_user(message);
 
-    const guild = await Guild.findOne({id: message.guild.id});  //the guild should be created when it joins, so no fail check here
-    const prefix = guild['prefix'];
+    const prefix = await Guild.getPrefix(message.guild.id);
 
     if (!message.content.startsWith(prefix)) return;
 

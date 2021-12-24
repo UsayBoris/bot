@@ -18,7 +18,12 @@ const guildSchema = mongoose.Schema({
 });
 
 guildSchema.statics.findById = function (id) {
-    return this.findOne({id: id})
+    return this.findOne({id: id});
+};
+
+guildSchema.statics.getPrefix = async function (id) {
+    let guild = await this.findById(id)
+    return guild['prefix'].toString();
 };
 
 const Guild = mongoose.model('Guild', guildSchema);
