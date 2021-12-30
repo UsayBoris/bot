@@ -42,6 +42,7 @@
 &nbsp;
 
 **Latest**
-- Fixed NSFW command;
-- Added Transaction description;
-- Deleted some dev commands;
+- Added Transaction and Mine database;
+- Dynamic shop is working;
+- Buy command can add item to user (still no filtering);
+- Minor changes;

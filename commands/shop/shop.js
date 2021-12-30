@@ -8,22 +8,36 @@ module.exports = {
     usage: 'shop {optional: specific shop}',
     execute: async function (message, client, args) {
 
+        const prefix = await Guild.getPrefix(message.guild.id);
+
+        let itemCategories = await Item.find();
+        const categories = [...new Set(itemCategories.map(item => item.category))];
+
         if (!args[0]) {
+            let categoryMessage = '';
+
+            categories.forEach(category => {
+                let capCategory = category.charAt(0).toUpperCase() + category.slice(1);
+                categoryMessage += capCategory + ' Shop' + " **" + prefix + "shop " + category + "**\n";
+            });
+
             let embedMessage = new Discord.MessageEmbed()
                 .setColor('0xD8BFD8')
                 .setTitle('Shop')
-                .setDescription('Perk Stop **+shop perk**')
+                .setDescription(categoryMessage);
 
             return message.channel.send({embeds: [embedMessage]});
         }
 
+        if (!categories.includes(args[0])) return;
 
-        let items = await Item.find({category: "perk"});
+        let items = await Item.find({category: args[0]});
+
+        let capCategory = args[0].charAt(0).toUpperCase() + args[0].slice(1);
+
         let embedMessage = new Discord.MessageEmbed()
             .setColor('0xD8BFD8')
-            .setTitle('Perk Shop')
-
-        const prefix = await Guild.getPrefix(message.guild.id);
+            .setTitle(capCategory + ' Shop');
 
         let messageConcat = '';
 
