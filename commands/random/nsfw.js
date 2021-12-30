@@ -14,19 +14,21 @@ module.exports = {
 
         let nsfw = ['4k', 'anal', 'ass', 'pussy', 'pgif']
 
-        message.channel.send(lo).then(m => {
+        message.channel.send({embeds: [lo]}).then(m => {
             superagent.get('https://nekobot.xyz/api/image').timeout({
                 response: 5000,
                 deadline: 10000
-            }).query({type: nsfw[Math.floor(Math.random()*nsfw.length)]}).then(res => {
-                m.edit(new Discord.MessageEmbed()
-                    .setDescription(res.body.message)
-                    .setTimestamp()
-                    .setImage(res.body.message)
-                    .setFooter(client.footer));
+            }).query({type: nsfw[Math.floor(Math.random() * nsfw.length)]}).then(res => {
+                m.edit({
+                    embeds:
+                        [new Discord.MessageEmbed()
+                            .setDescription(res.body.message)
+                            .setTimestamp()
+                            .setImage(res.body.message)]
+                });
             }, error => {
                 if (error.timeout)
-                     m.edit('Could not load any image');
+                    m.edit('Could not load any image');
             });
         });
     }

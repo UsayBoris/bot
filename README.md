@@ -37,12 +37,11 @@
 - [x] Fix Dice Command (new Discordjs version)
   - [x] Dice command is working but need to be redone to support transactions
 - [x] Empty bot command gives an error message "+"
-- [ ] Some music commands don't have embedded
-- [ ] Queue command giving an error when nothing is in queue
+- [ ] Fix NSFW command
 
 &nbsp;
 
 **Latest**
-- Database changes to allow items and perks;
-- Starter Shop made;
-- Added some static function changes;
+- Fixed NSFW command;
+- Added Transaction description;
+- Deleted some dev commands;

@@ -18,8 +18,8 @@ module.exports = {
                 await message.channel.send(Object.keys(commands).toString());
                 break;
             case 'add_item':
-                await Item.create({name: "Speed Perk", description: "Accelerates the mining process", id: 1, price: 100, emote: '"perk_speed":"842116583676444672"', category: "perk"});
-                await Item.create({name: "Luck Perk", description: "Increased the chance of more coins from mining", id: 2, price: 100, emote: '"perk_luck":"842141817990152212"', category: "perk"});
+                // await Item.create({name: "Speed Perk", description: "Accelerates the mining process", id: 1, price: 100, emote: '"perk_speed":"842116583676444672"', category: "perk"});
+                // await Item.create({name: "Luck Perk", description: "Increased the chance of more coins from mining", id: 2, price: 100, emote: '"perk_luck":"842141817990152212"', category: "perk"});
                 break;
 
         }
