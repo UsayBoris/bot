@@ -45,8 +45,8 @@ module.exports = {
                             return dice_message.reactions.removeAll();
                         }
                         if (roll_2 > roll_1) {
-                            await new Transaction(message.author.id, -bet_value).process();
-                            await new Transaction(member.id, bet_value).process();
+                            await new Transaction(message.author.id, -bet_value, 'Dice').process();
+                            await new Transaction(member.id, bet_value, 'Dice').process();
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()
                                     .setColor(0xAF873D)
@@ -54,8 +54,8 @@ module.exports = {
                                     .setDescription(`**${member.displayName}** won the dice with a roll of **${roll_2}** vs **${roll_1}**, and received **${bet_value}** <:boriscoin:798017751842291732>`)]
                             });
                         } else {
-                            await new Transaction(message.author.id, bet_value).process();
-                            await new Transaction(member.id, -bet_value).process();
+                            await new Transaction(message.author.id, bet_value, 'Dice').process();
+                            await new Transaction(member.id, -bet_value, 'Dice').process();
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()
                                     .setColor(0xAF873D)

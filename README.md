@@ -1,7 +1,7 @@
 - [x] Change file structure, remove help function
 - [x] Change experience calculation (requires database reset)
 - [x] Check how to have static images (changed to emote)
-- [ ] Starter shop and buy options 
+- [x] Starter shop and buy options 
 - [ ] Shop Sprites
   - [ ] Weapons
   - [ ] Fish
@@ -15,7 +15,7 @@
 - [ ] Google Search
 - [ ] Make pretty Embed stuff
 - [x] Fix help command
-- [ ] Improve mining method:
+- [x] Improve mining method:
   - [ ] Add a luck and speed upgrade
 - [ ] Profile perks (mining and other)
 - [ ] Maybe work on a minigame
@@ -43,4 +43,4 @@
 &nbsp;
 
 **Latest**
-- Added user id to transaction database;
+- Dice command fix;
