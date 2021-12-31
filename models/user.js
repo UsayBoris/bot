@@ -51,9 +51,6 @@ const userSchema = mongoose.Schema({
     },
     inventory: {
         type: [itemSchema]
-    },
-    perks: {
-        type: [itemSchema]
     }
 });
 

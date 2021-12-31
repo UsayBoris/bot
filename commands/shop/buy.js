@@ -14,16 +14,11 @@ module.exports = {
         if (!item) return console.log('Not a valid Item');
 
         User.findOne({id: message.author.id}).then(async user => {
-            console.log(item.category);
-
-            if (item.category === 'perk') {
-                user.perks.push({
-                    name: item.name,
-                    id: item.id,
-                    quantity: 1
-                })
-            }
-
+            user.inventory.push({
+                name: item.name,
+                id: item.id,
+                quantity: 1
+            })
             user.save();
         });
     }

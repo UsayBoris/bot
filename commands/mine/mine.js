@@ -24,8 +24,7 @@ module.exports = {
         minedRecently.add(message.author.id);
         setTimeout(async () => {
             minedRecently.delete(message.author.id);
-            let value = await new Transaction(message.author.id, Math.floor(Math.random() * 5), "Mining").process();
-
+            let value = await new Transaction(message.author.id, Math.floor(Math.random() * 4) + 1, "Mining").process();
             let newMessage = new Discord.MessageEmbed()
                 .setColor(0xAF873D)
                 .setTitle('Mining')

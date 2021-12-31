@@ -27,9 +27,10 @@
 &nbsp;
 
 **SHORT TEAM TODO**
+- [ ] Mining to grant a BC bonus every block Mined
+- [ ] Add an Inventory command, splitting items by category
 - [ ] Add teams
   - [ ] Find an API to generate a chart of the most users in each team
-  
 - [ ] Probably change everything that access the database to a class
 
 
@@ -37,12 +38,11 @@
 - [x] Fix Dice Command (new Discordjs version)
   - [x] Dice command is working but need to be redone to support transactions
 - [x] Empty bot command gives an error message "+"
-- [ ] Fix NSFW command
+- [x] Fix NSFW command
 
 &nbsp;
 
 **Latest**
-- Added Transaction and Mine database;
-- Dynamic shop is working;
-- Buy command can add item to user (still no filtering);
-- Minor changes;
+- Attempts to fix shop command;
+- Added Transaction database;
+- Now Mining always grants a BC;

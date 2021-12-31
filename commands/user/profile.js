@@ -1,5 +1,6 @@
 const {User} = require('../../models/user');
 const Discord = require("discord.js");
+const Item = require('../../models/item');
 
 module.exports = {
     name: 'Profile',
@@ -12,7 +13,7 @@ module.exports = {
             .setColor('0x00AE86')
             .setTitle(`${message.author.username}'s Profile`)
             .addField("Stats", `**Level: ${user.level}**\n<:xp:801554148994056202> Experience: **${user.xp}**\n<:boriscoin:798017751842291732> BorisCoins: **${user.coins}**\nAzia: **${user.azia}**`)
-            .addField("Inventory", "Empty")
+            .addField('Inventory', user.inventory.length + ' items')
             .setThumbnail(message.author.avatarURL());
 
         return message.channel.send({embeds: [embed]});

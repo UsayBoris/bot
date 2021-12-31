@@ -1,10 +1,6 @@
 const mongoose = require('./index');
 
 const transactionSchema = mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     value: {
         type: Number,
         required: true,
