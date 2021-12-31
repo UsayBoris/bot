@@ -43,6 +43,4 @@
 &nbsp;
 
 **Latest**
-- Attempts to fix shop command;
-- Added Transaction database;
-- Now Mining always grants a BC;
+- Added user id to transaction database;
