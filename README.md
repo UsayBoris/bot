@@ -44,6 +44,4 @@
 &nbsp;
 
 **Latest**
-- Give Command;
-- Highscores command is probably working;
-- Fixed some Help Descriptions;
+- Added Give Message;

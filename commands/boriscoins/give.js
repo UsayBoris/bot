@@ -16,5 +16,12 @@ module.exports = {
 
         await new Transaction(message.author.id, -give_value, 'Give').process();
         await new Transaction(member.id, give_value, 'Give').process();
+
+        return message.channel.send({
+            embeds: new Discord.MessageEmbed()
+                .setColor(0xAF873D)
+                .setTitle('Give')
+                .setDescription(`You gave ${member.displayName} ${give_value} <:boriscoin:798017751842291732>`)
+        });
     }
 }
