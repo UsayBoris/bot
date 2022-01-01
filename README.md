@@ -44,4 +44,4 @@
 &nbsp;
 
 **Latest**
-- Added Give Message;
+- Give Message Fix;
