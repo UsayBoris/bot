@@ -10,8 +10,14 @@ module.exports = {
         let user = await User.findById(message.author.id);
         let inventory = user.inventory;
 
-        let messageConcat = '';
+        if (!(inventory.length > 0)) return message.channel.send({
+            embeds: [new Discord.MessageEmbed()
+                .setColor('0x00AE86')
+                .setTitle('Inventory')
+                .setDescription('Empty')]
+        });
 
+        let messageConcat = '';
         for (const item of inventory) {
             messageConcat += await Item.getItemString(item.id, item.quantity)
         }

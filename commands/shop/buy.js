@@ -1,6 +1,7 @@
 const Item = require('../../models/item');
 const {User, check_balance} = require('../../models/user');
 const Transaction = require("../../struct/Transaction");
+const Discord = require("discord.js");
 
 module.exports = {
     name: 'Buy',
@@ -34,6 +35,13 @@ module.exports = {
             }
 
             user.save();
+        });
+
+        return message.channel.send({
+            embeds: [new Discord.MessageEmbed()
+                .setColor('0xD8BFD8')
+                .setTitle('Buy')
+                .setDescription("You bought <" + item.emote + "> "+item.name+" for <:boriscoin:798017751842291732> " + item.price + ".")]
         });
     }
 };

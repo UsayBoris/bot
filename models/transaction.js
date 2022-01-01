@@ -2,8 +2,8 @@ const mongoose = require('./index');
 
 const transactionSchema = mongoose.Schema({
     user: {
-      type: Number,
-      required: true
+        type: Number,
+        required: true
     },
     value: {
         type: Number,
@@ -12,6 +12,10 @@ const transactionSchema = mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 

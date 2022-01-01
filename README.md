@@ -40,11 +40,11 @@
   - [x] Dice command is working but need to be redone to support transactions
 - [x] Empty bot command gives an error message "+"
 - [x] Fix NSFW command
+- [ ] All permission commands are not working
 
 &nbsp;
 
 **Latest**
-- Buy Command;
-- Inventory Command;
-- Start adding Perk Bonuses to mining;
-- Database Static Functions Added;
+- Empty inventory message;
+- Buy command now gives a message;
+- Transaction date in database;
