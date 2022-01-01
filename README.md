@@ -27,6 +27,7 @@
 &nbsp;
 
 **SHORT TEAM TODO**
+- [ ] Give command
 - [ ] Mining to grant a BC bonus every block Mined
 - [ ] Add an Inventory command, splitting items by category
 - [ ] Add teams
@@ -43,4 +44,6 @@
 &nbsp;
 
 **Latest**
-- Dice command fix;
+- Give Command;
+- Highscores command is probably working;
+- Fixed some Help Descriptions;

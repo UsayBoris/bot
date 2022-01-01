@@ -1,0 +1,20 @@
+const Discord = require("discord.js");
+const {check_balance} = require("../../models/user");
+const Transaction = require('../../struct/Transaction');
+
+module.exports = {
+    name: 'Give',
+    description: 'Give coins to someone',
+    usage: 'give {user tag} {value}',
+    execute: async function (message, client, args) {
+        let member = message.mentions.members.first();
+        if (member === undefined || member.id === message.author.id) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid user')]});
+        if (!args[1] || isNaN(args[1])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+
+        let give_value = parseInt(args[1]);
+        if (await check_balance(message.author.id) < give_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to give')]});
+
+        await new Transaction(message.author.id, -give_value, 'Give').process();
+        await new Transaction(member.id, give_value, 'Give').process();
+    }
+}

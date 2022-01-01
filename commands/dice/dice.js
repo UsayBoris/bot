@@ -3,9 +3,9 @@ const {check_balance} = require("../../models/user");
 const Transaction = require('../../struct/Transaction');
 
 module.exports = {
-    name: 'Test Module',
-    description: 'Currently working on the dice command',
-    usage: '',
+    name: 'Dice',
+    description: 'Dice command to challenge your friends',
+    usage: 'dice {user tag} {value}',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         if (member === undefined || member.id === message.author.id) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid player')]});
