@@ -3,9 +3,6 @@ const Transaction = require('../../struct/Transaction');
 const {mining_cooldown} = require('../../config.json');
 const Discord = require('discord.js');
 
-const luck_bases = [
-    [1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5]
-]
 
 module.exports = {
     name: 'Mine',

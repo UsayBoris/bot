@@ -28,6 +28,15 @@ const itemSchema = mongoose.Schema({
     }
 });
 
+itemSchema.statics.findById = function (id) {
+    return this.findOne({id: id});
+};
+
+itemSchema.statics.getItemString = async function (id, quantity) {
+    let item = await this.findById(id);
+    return  quantity + ' <' + item.emote + '> ' + item.name + '\n';
+};
+
 const Item = mongoose.model('Item', itemSchema);
 
 module.exports = Item;

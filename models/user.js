@@ -55,7 +55,11 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.statics.findById = function (id) {
-    return this.findOne({id: id})
+    return this.findOne({id: id});
+};
+
+userSchema.statics.getPerks = function (id) {
+    return this;
 };
 
 const User = mongoose.model('User', userSchema);

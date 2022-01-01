@@ -27,7 +27,7 @@
 &nbsp;
 
 **SHORT TEAM TODO**
-- [ ] Give command
+- [x] Give command
 - [ ] Mining to grant a BC bonus every block Mined
 - [ ] Add an Inventory command, splitting items by category
 - [ ] Add teams
@@ -44,4 +44,7 @@
 &nbsp;
 
 **Latest**
-- Give Message Fix;
+- Buy Command;
+- Inventory Command;
+- Start adding Perk Bonuses to mining;
+- Database Static Functions Added;
