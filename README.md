@@ -20,11 +20,7 @@
 - [x] Profile perks (mining and other)
 - [ ] Maybe work on a minigame
 
-
 - [x] Make a suggestions command, that saves requests for bot functions
-
-
-&nbsp;
 
 **SHORT TEAM TODO**
 - [x] Give command
@@ -35,7 +31,6 @@
   - [ ] Find an API to generate a chart of the most users in each team
 - [ ] Probably change everything that access the database to a class
 
-
 **Fixes**
 - [x] Fix Dice Command (new Discordjs version)
   - [x] Dice command is working but need to be redone to support transactions
@@ -43,7 +38,8 @@
 - [x] Fix NSFW command
 - [ ] All permission commands are not working
 
-&nbsp;
-
-**Latest**
-- Quick fix to mining command;
+**Latest Version: 2.3.9**
+- Perks are working;
+- Perks are limited to tier 1 so far;
+- Upgrade Command is under work;
+- README now available with command;

@@ -13,7 +13,6 @@ module.exports = {
         if (minedRecently.has(message.author.id))
             return message.reply('you are still mining!');
 
-        /* Working, but needs limiting in purchases
         let perks = await User.getPerks(message.author.id);
 
         let speedPerk = perks.find(o => o.name === 'Speed Perk');
@@ -21,9 +20,6 @@ module.exports = {
 
         let speedValue = ((!speedPerk) ? 0 : speedPerk.quantity);
         let luckValue = ((!luckPerk) ? 0 : luckPerk.quantity);
-        */
-        let speedValue = 0;
-        let luckValue = 0;
 
         let embedMessage = new Discord.MessageEmbed()
             .setColor(0xAF873D)
