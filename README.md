@@ -24,7 +24,7 @@
 
 **SHORT TEAM TODO**
 - [x] Give command
-- [ ] Purchase limiting, at least for perks (probably to a static value);
+- [x] Purchase limiting, at least for perks (probably to a static value);
 - [ ] Mining to grant a BC bonus every block Mined
 - [ ] Add an Inventory command, splitting items by category
 - [ ] Add teams
@@ -37,6 +37,7 @@
 - [x] Empty bot command gives an error message "+"
 - [x] Fix NSFW command
 - [ ] All permission commands are not working
+- [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
-**Latest Version: 2.3.11**
-- Dev commands not working, reverted;
+**Latest Version: 2.3.12**
+- Added azia cooldown;

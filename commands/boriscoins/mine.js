@@ -4,7 +4,6 @@ const {mining_cooldown} = require('../../config.json');
 const Discord = require('discord.js');
 const {User} = require('../../models/user');
 
-
 module.exports = {
     name: 'Mine',
     description: 'Mine for some coins (1 minute cooldown)',
