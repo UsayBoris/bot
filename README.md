@@ -38,8 +38,6 @@
 - [x] Fix NSFW command
 - [ ] All permission commands are not working
 
-**Latest Version: 2.3.9**
-- Perks are working;
-- Perks are limited to tier 1 so far;
-- Upgrade Command is under work;
-- README now available with command;
+**Latest Version: 2.3.10**
+- Dev commands added (block, unblock);
+- Fixed log prints;

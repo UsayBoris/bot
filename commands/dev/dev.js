@@ -4,6 +4,8 @@ const Item = require('../../models/item');
 module.exports = {
     execute: async function (message, client, args, commands) {
         if (message.author.id !== '90535285909118976') return message.channel.send('you are not a developer');
+        let member = message.mentions.members.first();
+        const blockedUsers = message.client.blockedUsers.get(message.guild.id);
         switch (args[0]) {
             case 'emojis':
                 let emojis = {};
@@ -27,9 +29,13 @@ module.exports = {
                 // await Item.create({name: "Emerald", description: "Tier 4 Gem", id: 204, price: 800, emote: ':gem_4:926220295440838756', category: "crafting"});
                 // await Item.create({name: "Amethyst", description: "Tier 5 Gem", id: 205, price: 1600, emote: ':gem_5:926220295893835786', category: "crafting"});
                 // await Item.create({name: "Dick", description: "Dick", id: 69, price: 999, emote: ':boris_dick:926953596828909568', category: "test"});
+                break;
 
-
-
+            case 'block':
+                blockedUsers.add(member.id);
+                break;
+            case 'unblock':
+                blockedUsers.delete(member.id);
                 break;
 
         }

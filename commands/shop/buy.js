@@ -21,8 +21,6 @@ module.exports = {
         // else -> update item in inventory for the new quantity (transaction made)
         // if the item does not exist, add it to the inventory (transaction made)
 
-        console.log(item);
-
         User.findOne({id: message.author.id}).then(async user => {
             let obj = user.inventory.find(x => x.name === item.name);
             if (!obj) {
