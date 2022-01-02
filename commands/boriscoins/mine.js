@@ -22,6 +22,8 @@ module.exports = {
         let speedValue = ((!speedPerk) ? 0 : speedPerk.quantity);
         let luckValue = ((!luckPerk) ? 0 : luckPerk.quantity);
         */
+        let speedValue = 0;
+        let luckValue = 0;
 
         let embedMessage = new Discord.MessageEmbed()
             .setColor(0xAF873D)

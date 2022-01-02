@@ -46,5 +46,4 @@
 &nbsp;
 
 **Latest**
-- Perks added;
-- Perks not available yet;
+- Quick fix to mining command;
