@@ -38,6 +38,5 @@
 - [x] Fix NSFW command
 - [ ] All permission commands are not working
 
-**Latest Version: 2.3.10**
-- Dev commands added (block, unblock);
-- Fixed log prints;
+**Latest Version: 2.3.11**
+- Dev commands not working, reverted;

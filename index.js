@@ -35,8 +35,6 @@ client.on("guildDelete", guild => {
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
     // if (message.author.id !== '90535285909118976') return; // Bot lock to dev
-    const blockedUsers = message.client.blockedUsers.get(message.guild.id);
-    if (blockedUsers.has(message.author.id)) return;
 
     if (message.content === '@everyone') {
         return message.reply('@everyone ping ping @everyone');

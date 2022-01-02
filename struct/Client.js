@@ -13,7 +13,6 @@ module.exports = class extends Client {
         });
 
         this.queue = new Map();
-        this.blockedUsers = new Set();
 
         this.config = config;
     }
