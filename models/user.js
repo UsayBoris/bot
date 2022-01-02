@@ -1,6 +1,7 @@
 const mongoose = require('./index');
 const logger = require('../logger');
 const Discord = require('discord.js');
+const Item = require('./item');
 
 const itemSchema = mongoose.Schema({
     name: {
@@ -13,9 +14,13 @@ const itemSchema = mongoose.Schema({
         unique: true
     },
     quantity: {
-      type: Number,
-      required: true
-    }
+        type: Number,
+        required: true
+    },/*
+    category: {
+        type: String,
+        required: true
+    }*/
 });
 
 const userSchema = mongoose.Schema({
@@ -58,8 +63,15 @@ userSchema.statics.findById = function (id) {
     return this.findOne({id: id});
 };
 
-userSchema.statics.getPerks = function (id) {
-    return this;
+userSchema.statics.getPerks = async function (id) {
+    let user = await this.findById(id);
+    let perks = [];
+    for (const item of user.inventory) {
+        if (await Item.getCategory(item.id) === 'perk') {
+            perks.push({name: item.name, quantity: item.quantity})
+        }
+    }
+    return perks;
 };
 
 const User = mongoose.model('User', userSchema);

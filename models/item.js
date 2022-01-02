@@ -37,6 +37,11 @@ itemSchema.statics.getItemString = async function (id, quantity) {
     return  quantity + ' <' + item.emote + '> ' + item.name + '\n';
 };
 
+itemSchema.statics.getCategory = async function (id) {
+    let item = await this.findById(id);
+    return item.category;
+}
+
 const Item = mongoose.model('Item', itemSchema);
 
 module.exports = Item;

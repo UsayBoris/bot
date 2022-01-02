@@ -13,11 +13,11 @@
 - [x] Better Logger - https://stackify.com/winston-logging-tutorial/
 - [ ] Role Management - https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/understanding/roles.md
 - [ ] Google Search
-- [ ] Make pretty Embed stuff
+- [x] Make pretty Embed stuff
 - [x] Fix help command
 - [x] Improve mining method:
-  - [ ] Add a luck and speed upgrade
-- [ ] Profile perks (mining and other)
+  - [x] Add a luck and speed upgrade
+- [x] Profile perks (mining and other)
 - [ ] Maybe work on a minigame
 
 
@@ -28,6 +28,7 @@
 
 **SHORT TEAM TODO**
 - [x] Give command
+- [ ] Purchase limiting, at least for perks (probably to a static value);
 - [ ] Mining to grant a BC bonus every block Mined
 - [ ] Add an Inventory command, splitting items by category
 - [ ] Add teams
@@ -45,6 +46,5 @@
 &nbsp;
 
 **Latest**
-- Empty inventory message;
-- Buy command now gives a message;
-- Transaction date in database;
+- Perks added;
+- Perks not available yet;
