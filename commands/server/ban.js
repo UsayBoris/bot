@@ -3,7 +3,7 @@ module.exports = {
     description: 'Bans someone for the given reason',
     usage: 'ban {user tag} {\'Reason\'}',
     execute: async function (message, client, args) {
-        if (!message.member.hasPermission('BAN_MEMBERS'))
+        if (!message.member.permissions.has('BAN_MEMBERS'))
             return message.reply("You don't have permissions to use this!");
 
         let member = message.mentions.members.first();

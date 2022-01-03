@@ -1,5 +1,4 @@
 const {User} = require('../../models/user');
-const {mining_cooldown} = require("../../config.json");
 const aziaRecently = new Set();
 
 module.exports = {
@@ -17,16 +16,13 @@ module.exports = {
         aziaRecently.add(message.author.id);
         setTimeout(() => {
             aziaRecently.delete(message.author.id);
-        }, (10 * 60 * 1000));
+        }, (60 * 1000));
 
-        await User.findOne({id: member.id}).then(async user => {
+        User.findOneAndUpdate({id: member.id}, {$inc: {azia: 1}}).then(user => {
             if (user === null) {
                 return message.reply("This user hasn't talked in this server yet.");
             }
-            user.azia += 1;
-            await user.save();
-            return message.channel.send(`O <@${(member.id).toString()}> já aziou ${user.azia} vezes.`);
-        })
-
+            return message.channel.send(`O <@${(member.id).toString()}> já aziou ${user.azia + 1} vezes.`);
+        });
     }
 };

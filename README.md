@@ -36,8 +36,10 @@
   - [x] Dice command is working but need to be redone to support transactions
 - [x] Empty bot command gives an error message "+"
 - [x] Fix NSFW command
-- [ ] All permission commands are not working
+- [x] All permission commands are not working
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
-**Latest Version: 2.3.12**
-- Added azia cooldown;
+**Latest Version: 2.4.0**
+- findOneAndUpdate works way better in some cases, changing some stuff;
+- Permissions commands should be fixed;
+- Removed all Music commands from the bot (not working after all);

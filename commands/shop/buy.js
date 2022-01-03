@@ -52,48 +52,5 @@ module.exports = {
                     .setDescription("You bought <" + item.emote + "> " + item.name + " for <:boriscoin:798017751842291732> " + item.price + ".")]
             });
         });
-
-        /*
-        User.findOne({id: message.author.id}).then(async user => {
-            let obj = user.inventory.find(async (o, i) => {
-                if (o.name === item.name) {
-                    if (item.category === 'perk') {
-                        await message.channel.send({
-                            embeds: [new Discord.MessageEmbed()
-                                .setColor('0xD8BFD8')
-                                .setTitle('Buy')
-                                .setDescription(`You already have this perk, try upgrading it **+upgrade ${item.name}**`)]
-                        });
-                    } else {
-                        user.inventory[i] = {name: o.name, id: o.id, quantity: o.quantity + 1};
-                        await new Transaction(message.author.id, -item.price, 'Buy').process();
-                        await message.channel.send({
-                            embeds: [new Discord.MessageEmbed()
-                                .setColor('0xD8BFD8')
-                                .setTitle('Buy')
-                                .setDescription("You bought <" + item.emote + "> " + item.name + " for <:boriscoin:798017751842291732> " + item.price + ".")]
-                        });
-                    }
-                    return true;
-                }
-            });
-
-            if (!obj) {
-                user.inventory.push({
-                    name: item.name,
-                    id: item.id,
-                    quantity: 1
-                });
-                await new Transaction(message.author.id, -item.price, 'Buy').process();
-                return message.channel.send({
-                    embeds: [new Discord.MessageEmbed()
-                        .setColor('0xD8BFD8')
-                        .setTitle('Buy')
-                        .setDescription("You bought <" + item.emote + "> " + item.name + " for <:boriscoin:798017751842291732> " + item.price + ".")]
-                });
-            }
-            user.save();
-        });
-        */
     }
 };

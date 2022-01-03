@@ -10,9 +10,7 @@ module.exports = class Transaction {
     }
 
     async process() {
-        await User.findOne({id: this.id}).then(async user => {
-            user.coins += this.value;
-            user.save();
+        await User.findOneAndUpdate({id: this.id}, {$inc: {coins: this.value}}).then(async () => {
             await _Transaction.create({user: this.id, value: this.value, description: this.reason});
             logger.transaction(`${this.id.toString()} -> ${this.value}BC "${this.reason}"`);
         });
