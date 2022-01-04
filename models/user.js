@@ -16,11 +16,7 @@ const itemSchema = mongoose.Schema({
     quantity: {
         type: Number,
         required: true
-    },/*
-    category: {
-        type: String,
-        required: true
-    }*/
+    }
 });
 
 const userSchema = mongoose.Schema({
@@ -68,15 +64,26 @@ userSchema.statics.getPerks = async function (id) {
     let perks = [];
     for (const item of user.inventory) {
         if (await Item.getCategory(item.id) === 'perk') {
-            perks.push({name: item.name, quantity: item.quantity})
+            perks.push({id: item.id, name: item.name, quantity: item.quantity})
         }
     }
     return perks;
 };
 
+userSchema.statics.getBalance = async function (id) {
+    let user = await User.findById(id);
+    return user.coins;
+};
+
+userSchema.statics.checkInventory = async function (id, itemId) {
+    let user = await this.findById(id);
+    return user.inventory.find(o => o.id === itemId);
+};
+
 const User = mongoose.model('User', userSchema);
 
 async function update_user(message) {
+    //TODO replace this with a static, updateOneOrCreate
     await User.findOne({id: message.author.id}).then(async user => {
 
         if (user === null) {
@@ -106,19 +113,4 @@ async function update_user(message) {
     });
 }
 
-async function find_all_users(sort_query) {
-    if (!sort_query) sort_query = 'xp';
-    let users = await User.find({}).sort([[sort_query, "desc"]]);
-    let result = []
-    for (let i = 0; i < 10; i++) {
-        result[i] = users[i];
-    }
-    return result;
-}
-
-async function check_balance(id) {
-    let user = await User.findById(id);
-    return user.coins;
-}
-
-module.exports = {User, update_user, find_all_users, check_balance};
+module.exports = {User, update_user};

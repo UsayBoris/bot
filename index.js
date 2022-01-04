@@ -6,8 +6,6 @@ const {update_user} = require('./models/user');
 const Guild = require('./models/guild');
 const logger = require('./logger');
 
-//TODO pretty embed for everything that needs an embed
-
 //Bot startup message
 client.on('ready', async () => {
     logger.info(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds`)

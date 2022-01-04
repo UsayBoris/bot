@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const {check_balance} = require("../../models/user");
+const {User} = require("../../models/user");
 const Transaction = require('../../struct/Transaction');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         if (!args[1] || isNaN(args[1])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
 
         let bet_value = parseInt(args[1]);
-        if (await check_balance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});
+        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});
 
         let roll_1 = Math.floor(Math.random() * 100) + 1;
         let roll_2 = Math.floor(Math.random() * 100) + 1;
@@ -24,7 +24,7 @@ module.exports = {
         let embedMessage = new Discord.MessageEmbed()
             .setColor(0xAF873D)
             .setTitle('Dice Challenge')
-            .setDescription(`You have challenged **${member.displayName}**. Total value in the bet: **${bet_value}** <:boriscoin:798017751842291732>`)
+            .setDescription(`You have challenged **${member.displayName}**. Total value in the bet: **${bet_value}** <:boriscoin:798017751842291732>`);
 
         message.channel.send({embeds: [embedMessage]}).then(async dice_message => {
             await dice_message.react('✔');
@@ -35,7 +35,7 @@ module.exports = {
                     const reaction = collected.first();
 
                     if (reaction.emoji.name === '✔') {
-                        if (await check_balance(member.id) < bet_value) {
+                        if (await User.getBalance(member.id) < bet_value) {
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()
                                     .setColor(0xAF873D)
@@ -74,7 +74,6 @@ module.exports = {
                     await dice_message.reactions.removeAll();
                 })
                 .catch(async err => {
-                    console.log(err);
                     await dice_message.edit({
                         embeds: [new Discord.MessageEmbed()
                             .setColor(0xAF873D)

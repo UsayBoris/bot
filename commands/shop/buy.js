@@ -13,7 +13,7 @@ module.exports = {
         let item = await Item.findOne({name: itemString});
         if (!item) return message.channel.send('Not a valid Item');
 
-        if (await check_balance(message.author.id) < item.price) return message.channel.send('Not enough money!');
+        if (await User.getBalance(message.author.id) < item.price) return message.channel.send('Not enough money!');
 
         // check if there is an item in inventory that matches the one that he wants to buy
         // check if that item is a perk
