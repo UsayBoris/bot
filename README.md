@@ -23,7 +23,6 @@
 - [x] Make a suggestions command, that saves requests for bot functions
 
 **SHORT TEAM TODO**
-
 - [x] Give command
 - [x] Purchase limiting, at least for perks (probably to a static value);
 - [ ] Add a commands;
@@ -34,7 +33,6 @@
 - [ ] Probably change everything that access the database to a class
 
 **Fixes**
-
 - [x] Fix Dice Command (new Discordjs version)
     - [x] Dice command is working but need to be redone to support transactions
 - [x] Empty bot command gives an error message "+"
@@ -42,9 +40,5 @@
 - [x] All permission commands are not working
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
-**Latest Version: 2.5.0**
-
-- Check balance method fixed;
-- Better highscores command;
-- Upgrade command fully working (for perks);
-- Fixed mining giving the wrong maximum number of coins;
+**Latest Version: 2.5.1**
+- "fdp"
