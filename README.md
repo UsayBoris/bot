@@ -25,9 +25,9 @@
 **SHORT TEAM TODO**
 - [x] Give command
 - [x] Purchase limiting, at least for perks (probably to a static value);
-- [ ] Add a commands;
 - [ ] Mining to grant a BC bonus every block Mined
-- [ ] Add an Inventory command, splitting items by category
+- [x] Add an Inventory command
+  - [ ] Split items by category
 - [ ] Add teams
     - [ ] Find an API to generate a chart of the most users in each team
 - [ ] Probably change everything that access the database to a class
@@ -40,5 +40,6 @@
 - [x] All permission commands are not working
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
-**Latest Version: 2.5.1**
-- "fdp"
+**Latest Version: 2.5.2**
+- Help Command improved, now shows every command on empty;
+- Deleting incomplete commands;

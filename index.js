@@ -33,7 +33,7 @@ client.on("guildDelete", guild => {
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
     // if (message.author.id !== '90535285909118976') return; // Bot lock to dev
-    if (message.author.id === '398231924151418880' || message.author.id === '755848086823239700') return message.reply('"fdp"');
+    // if (message.author.id === '398231924151418880' || message.author.id === '755848086823239700') return message.reply('"fdp"');
 
     if (message.content === '@everyone') {
         return message.reply('@everyone ping ping @everyone');
