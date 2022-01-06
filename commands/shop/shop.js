@@ -23,6 +23,7 @@ module.exports = {
 
             let embedMessage = new Discord.MessageEmbed()
                 .setColor('0xD8BFD8')
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Shop')
                 .setDescription(categoryMessage);
 
@@ -37,6 +38,7 @@ module.exports = {
 
         let embedMessage = new Discord.MessageEmbed()
             .setColor('0xD8BFD8')
+            .setAuthor(message.author.username, message.author.avatarURL())
             .setTitle(capCategory + ' Shop');
 
         let messageConcat = '';

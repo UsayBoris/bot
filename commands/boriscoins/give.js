@@ -20,6 +20,7 @@ module.exports = {
         return message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor(0xAF873D)
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Give')
                 .setDescription(`You gave ${member.displayName} ${give_value} <:boriscoin:798017751842291732>`)]
         });

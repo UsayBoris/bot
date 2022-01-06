@@ -40,8 +40,6 @@
 - [x] All permission commands are not working
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
-**Latest Version: 2.5.3**
-- Help settings updated to new description;
-- Info command;
-- Slots command;
-- Nerfed upgrade rates;
+**Latest Version: 2.5.4**
+- Added user to the top of the embed message;
+- Fixed fast mining command bug;

@@ -12,6 +12,7 @@ module.exports = {
         message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor(0xAAFF00)
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Suggestion')
                 .setDescription(`your suggestion has been recorded!`)]
         });

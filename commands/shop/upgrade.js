@@ -21,6 +21,7 @@ module.exports = {
         if (args.length === 0) return message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor(0x8802A4)
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Upgrade')
                 .setDescription(`You need to insert the name of the perk you wish to upgrade!`)]
         });
@@ -32,6 +33,7 @@ module.exports = {
         if (!upgradablePerk) return message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor(0x8802A4)
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Upgrade')
                 .setDescription(`You don't have this perk!`)]
         });
@@ -39,6 +41,7 @@ module.exports = {
         if (upgradablePerk.quantity >= 6) return message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor(0x8802A4)
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Upgrade')
                 .setDescription(`This perk is already max level!`)]
         });
@@ -50,6 +53,7 @@ module.exports = {
             return message.channel.send({
                 embeds: [new Discord.MessageEmbed()
                     .setColor(0x8802A4)
+                    .setAuthor(message.author.username, message.author.avatarURL())
                     .setTitle('Upgrade')
                     .setDescription("You don't have the required material to upgrade this Perk\n You need 1 <" + reqMaterial.emote + "> **" + reqMaterial.name + "**.")]
             });
@@ -66,6 +70,7 @@ module.exports = {
         message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor(0x8802A4)
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Upgrade')
                 .setDescription("You are attempting to upgrade <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1) + "**.\n It will consume **1** <" + reqMaterial.emote + "> **" + material.name + "** and it has a **" + successRate + "%** success rate.\n Continue?")]
         })
@@ -107,6 +112,7 @@ module.exports = {
                                     await upgrade_message.edit({
                                         embeds: [new Discord.MessageEmbed()
                                             .setColor(0x8802A4)
+                                            .setAuthor(message.author.username, message.author.avatarURL())
                                             .setTitle('Upgrade')
                                             .setDescription("You successfully upgraded <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1).toString() + "**.")]
                                     });
@@ -114,6 +120,7 @@ module.exports = {
                                     await upgrade_message.edit({
                                         embeds: [new Discord.MessageEmbed()
                                             .setColor(0x8802A4)
+                                            .setAuthor(message.author.username, message.author.avatarURL())
                                             .setTitle('Upgrade')
                                             .setDescription("You failed to upgrade <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1).toString() + "**.\n Better luck next time!")]
                                     });
@@ -124,6 +131,7 @@ module.exports = {
                             await upgrade_message.edit({
                                 embeds: [new Discord.MessageEmbed()
                                     .setColor(0x8802A4)
+                                    .setAuthor(message.author.username, message.author.avatarURL())
                                     .setTitle('Upgrade')
                                     .setDescription(`You declined the upgrade.`)]
                             });
@@ -134,6 +142,7 @@ module.exports = {
                         await upgrade_message.edit({
                             embeds: [new Discord.MessageEmbed()
                                 .setColor(0x8802A4)
+                                .setAuthor(message.author.username, message.author.avatarURL())
                                 .setTitle('Upgrade')
                                 .setDescription(`Upgrade time has expired.`)]
                         });

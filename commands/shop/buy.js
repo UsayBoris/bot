@@ -35,6 +35,7 @@ module.exports = {
                     return message.channel.send({
                         embeds: [new Discord.MessageEmbed()
                             .setColor('0xD8BFD8')
+                            .setAuthor(message.author.username, message.author.avatarURL())
                             .setTitle('Buy')
                             .setDescription(`You already have this perk, try upgrading it **+upgrade ${item.name}**`)]
                     });
@@ -48,6 +49,7 @@ module.exports = {
             await message.channel.send({
                 embeds: [new Discord.MessageEmbed()
                     .setColor('0xD8BFD8')
+                    .setAuthor(message.author.username, message.author.avatarURL())
                     .setTitle('Buy')
                     .setDescription("You bought <" + item.emote + "> " + item.name + " for <:boriscoin:798017751842291732> " + item.price + ".")]
             });

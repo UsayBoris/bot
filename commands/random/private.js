@@ -11,6 +11,7 @@ module.exports = {
                 user.private = false;
                 let embed = new Discord.MessageEmbed()
                     .setColor("0xACA19D")
+                    .setAuthor(message.author.username, message.author.avatarURL())
                     .setTitle('You turned private messages on');
                 await message.channel.send({embeds: [embed]});
             }
@@ -18,6 +19,7 @@ module.exports = {
                 user.private = true;
                 let embed = new Discord.MessageEmbed()
                     .setColor("0xACA19D")
+                    .setAuthor(message.author.username, message.author.avatarURL())
                     .setTitle('You turned private messages off');
                 await message.channel.send({embeds: [embed]});
             } else {

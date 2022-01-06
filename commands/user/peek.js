@@ -13,6 +13,7 @@ module.exports = {
         }
         const embed = new Discord.MessageEmbed()
             .setColor(0x00AE86)
+            .setAuthor(message.author.username, message.author.avatarURL())
             .setTitle(`${member.user.username} Profile`)
             .addField("Stats", `**Level: ${user.level}**\nAzia: **${user.azia}**`)
             .setThumbnail(member.user.avatarURL());

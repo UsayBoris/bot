@@ -9,6 +9,7 @@ module.exports = {
         fetch('https://zenquotes.io/api/random')
             .then(res => res.json())
             .then(json => message.channel.send({embeds: [new Discord.MessageEmbed()
+                    .setAuthor(message.author.username, message.author.avatarURL())
                     .setTitle(json[0].a)
                     .setDescription(json[0].q)]}));
     },

@@ -13,6 +13,7 @@ module.exports = {
         if (!(inventory.length > 0)) return message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor('0x00AE86')
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Inventory')
                 .setDescription('Empty')]
         });
@@ -25,6 +26,7 @@ module.exports = {
         message.channel.send({
             embeds: [new Discord.MessageEmbed()
                 .setColor('0x00AE86')
+                .setAuthor(message.author.username, message.author.avatarURL())
                 .setTitle('Inventory')
                 .setDescription(messageConcat)]
         });
