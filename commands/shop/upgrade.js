@@ -5,12 +5,10 @@ const Item = require("../../models/item");
 module.exports = {
     name: 'Upgrade',
     description: 'Upgrades a perk to the next tier',
-    usage: 'upgrade {item name}',
+    usage: 'upgrade <item name>',
     execute: async function (message, client, args) {
 
         let materialID = [201, 202, 203, 204, 205];
-
-        //TODO figure gow to get this working
 
         // check if the user has an item with that name in inventory and quantity bellow max level (6)
         // check what is the quantity (tier) and calculate the value to upgrade
@@ -57,7 +55,7 @@ module.exports = {
             });
         }
 
-        let successRate = 55 - (upgradablePerk.quantity * 5);
+        let successRate = 40 - (upgradablePerk.quantity * 5);
 
         let perk = await Item.findById(upgradablePerk.id);
 

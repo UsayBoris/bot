@@ -4,10 +4,10 @@ const aziaRecently = new Set();
 module.exports = {
     name: 'Azia',
     description: 'Azia alguém',
-    usage: 'azia {user tag}',
+    usage: 'azia <optional: user tag>',
     execute: async function (message, client, args) {
         if (aziaRecently.has(message.author.id))
-            return message.reply('é estar calado e parar com o spam');
+            return message.reply('Command under cooldown.');
 
         let member = message.mentions.members.first();
         if (member === undefined) member = message.author;

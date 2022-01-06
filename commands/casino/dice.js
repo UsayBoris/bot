@@ -5,7 +5,7 @@ const Transaction = require('../../struct/Transaction');
 module.exports = {
     name: 'Dice',
     description: 'Dice command to challenge your friends',
-    usage: 'dice {user tag} {value}',
+    usage: 'dice <user tag> <value>',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         if (member === undefined || member.id === message.author.id) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid player')]});

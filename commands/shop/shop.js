@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'Shop',
     description: 'Displays the full or specific shops (with argument displays the specific shop',
-    usage: 'shop {optional: specific shop}',
+    usage: 'shop <optional: specific shop>',
     execute: async function (message, client, args) {
 
         const prefix = await Guild.getPrefix(message.guild.id);
@@ -41,7 +41,7 @@ module.exports = {
 
         let messageConcat = '';
 
-        for(const item of items){
+        for (const item of items) {
             messageConcat += '<' + (item.emote).toString() + '> **' + (item.name).toString() + '** - <:boriscoin:798017751842291732>' + (item.price).toString() + ' **' + prefix + 'buy ' + (item.name).toString() + '**\n';
         }
 

@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
     name: 'Peek',
     description: 'Look at a user profile',
-    usage: 'peek {user tag}',
+    usage: 'peek <user tag>',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         let user = await User.findOne({id: member.user.id});

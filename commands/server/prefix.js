@@ -3,7 +3,7 @@ const Guild = require('../../models/guild');
 module.exports = {
     name: 'Prefix',
     description: 'Change the prefix for the bot in this server',
-    usage: 'prefix {new prefix}',
+    usage: 'prefix <new prefix>',
     execute: async function (message, client, args) {
         if (!message.member.permissions.has('KICK_MEMBERS'))
             return message.reply("you don't have permissions to use this!");

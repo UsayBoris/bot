@@ -6,7 +6,7 @@ const Discord = require("discord.js");
 module.exports = {
     name: 'Buy',
     description: 'Buys a specific item from the shop',
-    usage: 'buy {item name}',
+    usage: 'buy <item name>',
     execute: async function (message, client, args) {
 
         const itemString = args.join(' ');

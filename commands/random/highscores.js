@@ -6,7 +6,7 @@ const Item = require("../../models/item");
 module.exports = {
     name: 'Highscores',
     description: 'Check highscores',
-    usage: 'highscores {sort query (azia, xp, coins)}',
+    usage: 'highscores <sort query (azia, xp, coins)>',
     execute: async function (message, client, args) {
         // check if there is an arg, if there isn't, the default will be xp
         // get the top 10 users for the search query (Name and only the field that matters

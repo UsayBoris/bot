@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'Private',
     description: 'Switch Private Mentions',
-    usage: 'private on/off',
+    usage: 'private <on/off>',
     execute: async function (message, client, args) {
         await User.findOne({id: message.author.id}).then(async user => {
             if (args[0] === 'on') {
