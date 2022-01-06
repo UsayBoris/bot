@@ -40,8 +40,8 @@
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
 **BEFORE 3.0**
-- Slot rates are not very good indeed;
+- Some kind of prestige;
 
-**Latest Version: 2.5.5**
-- Blackjack command tests;
-- Improved Slots to a real model;
+**Latest Version: 2.5.6**
+- Added a new type of slots;
+

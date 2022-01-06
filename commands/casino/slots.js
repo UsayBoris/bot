@@ -4,21 +4,20 @@ const Transaction = require("../../struct/Transaction");
 const slotsRecently = new Set();
 
 module.exports = {
-    name: 'Slots',
+    name: '7 Slots - 15 seconds cooldown',
     description: '**Win** - **Combination**\n30 - 3 Jokers 🎰 🎰 🎰\n10 - Any 3 Fruit 🍎 🍇 🍋 🍌 🍒\n4 - Any 2 Jokers 🎰 🎰\n1 - Any 1 Joker 🎰',
     usage: 'slots <value>',
     execute: async function (message, client, args) {
+        if (!args[0] || isNaN(args[0])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+        let bet_value = parseInt(args[0]);
+        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+
         if (slotsRecently.has(message.author.id))
-            return message.reply('Command under cooldown.');
+            return message.reply('command has a 15 second cooldown.');
         slotsRecently.add(message.author.id);
         setTimeout(() => {
             slotsRecently.delete(message.author.id);
-        }, (30 * 1000));
-
-        if (!args[0] || isNaN(args[0])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
-
-        let bet_value = parseInt(args[0]);
-        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        }, (15 * 1000));
 
         let items = ['🎰', '🍎', '🍇', '🍋', '🍌', '🍒'];
 
