@@ -5,7 +5,7 @@ const slotsRecently = new Set();
 
 module.exports = {
     name: 'Slots',
-    description: 'Slot Machine: same 3: 100x, same first 2: 20x',
+    description: '**Win** - **Combination**\n30 - 3 Jokers 🎰 🎰 🎰\n10 - Any 3 Fruit 🍎 🍇 🍋 🍌 🍒\n4 - Any 2 Jokers 🎰 🎰\n1 - Any 1 Joker 🎰',
     usage: 'slots <value>',
     execute: async function (message, client, args) {
         if (slotsRecently.has(message.author.id))
@@ -20,30 +20,56 @@ module.exports = {
         let bet_value = parseInt(args[0]);
         if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
 
-        let items = ['💰', '💎', '💸', '💯', '💍', '🔥', '🍎'];
+        let items = ['🎰', '🍎', '🍇', '🍋', '🍌', '🍒'];
 
         let $ = items[Math.floor(items.length * Math.random())];
         let $$ = items[Math.floor(items.length * Math.random())];
         let $$$ = items[Math.floor(items.length * Math.random())];
 
+        // 3 Jokers -> win 30
+        // 3 Fruit -> win 10
+        // 2 Jokers -> win 4
+        // 1 Joker -> win 1
+
         if ($ === $$ && $ === $$$) {
-            await new Transaction(message.author.id, bet_value * 100, 'Slots').process();
+            if ($ === '🎰') {
+                await new Transaction(message.author.id, bet_value * 30, 'Slots').process();
+                return message.channel.send({
+                    embeds: [new Discord.MessageEmbed()
+                        .setTitle("Slot Machine")
+                        .setAuthor(message.author.username, message.author.avatarURL())
+                        .setDescription(`• ${$}  ${$$}  ${$$$} •`)
+                        .addField('Jackpot!', "Big win! You won " + bet_value * 30 + ".")
+                        .setColor(0xAF873D)]
+                });
+            } else {
+                await new Transaction(message.author.id, bet_value * 10, 'Slots').process();
+                return message.channel.send({
+                    embeds: [new Discord.MessageEmbed()
+                        .setTitle("Slot Machine")
+                        .setAuthor(message.author.username, message.author.avatarURL())
+                        .setDescription(`• ${$}  ${$$}  ${$$$} •`)
+                        .addField('3 of a kind!', "You won " + bet_value * 10 + ".")
+                        .setColor(0xAF873D)]
+                });
+            }
+        } else if (($ === $$ || $ === $$$) && ($ === '🎰') || (($$ === $$$) && ($$ === '🎰'))) {
+            await new Transaction(message.author.id, bet_value * 4, 'Slots').process();
             return message.channel.send({
                 embeds: [new Discord.MessageEmbed()
                     .setTitle("Slot Machine")
                     .setAuthor(message.author.username, message.author.avatarURL())
                     .setDescription(`• ${$}  ${$$}  ${$$$} •`)
-                    .addField('Won!', "Big win! You won " + bet_value * 100 + ".")
+                    .addField('2 Jokers!', "You won " + bet_value * 4 + ".")
                     .setColor(0xAF873D)]
             });
-        } else if ($ === $$) {
-            await new Transaction(message.author.id, bet_value * 20, 'Slots').process();
+        } else if ($ === '🎰' || $$ === '🎰' || $$$ === '🎰') {
             return message.channel.send({
                 embeds: [new Discord.MessageEmbed()
                     .setTitle("Slot Machine")
                     .setAuthor(message.author.username, message.author.avatarURL())
                     .setDescription(`• ${$}  ${$$}  ${$$$} •`)
-                    .addField('Won!', "Boring, but still a win! Won " + bet_value * 20 + ".")
+                    .addField('1 Joker!', "You break even!")
                     .setColor(0xAF873D)]
             });
         } else {

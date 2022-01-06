@@ -19,7 +19,6 @@
     - [x] Add a luck and speed upgrade
 - [x] Profile perks (mining and other)
 - [ ] Maybe work on a minigame
-
 - [x] Make a suggestions command, that saves requests for bot functions
 
 **SHORT TEAM TODO**
@@ -40,6 +39,9 @@
 - [x] All permission commands are not working
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
 
-**Latest Version: 2.5.4**
-- Added user to the top of the embed message;
-- Fixed fast mining command bug;
+**BEFORE 3.0**
+- Slot rates are not very good indeed;
+
+**Latest Version: 2.5.5**
+- Blackjack command tests;
+- Improved Slots to a real model;
