@@ -18,45 +18,37 @@ module.exports = {
         // on success update the user with the new item quantity and remove crafting component
         // on fail, keep quantity but remove the crafting component
 
-        if (args.length === 0) return message.channel.send({
-            embeds: [new Discord.MessageEmbed()
-                .setColor(0x8802A4)
-                .setAuthor(message.author.username, message.author.avatarURL())
-                .setTitle('Upgrade')
-                .setDescription(`You need to insert the name of the perk you wish to upgrade!`)]
-        });
+        let upgradeMessage = new Discord.MessageEmbed()
+            .setColor(0x8802A4)
+            .setAuthor(message.author.username, message.author.avatarURL())
+            .setTitle('Upgrade')
+
+        if (args.length === 0) {
+            upgradeMessage.setDescription(`You need to insert the name of the perk you wish to upgrade!`);
+            return message.channel.send({embeds: [upgradeMessage]});
+        }
 
         const perkName = args.join(' ');
         let perks = await User.getPerks(message.author.id);
         let upgradablePerk = perks.find(o => o.name === perkName);
 
-        if (!upgradablePerk) return message.channel.send({
-            embeds: [new Discord.MessageEmbed()
-                .setColor(0x8802A4)
-                .setAuthor(message.author.username, message.author.avatarURL())
-                .setTitle('Upgrade')
-                .setDescription(`You don't have this perk!`)]
-        });
+        if (!upgradablePerk) {
+            upgradeMessage.setDescription(`You don't have this perk!`);
+            return message.channel.send({embeds: [upgradeMessage]});
+        }
 
-        if (upgradablePerk.quantity >= 6) return message.channel.send({
-            embeds: [new Discord.MessageEmbed()
-                .setColor(0x8802A4)
-                .setAuthor(message.author.username, message.author.avatarURL())
-                .setTitle('Upgrade')
-                .setDescription(`This perk is already max level!`)]
-        });
 
-        let material = await User.checkInventory(message.author.id, materialID[(upgradablePerk.quantity - 1)])
+        if (upgradablePerk.quantity >= 6) {
+            upgradeMessage.setDescription(`This perk is already max level!`);
+            return message.channel.send({embeds: [upgradeMessage]});
+        }
+
+        let material = await User.checkInventory(message.author.id, materialID[(upgradablePerk.quantity - 1)]);
         let reqMaterial = await Item.findById(materialID[(upgradablePerk.quantity - 1)]);
 
         if (!material) {
-            return message.channel.send({
-                embeds: [new Discord.MessageEmbed()
-                    .setColor(0x8802A4)
-                    .setAuthor(message.author.username, message.author.avatarURL())
-                    .setTitle('Upgrade')
-                    .setDescription("You don't have the required material to upgrade this Perk\n You need 1 <" + reqMaterial.emote + "> **" + reqMaterial.name + "**.")]
-            });
+            upgradeMessage.setDescription("You don't have the required material to upgrade this Perk\n You need 1 <" + reqMaterial.emote + "> **" + reqMaterial.name + "**.");
+            return message.channel.send({embeds: [upgradeMessage]});
         }
 
         let successRate = 40 - (upgradablePerk.quantity * 5);
@@ -67,13 +59,9 @@ module.exports = {
             return ['✔', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
         }
 
-        message.channel.send({
-            embeds: [new Discord.MessageEmbed()
-                .setColor(0x8802A4)
-                .setAuthor(message.author.username, message.author.avatarURL())
-                .setTitle('Upgrade')
-                .setDescription("You are attempting to upgrade <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1) + "**.\n It will consume **1** <" + reqMaterial.emote + "> **" + material.name + "** and it has a **" + successRate + "%** success rate.\n Continue?")]
-        })
+        upgradeMessage.setDescription("You are attempting to upgrade <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1) + "**.\n It will consume **1** <" + reqMaterial.emote + "> **" + material.name + "** and it has a **" + successRate + "%** success rate.\n Continue?");
+
+        message.channel.send({embeds: [upgradeMessage]})
             .then(async upgrade_message => {
                 await upgrade_message.react('✔');
                 await upgrade_message.react('❌');
@@ -87,65 +75,30 @@ module.exports = {
                             // if not success, do nothing to perk, remove the crafting item (seems legit)
                             User.findOne({id: message.author.id}).then(async user => {
                                 let upgradeRoll = Math.floor(Math.random() * 100);
+
                                 // delete or reduce the quantity of the material by one
-                                material = user.inventory.find(x => x.name === material.name);
-                                if (material.quantity === 1) {
-                                    let index = user.inventory.indexOf(material);
-                                    user.inventory.splice(index, 1);
-                                } else {
-                                    let index = user.inventory.indexOf(material);
-                                    user.inventory[index] = {
-                                        name: material.name,
-                                        id: material.id,
-                                        quantity: material.quantity - 1
-                                    };
-                                }
+                                await user.removeItem(material.name);
+
                                 if (upgradeRoll <= successRate) {
                                     // if the roll is lower than the rate, the upgrade is successful
-                                    upgradablePerk = user.inventory.find(x => x.name === upgradablePerk.name);
-                                    let index = user.inventory.indexOf(upgradablePerk);
-                                    user.inventory[index] = {
-                                        name: upgradablePerk.name,
-                                        id: upgradablePerk.id,
-                                        quantity: upgradablePerk.quantity + 1
-                                    };
-                                    await upgrade_message.edit({
-                                        embeds: [new Discord.MessageEmbed()
-                                            .setColor(0x8802A4)
-                                            .setAuthor(message.author.username, message.author.avatarURL())
-                                            .setTitle('Upgrade')
-                                            .setDescription("You successfully upgraded <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1).toString() + "**.")]
-                                    });
+                                    await user.addItem(upgradablePerk.name, upgradablePerk.id);
+                                    upgradeMessage.setDescription("You successfully upgraded <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1).toString() + "**.");
+                                    await upgrade_message.edit({embeds: [upgradeMessage]});
                                 } else {
-                                    await upgrade_message.edit({
-                                        embeds: [new Discord.MessageEmbed()
-                                            .setColor(0x8802A4)
-                                            .setAuthor(message.author.username, message.author.avatarURL())
-                                            .setTitle('Upgrade')
-                                            .setDescription("You failed to upgrade <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1).toString() + "**.\n Better luck next time!")]
-                                    });
+                                    upgradeMessage.setDescription("You failed to upgrade <" + perk.emote + "> **" + perk.name + "** to **Tier " + (upgradablePerk.quantity + 1).toString() + "**.\n Better luck next time!");
+                                    await upgrade_message.edit({embeds: [upgradeMessage]});
                                 }
                                 user.save();
                             });
                         } else {
-                            await upgrade_message.edit({
-                                embeds: [new Discord.MessageEmbed()
-                                    .setColor(0x8802A4)
-                                    .setAuthor(message.author.username, message.author.avatarURL())
-                                    .setTitle('Upgrade')
-                                    .setDescription(`You declined the upgrade.`)]
-                            });
+                            upgradeMessage.setDescription(`You declined the upgrade.`);
+                            await upgrade_message.edit({embeds: [upgradeMessage]});
                         }
                         return upgrade_message.reactions.removeAll();
                     })
                     .catch(async err => {
-                        await upgrade_message.edit({
-                            embeds: [new Discord.MessageEmbed()
-                                .setColor(0x8802A4)
-                                .setAuthor(message.author.username, message.author.avatarURL())
-                                .setTitle('Upgrade')
-                                .setDescription(`Upgrade time has expired.`)]
-                        });
+                        upgradeMessage.setDescription(`Upgrade time has expired.`);
+                        await upgrade_message.edit({embeds: [upgradeMessage]});
                         return upgrade_message.reactions.removeAll();
                     });
             });

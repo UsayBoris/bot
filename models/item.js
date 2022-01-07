@@ -32,6 +32,10 @@ itemSchema.statics.findById = function (id) {
     return this.findOne({id: id});
 };
 
+itemSchema.statics.findByName = function (name) {
+    return this.findOne({name: name});
+}
+
 itemSchema.statics.getItemString = async function (id, quantity) {
     let item = await this.findById(id);
     return quantity + ' <' + item.emote + '> ' + item.name + '\n';

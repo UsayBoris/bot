@@ -9,50 +9,41 @@ module.exports = {
     usage: 'buy <item name>',
     execute: async function (message, client, args) {
 
+        let buyMessage = new Discord.MessageEmbed()
+            .setColor('0xD8BFD8')
+            .setAuthor(message.author.username, message.author.avatarURL())
+            .setTitle('Buy');
+
         const itemString = args.join(' ');
         let item = await Item.findOne({name: itemString});
-        if (!item) return message.channel.send('Not a valid Item');
+        if (!item) {
+            buyMessage.setDescription('Not a valid Item');
+            return message.channel.send({embeds: [buyMessage]});
+        }
 
-        if (await User.getBalance(message.author.id) < item.price) return message.channel.send('Not enough money!');
+        if (await User.getBalance(message.author.id) < item.price) {
+            buyMessage.setDescription('Not enough money!');
+            return message.channel.send({embeds: [buyMessage]});
+        }
 
-        // check if there is an item in inventory that matches the one that he wants to buy
-        // check if that item is a perk
-        // if perk -> skip the update, send user a message that it needs to be upgraded
-        // else -> update item in inventory for the new quantity (transaction made)
-        // if the item does not exist, add it to the inventory (transaction made)
+        if (item.category === 'untradeable') {
+            buyMessage.setDescription(`**Untradeable drop**`);
+            return message.channel.send({embeds: [buyMessage]});
+        }
+
+        // this check needs to be made before the add, because the addItem doesn't check if it's a perk
+        // the addItem is made to be global, so it just adds of updates the item
+        if (item.category === 'perk' && (await User.checkInventory(message.author.id, item.id))) {
+            buyMessage.setDescription(`You already have this perk, try upgrading it **+upgrade ${item.name}**`);
+            return message.channel.send({embeds: [buyMessage]});
+        }
 
         User.findOne({id: message.author.id}).then(async user => {
-            let obj = user.inventory.find(x => x.name === item.name);
-            if (!obj) {
-                user.inventory.push({
-                    name: item.name,
-                    id: item.id,
-                    quantity: 1
-                });
-                user.save();
-            } else {
-                if (item.category === 'perk') {
-                    return message.channel.send({
-                        embeds: [new Discord.MessageEmbed()
-                            .setColor('0xD8BFD8')
-                            .setAuthor(message.author.username, message.author.avatarURL())
-                            .setTitle('Buy')
-                            .setDescription(`You already have this perk, try upgrading it **+upgrade ${item.name}**`)]
-                    });
-                } else {
-                    let index = user.inventory.indexOf(obj);
-                    user.inventory[index] = {name: obj.name, id: obj.id, quantity: obj.quantity + 1};
-                    user.save();
-                }
-            }
+            await user.addItem(item.name, item.id);
+            user.save();
             await new Transaction(message.author.id, -item.price, 'Buy').process();
-            await message.channel.send({
-                embeds: [new Discord.MessageEmbed()
-                    .setColor('0xD8BFD8')
-                    .setAuthor(message.author.username, message.author.avatarURL())
-                    .setTitle('Buy')
-                    .setDescription("You bought <" + item.emote + "> " + item.name + " for <:boriscoin:798017751842291732> " + item.price + ".")]
-            });
+            buyMessage.setDescription("You bought <" + item.emote + "> " + item.name + " for <:boriscoin:798017751842291732> " + item.price + ".");
+            return message.channel.send({embeds: [buyMessage]});
         });
     }
 };

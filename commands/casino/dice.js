@@ -9,7 +9,7 @@ module.exports = {
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         if (member === undefined || member.id === message.author.id) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid player')]});
-        if (!args[1] || isNaN(args[1])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+        if (!args[1] || isNaN(args[1]) || parseInt(args[0]) === 0) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
 
         let bet_value = parseInt(args[1]);
         if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});

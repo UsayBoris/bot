@@ -24,6 +24,11 @@ module.exports = {
                 // await Item.create({name: "Emerald", description: "Tier 4 Gem", id: 204, price: 800, emote: ':gem_4:926220295440838756', category: "crafting"});
                 // await Item.create({name: "Amethyst", description: "Tier 5 Gem", id: 205, price: 1600, emote: ':gem_5:926220295893835786', category: "crafting"});
                 // await Item.create({name: "Dick", description: "Dick", id: 69, price: 999, emote: ':boris_dick:926953596828909568', category: "test"});
+                // await Item.create({name: "Angel Sword", description: "A sword given by an Angel to slay the Demons crawling the Earth", id: 102, price: 3000, emote: ':sword_angel:797954570181148762', category: "gear"});
+                // await Item.create({name: "Blurite Sword", description: "A sword made by the finest dwarves using deep mine minerals", id: 103, price: 5000, emote: ':sword_blurite:797954570193731644', category: "gear"});
+                // await Item.create({name: "Devilish Sword", description: "The One sword to bring them down", id: 104, price: 10000, emote: ':sword_devilish:797954570210902076', category: "gear"});
+                // await Item.create({name: "Bronze Key", description: "Opens a Bronze chest", id: 801, price: 0, emote: ':bronze_key:842116583471710288', category: "untradeable"});
+                // await Item.create({name: "Gold Key", description: "Opens the Gold Chest", id: 802, price: 0, emote: ':gold_key:842116583471841280', category: "untradeable"});
                 break;
         }
     },

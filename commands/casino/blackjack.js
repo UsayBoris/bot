@@ -6,6 +6,7 @@ module.exports = {
     description: 'Blackjack game',
     usage: 'blackjack <value>',
     execute: async function (message, client, args) {
+        return;
         if (blackjackRecently.has(message.author.id))
             return message.reply('Command under cooldown.');
         blackjackRecently.add(message.author.id);
@@ -25,7 +26,6 @@ module.exports = {
             {suit: 'clubs', rank: 'J', value: 10, emoji: "♣"},
             {suit: 'clubs', rank: 'Q', value: 10, emoji: "♣"},
             {suit: 'clubs', rank: 'K', value: 10, emoji: "♣"},
-
             {suit: 'diamonds', rank: 'A', value: [1, 11], emoji: "♦"},
             {suit: 'diamonds', rank: '2', value: 2, emoji: "♦"},
             {suit: 'diamonds', rank: '3', value: 3, emoji: "♦"},
@@ -39,7 +39,6 @@ module.exports = {
             {suit: 'diamonds', rank: 'J', value: 10, emoji: "♦"},
             {suit: 'diamonds', rank: 'Q', value: 10, emoji: "♦"},
             {suit: 'diamonds', rank: 'K', value: 10, emoji: "♦"},
-
             {suit: 'hearts', rank: 'A', value: [1, 11], emoji: "♥"},
             {suit: 'hearts', rank: '2', value: 2, emoji: "♥"},
             {suit: 'hearts', rank: '3', value: 3, emoji: "♥"},
@@ -53,7 +52,6 @@ module.exports = {
             {suit: 'hearts', rank: 'J', value: 10, emoji: "♥"},
             {suit: 'hearts', rank: 'Q', value: 10, emoji: "♥"},
             {suit: 'hearts', rank: 'K', value: 10, emoji: "♥"},
-
             {suit: 'spades', rank: 'A', value: [1, 11], emoji: "♠"},
             {suit: 'spades', rank: '2', value: 2, emoji: "♠"},
             {suit: 'spades', rank: '3', value: 3, emoji: "♠"},
@@ -69,6 +67,7 @@ module.exports = {
             {suit: 'spades', rank: 'K', value: 10, emoji: "♠"},
         ];
 
-        console.log(shuffle(DECK));
+        message.channel.send(JSON.stringify(DECK[Math.floor(DECK.length * Math.random())]));
+
     }
 }

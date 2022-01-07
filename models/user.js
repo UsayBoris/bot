@@ -80,6 +80,39 @@ userSchema.statics.checkInventory = async function (id, itemId) {
     return user.inventory.find(o => o.id === itemId);
 };
 
+userSchema.methods.addItem = async function (name, id) {
+    let obj = this.inventory.find(x => x.name === name);
+    if (!obj) {
+        this.inventory.push({
+            name: name,
+            id: id,
+            quantity: 1
+        });
+    } else {
+        let index = this.inventory.indexOf(obj);
+        this.inventory[index] = {
+            name: obj.name,
+            id: obj.id,
+            quantity: obj.quantity + 1
+        };
+    }
+}
+
+userSchema.methods.removeItem = async function (name) {
+    obj = this.inventory.find(x => x.name === name);
+    if (obj.quantity === 1) {
+        let index = this.inventory.indexOf(obj);
+        this.inventory.splice(index, 1);
+    } else {
+        let index = this.inventory.indexOf(obj);
+        this.inventory[index] = {
+            name: obj.name,
+            id: obj.id,
+            quantity: obj.quantity - 1
+        };
+    }
+}
+
 const User = mongoose.model('User', userSchema);
 
 async function update_user(message) {

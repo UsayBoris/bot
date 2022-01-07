@@ -38,10 +38,19 @@
 - [x] Fix NSFW command
 - [x] All permission commands are not working
 - [ ] Find a better buy (method to add something to the user inventory, because of mining rewards)
+- [ ] User exists (Dice and Give)
 
 **BEFORE 3.0**
 - Some kind of prestige;
+- Super Special Slots Machine;
+- Scratch Card;
+- Buy/Upgrade Cooldown;
+- Probably inventory sorting;
 
-**Latest Version: 2.5.6**
-- Added a new type of slots;
+**Latest Version: 2.6.0**
+- Changed Special Slots looks a bit;
+- Changed backend to add and remove item;
+- Changed commands that work with items to be able to support new backend;
+- Added key drops to mine command;
+- Only one embed message for each command (code cleanup);
 
