@@ -5,7 +5,7 @@ const shuffle = require("shuffle-array")
 const slotsRecently = new Set();
 
 module.exports = {
-    name: 'Specia Slots - 10 minutes cooldown',
+    name: 'Specia Slots - 5 minutes cooldown',
     description: '**Win** - **Combination**\n60 - 3 Jokers 🎰 🎰 🎰\n40 - 3 Diamonds 💎 💎 💎\n20 - 3 Cherries 🍒 🍒 🍒\n10 - 3 of a kind 🍊 🍌 🍋\n3 - 2 Cherries 🍒 🍒\n1 - 1 Cherry 🍒',
     usage: 'specialslots <value>',
     execute: async function (message, client, args) {

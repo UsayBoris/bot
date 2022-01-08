@@ -99,7 +99,7 @@ userSchema.methods.addItem = async function (name, id) {
 }
 
 userSchema.methods.removeItem = async function (name) {
-    obj = this.inventory.find(x => x.name === name);
+    let obj = this.inventory.find(x => x.name === name);
     if (obj.quantity === 1) {
         let index = this.inventory.indexOf(obj);
         this.inventory.splice(index, 1);
@@ -111,6 +111,10 @@ userSchema.methods.removeItem = async function (name) {
             quantity: obj.quantity - 1
         };
     }
+}
+
+userSchema.methods.findItem = async function (name) {
+    return this.inventory.find(x => x.name === name)
 }
 
 const User = mongoose.model('User', userSchema);

@@ -42,20 +42,20 @@ module.exports = {
             let gold_roll = Math.floor(Math.random() * 1000) + 1
 
             if (bronze_roll === 1) {
+                let item = await Item.findOne({id: 801});
                 User.findOne({id: message.author.id}).then(async user => {
-                    let item = await Item.findOne({id: 801});
                     await user.addItem(item.name, item.id);
                     user.save();
                 });
-                mineMessage.addField('Item Drop:', 'Bronze Key', true);
+                mineMessage.addField('Item Drop:', '<' + item.emote + '>' + 'Bronze Key', true);
             }
             if (gold_roll === 1) {
+                let item = await Item.findOne({id: 802});
                 User.findOne({id: message.author.id}).then(async user => {
-                    let item = await Item.findOne({id: 802});
                     await user.addItem(item.name, item.id);
                     user.save();
                 });
-                mineMessage.addField('Item Drop:', 'Gold Key', true);
+                mineMessage.addField('Item Drop:', '<' + item.emote + '>' + 'Gold Key', true);
             }
             return msg.edit({embeds: [mineMessage]})
         }, (mining_cooldown * 1000) - (5000 * speedValue));

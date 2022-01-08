@@ -8,7 +8,7 @@ module.exports = {
     usage: 'give <user tag> <value>',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
-        if (member === undefined || member.id === message.author.id) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid user')]});
+        if (member === undefined || member.id === message.author.id || !(await User.exists({id: member.id}))) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid user')]});
         if (!args[1] || isNaN(args[1])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
 
         let give_value = parseInt(args[1]);
