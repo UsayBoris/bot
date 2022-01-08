@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const {User} = require("../../models/user");
 const Transaction = require('../../struct/Transaction');
+const activeDice = new Set();
 
 module.exports = {
     name: 'Dice',
@@ -13,6 +14,12 @@ module.exports = {
 
         let bet_value = parseInt(args[1]);
         if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});
+
+        // Active Dice check
+        if (activeDice.has(message.author.id) || activeDice.has(member.id))
+            return message.reply('either you or your opponent have an active dice challenge!');
+        activeDice.add(message.author.id);
+        activeDice.add(member.id);
 
         let roll_1 = Math.floor(Math.random() * 100) + 1;
         let roll_2 = Math.floor(Math.random() * 100) + 1;
@@ -42,6 +49,9 @@ module.exports = {
                                     .setTitle('Dice Challenge')
                                     .setDescription(`You dont have enough coins to accept this challenge. Cancelled!`)]
                             });
+                            // remove from active
+                            activeDice.delete(message.author.id);
+                            activeDice.delete(member.id);
                             return dice_message.reactions.removeAll();
                         }
                         if (roll_2 > roll_1) {
@@ -71,6 +81,9 @@ module.exports = {
                                 .setDescription(`**${member.displayName}** declined the dice, better friends next time!`)]
                         });
                     }
+                    // remove from active
+                    activeDice.delete(message.author.id);
+                    activeDice.delete(member.id);
                     await dice_message.reactions.removeAll();
                 })
                 .catch(async err => {
@@ -80,6 +93,9 @@ module.exports = {
                             .setTitle('Dice Challenge')
                             .setDescription(`The Challenge has expired!`)]
                     });
+                    // remove from active
+                    activeDice.delete(message.author.id);
+                    activeDice.delete(member.id);
                     await dice_message.reactions.removeAll();
                 });
         });

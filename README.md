@@ -26,7 +26,7 @@
 - [x] User exists (Dice and Give)
 
 **BEFORE 3.0**
-- [ ] Active Dice challenge (set);
+- [x] Active Dice challenge check;
 - [ ] updateOneOrCreate to User Model
     - increase a specific amount of xp
     - check for levelup
@@ -40,9 +40,6 @@
 - [ ] Evaluate the need for Buy/Upgrade Cooldown;
 - [ ] Probably inventory sorting;
 
-**Latest Version: 2.6.1**
-- Check if the user exists in Dice and Give command;
-- Chests fully functional (for coins drop);
-- Added key emote at mine drop;
-- Re-did README;
+**Latest Version: 2.6.2**
+- Active Dice challenge check;
 
