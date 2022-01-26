@@ -27,6 +27,7 @@
 
 **BEFORE 3.0**
 - [x] Active Dice challenge check;
+- [x] Dice to deduct funds, and if timeout of decline give them back;
 - [ ] updateOneOrCreate to User Model
     - increase a specific amount of xp
     - check for levelup
@@ -40,6 +41,7 @@
 - [ ] Evaluate the need for Buy/Upgrade Cooldown;
 - [ ] Probably inventory sorting;
 
-**Latest Version: 2.6.2**
-- Active Dice challenge check;
+**Latest Version: 2.6.3**
+- Adjusted Slots winnings to the right value;
+- Dice deducts funds and then adds it back;
 

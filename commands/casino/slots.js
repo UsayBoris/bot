@@ -32,7 +32,7 @@ module.exports = {
 
         if ($ === $$ && $ === $$$) {
             if ($ === '🎰') {
-                await new Transaction(message.author.id, bet_value * 30, 'Slots').process();
+                await new Transaction(message.author.id, bet_value * 29, 'Slots').process();
                 return message.channel.send({
                     embeds: [new Discord.MessageEmbed()
                         .setTitle("Slot Machine")
@@ -42,7 +42,7 @@ module.exports = {
                         .setColor(0xAF873D)]
                 });
             } else {
-                await new Transaction(message.author.id, bet_value * 10, 'Slots').process();
+                await new Transaction(message.author.id, bet_value * 9, 'Slots').process();
                 return message.channel.send({
                     embeds: [new Discord.MessageEmbed()
                         .setTitle("Slot Machine")
@@ -53,7 +53,7 @@ module.exports = {
                 });
             }
         } else if (($ === $$ || $ === $$$) && ($ === '🎰') || (($$ === $$$) && ($$ === '🎰'))) {
-            await new Transaction(message.author.id, bet_value * 4, 'Slots').process();
+            await new Transaction(message.author.id, bet_value * 3, 'Slots').process();
             return message.channel.send({
                 embeds: [new Discord.MessageEmbed()
                     .setTitle("Slot Machine")

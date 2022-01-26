@@ -12,7 +12,9 @@ module.exports = class extends Client {
                 Intents.FLAGS.GUILD_MESSAGE_REACTIONS]
         });
 
-        this.queue = new Map();
+
+        // project wise variables
+        this.activeDice = new Set();
 
         this.config = config;
     }

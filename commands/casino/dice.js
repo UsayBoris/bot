@@ -16,10 +16,12 @@ module.exports = {
         if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});
 
         // Active Dice check
-        if (activeDice.has(message.author.id) || activeDice.has(member.id))
-            return message.reply('either you or your opponent have an active dice challenge!');
-        activeDice.add(message.author.id);
-        activeDice.add(member.id);
+        if (client.activeDice.has(message.author.id) || client.activeDice.has(member.id))
+            return message.reply('either you or your opponent have an active dice');
+        client.activeDice.add(message.author.id);
+        client.activeDice.add(member.id);
+
+        await new Transaction(message.author.id, -bet_value, 'Dice').process();
 
         let roll_1 = Math.floor(Math.random() * 100) + 1;
         let roll_2 = Math.floor(Math.random() * 100) + 1;
@@ -43,6 +45,7 @@ module.exports = {
 
                     if (reaction.emoji.name === '✔') {
                         if (await User.getBalance(member.id) < bet_value) {
+                            await new Transaction(message.author.id, bet_value, 'Dice').process();
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()
                                     .setColor(0xAF873D)
@@ -50,12 +53,11 @@ module.exports = {
                                     .setDescription(`You dont have enough coins to accept this challenge. Cancelled!`)]
                             });
                             // remove from active
-                            activeDice.delete(message.author.id);
-                            activeDice.delete(member.id);
+                            client.activeDice.delete(message.author.id);
+                            client.activeDice.delete(member.id);
                             return dice_message.reactions.removeAll();
                         }
                         if (roll_2 > roll_1) {
-                            await new Transaction(message.author.id, -bet_value, 'Dice').process();
                             await new Transaction(member.id, bet_value, 'Dice').process();
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()
@@ -64,7 +66,7 @@ module.exports = {
                                     .setDescription(`**${member.displayName}** won the dice with a roll of **${roll_2}** vs **${roll_1}**, and received **${bet_value}** <:boriscoin:798017751842291732>`)]
                             });
                         } else {
-                            await new Transaction(message.author.id, bet_value, 'Dice').process();
+                            await new Transaction(message.author.id, 2*bet_value, 'Dice').process();
                             await new Transaction(member.id, -bet_value, 'Dice').process();
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()
@@ -74,6 +76,7 @@ module.exports = {
                             });
                         }
                     } else {
+                        await new Transaction(message.author.id, bet_value, 'Dice').process();
                         await dice_message.edit({
                             embeds: [new Discord.MessageEmbed()
                                 .setColor(0xAF873D)
@@ -82,11 +85,12 @@ module.exports = {
                         });
                     }
                     // remove from active
-                    activeDice.delete(message.author.id);
-                    activeDice.delete(member.id);
+                    client.activeDice.delete(message.author.id);
+                    client.activeDice.delete(member.id);
                     await dice_message.reactions.removeAll();
                 })
                 .catch(async err => {
+                    await new Transaction(message.author.id, bet_value, 'Dice').process();
                     await dice_message.edit({
                         embeds: [new Discord.MessageEmbed()
                             .setColor(0xAF873D)
@@ -94,8 +98,8 @@ module.exports = {
                             .setDescription(`The Challenge has expired!`)]
                     });
                     // remove from active
-                    activeDice.delete(message.author.id);
-                    activeDice.delete(member.id);
+                    client.activeDice.delete(message.author.id);
+                    client.activeDice.delete(member.id);
                     await dice_message.reactions.removeAll();
                 });
         });
