@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const {User} = require("../../models/user");
 const Item = require("../../models/item");
+const {base_upgrade} = require('../../config.json');
 
 module.exports = {
     name: 'Upgrade',
@@ -51,7 +52,7 @@ module.exports = {
             return message.channel.send({embeds: [upgradeMessage]});
         }
 
-        let successRate = 40 - (upgradablePerk.quantity * 5);
+        let successRate = base_upgrade - (upgradablePerk.quantity * 5);
 
         let perk = await Item.findById(upgradablePerk.id);
 

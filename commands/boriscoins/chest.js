@@ -24,13 +24,14 @@ module.exports = {
 
                     // Receive 300 to 400 coins and 200 to 300xp (to be added latter)
                     let coins_roll = Math.floor(Math.random() * 100) + 300;
-                    // let xp_roll = Math.floor(Math.random() * 100) + 200;
+                    let xp_roll = Math.floor(Math.random() * 100) + 200;
 
                     await new Transaction(message.author.id, coins_roll, 'Chest').process();
                     user.removeItem(keyObj.name);
+                    user.addExperience(xp_roll);
                     user.save();
 
-                    chestMessage.setTitle('Bronze Chest').setDescription("You received <:boriscoin:798017751842291732> " + coins_roll + " from the chest.");
+                    chestMessage.setTitle('Bronze Chest').setDescription("You received <:boriscoin:798017751842291732> " + coins_roll + " and <:xp:801554148994056202> " + xp_roll + " from the chest.");
                     return message.channel.send({embeds: [chestMessage]});
                 });
                 break;
@@ -44,13 +45,14 @@ module.exports = {
 
                     // Receive 2-3k coins and 500 to 1000 xp (to be added latter)
                     let coins_roll = Math.floor(Math.random() * 1000) + 2000;
-                    // let xp_roll = Math.floor(Math.random() * 500) + 500;
+                    let xp_roll = Math.floor(Math.random() * 500) + 500;
 
                     await new Transaction(message.author.id, coins_roll, 'Chest').process();
                     user.removeItem(keyObj.name);
+                    user.addExperience(xp_roll);
                     user.save();
 
-                    chestMessage.setTitle('Gold Chest').setDescription("You received <:boriscoin:798017751842291732> " + coins_roll + " from the chest.");
+                    chestMessage.setTitle('Gold Chest').setDescription("You received <:boriscoin:798017751842291732> " + coins_roll + " and <:xp:801554148994056202> " + xp_roll + " from the chest.");
                     return message.channel.send({embeds: [chestMessage]});
                 });
                 break;

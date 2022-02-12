@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const {User} = require("../../models/user");
 const Transaction = require('../../struct/Transaction');
-const activeDice = new Set();
 
 module.exports = {
     name: 'Dice',

@@ -29,11 +29,6 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    private: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
     azia: {
         type: Number,
         default: 0
@@ -117,10 +112,18 @@ userSchema.methods.findItem = async function (name) {
     return this.inventory.find(x => x.name === name)
 }
 
+userSchema.methods.addExperience = async function (xp){
+    this.xp += xp;
+    let req_xp = 69 * (this.level + 1) * (1 + (this.level + 1));
+    if (this.xp >= req_xp) {
+        this.level += 1;
+        this.coins += this.level;
+    }
+}
+
 const User = mongoose.model('User', userSchema);
 
-async function update_user(message) {
-    //TODO replace this with a static, updateOneOrCreate
+async function newMessageUser(message) {
     await User.findOne({id: message.author.id}).then(async user => {
 
         if (user === null) {
@@ -128,26 +131,11 @@ async function update_user(message) {
             return logger.warn('New User Created (first time talking in the presence of the bot)');
         }
 
+        user.addExperience(1);
         user.name = message.author.username;
-        user.xp += 1;
 
-        let req_xp = 69 * (user.level + 1) * (1 + (user.level + 1));
-
-        if (user.xp >= req_xp) {
-            user.level += 1;
-            user.coins += user.level;
-            if (!user.private) {
-                await message.author.send({
-                    embeds: [new Discord.MessageEmbed()
-                        .setColor("0xACA19D")
-                        .setTitle('You Have leveled up')
-                        .setThumbnail(message.author.avatarURL())
-                        .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`)]
-                });
-            }
-        }
         user.save();
     });
 }
 
-module.exports = {User, update_user};
+module.exports = {User, newMessageUser};

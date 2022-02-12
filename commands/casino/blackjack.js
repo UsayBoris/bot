@@ -1,4 +1,4 @@
-const blackjackRecently = new Set();
+const blackjackActive = new Set();
 const shuffle = require("shuffle-array")
 
 module.exports = {
@@ -7,10 +7,10 @@ module.exports = {
     usage: 'blackjack <value>',
     execute: async function (message, client, args) {
         return;
-        if (blackjackRecently.has(message.author.id))
-            return message.reply('Command under cooldown.');
-        blackjackRecently.add(message.author.id);
-        blackjackRecently.delete(message.author.id);
+        if (blackjackActive.has(message.author.id))
+            return message.reply('You have an active game ongoing.');
+        blackjackActive.add(message.author.id);
+        blackjackActive.delete(message.author.id);
 
         let DECK = [
             {suit: 'clubs', rank: 'A', value: [1, 11], emoji: "♣"},

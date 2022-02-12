@@ -28,20 +28,26 @@
 **BEFORE 3.0**
 - [x] Active Dice challenge check;
 - [x] Dice to deduct funds, and if timeout of decline give them back;
-- [ ] updateOneOrCreate to User Model
-    - increase a specific amount of xp
-    - check for levelup
-    - create a new user
-- [ ] Add experience drop to chest open;
-- [ ] Teams with detailed stats (Ex: mined blocks)
+- [x] Add experience drop to chest open;
+- [ ] Votekick from voice channel;
+- [x] Poll system
+- [ ] Teams
+  - Create a team (with Boriscoins);
+  - Join a team;
+  - Owner to be able to delete a team;
+  - Detailed Stats (if not too heavy on database);
 - [ ] Mining blocks with bonus;
 - [ ] Some kind of prestige;
+- [x] Coin Flip;
 - [ ] Super Special Slots Machine;
 - [ ] Scratch Card;
 - [ ] Evaluate the need for Buy/Upgrade Cooldown;
 - [ ] Probably inventory sorting;
+- [ ] Transactions to give xp;
 
-**Latest Version: 2.6.3**
-- Adjusted Slots winnings to the right value;
-- Dice deducts funds and then adds it back;
-
+**Latest Version: 2.7.0**
+- Coin flip command;
+- Base upgrade rate changed to static config;
+- Chests now drop experience;
+- Poll command added, not fully functional;
+- Experience calculation now is User method;
