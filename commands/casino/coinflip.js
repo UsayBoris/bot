@@ -9,9 +9,16 @@ module.exports = {
     usage: 'coinflip <tails/heads> <value>',
     execute: async function (message, client, args) {
         if (!['tails', 'heads'].includes(args[0])) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Which side of the coin do you want to pick?')]});
-        if (!args[1] || isNaN(args[1]) || parseInt(args[1]) === 0) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
-        let bet_value = parseInt(args[1]);
-        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        let bet_value;
+        if (args[1] === 'allin') {
+            bet_value = await User.getBalance(message.author.id);
+        } else if (!args[1] || isNaN(args[1]) || parseInt(args[1]) === 0) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+        } else if (await User.getBalance(message.author.id) < parseInt(args[1])) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        } else {
+            bet_value = parseInt(args[1]);
+        }
 
         if (flipRecently.has(message.author.id))
             return message.reply('command has a 5 seconds cooldown.');
@@ -27,9 +34,9 @@ module.exports = {
 
         let coin = ((Math.floor(Math.random() * 2) === 0) ? 'heads' : 'tails');
 
-        switch (args[0]){
+        switch (args[0]) {
             case 'heads':
-                if (coin === "heads"){
+                if (coin === "heads") {
                     // Picked heads and won
                     await new Transaction(message.author.id, bet_value, 'Coinflip').process();
                     flipMessage.setDescription('You flip a coin, and it lands on Heads. You won ' + bet_value + ".");
@@ -41,7 +48,7 @@ module.exports = {
                     return message.channel.send({embeds: [flipMessage]});
                 }
             case 'tails':
-                if (coin === "tails"){
+                if (coin === "tails") {
                     // Picked tails and won
                     await new Transaction(message.author.id, bet_value, 'Coinflip').process();
                     flipMessage.setDescription('You flip a coin, and it lands on Tails. You won ' + bet_value + ".");

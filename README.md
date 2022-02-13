@@ -47,6 +47,5 @@
 - [ ] Give Item command;
 - [ ] User lock;
 
-**Latest Version: 2.7.1**
-- Leveling up no longer gives a message or coins;
-- Die command;
+**Latest Version: 2.7.2**
+- Added allin to all gamble commands;

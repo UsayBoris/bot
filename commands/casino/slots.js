@@ -8,9 +8,16 @@ module.exports = {
     description: '**Win** - **Combination**\n30 - 3 Jokers 🎰 🎰 🎰\n10 - Any 3 Fruit 🍎 🍇 🍋 🍌 🍒\n4 - Any 2 Jokers 🎰 🎰\n1 - Any 1 Joker 🎰',
     usage: 'slots <value>',
     execute: async function (message, client, args) {
-        if (!args[0] || isNaN(args[0]) || parseInt(args[0]) === 0) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
-        let bet_value = parseInt(args[0]);
-        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        let bet_value;
+        if (args[0] === 'allin') {
+            bet_value = await User.getBalance(message.author.id);
+        } else if (!args[0] || isNaN(args[0]) || parseInt(args[0]) === 0) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+        } else if (await User.getBalance(message.author.id) < parseInt(args[0])) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        } else {
+            bet_value = parseInt(args[0]);
+        }
 
         if (slotsRecently.has(message.author.id))
             return message.reply('command has a 15 second cooldown.');

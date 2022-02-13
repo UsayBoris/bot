@@ -9,11 +9,16 @@ module.exports = {
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         if (member === undefined || member.id === message.author.id || !(await User.exists({id: member.id}))) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('Not a valid player')]});
-        if (!args[1] || isNaN(args[1]) || parseInt(args[0]) === 0) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
-
-        let bet_value = parseInt(args[1]);
-        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins to make this challenge')]});
-
+        let bet_value;
+        if (args[1] === 'allin') {
+            bet_value = await User.getBalance(message.author.id);
+        } else if (!args[1] || isNaN(args[1]) || parseInt(args[1]) === 0) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+        } else if (await User.getBalance(message.author.id) < parseInt(args[1])) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        } else {
+            bet_value = parseInt(args[1]);
+        }
         // Active Dice check
         if (client.activeDice.has(message.author.id) || client.activeDice.has(member.id))
             return message.reply('either you or your opponent have an active dice');
@@ -65,7 +70,7 @@ module.exports = {
                                     .setDescription(`**${member.displayName}** won the dice with a roll of **${roll_2}** vs **${roll_1}**, and received **${bet_value}** <:boriscoin:798017751842291732>`)]
                             });
                         } else {
-                            await new Transaction(message.author.id, 2*bet_value, 'Dice').process();
+                            await new Transaction(message.author.id, 2 * bet_value, 'Dice').process();
                             await new Transaction(member.id, -bet_value, 'Dice').process();
                             await dice_message.edit({
                                 embeds: [new Discord.MessageEmbed()

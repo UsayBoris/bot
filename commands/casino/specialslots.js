@@ -9,9 +9,16 @@ module.exports = {
     description: '**Win** - **Combination**\n60 - 3 Jokers 🎰 🎰 🎰\n40 - 3 Diamonds 💎 💎 💎\n20 - 3 Cherries 🍒 🍒 🍒\n10 - 3 of a kind 🍊 🍌 🍋\n3 - 2 Cherries 🍒 🍒\n1 - 1 Cherry 🍒',
     usage: 'specialslots <value>',
     execute: async function (message, client, args) {
-        if (!args[0] || isNaN(args[0]) || parseInt(args[0]) === 0) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
-        let bet_value = parseInt(args[0]);
-        if (await User.getBalance(message.author.id) < bet_value) return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        let bet_value;
+        if (args[0] === 'allin') {
+            bet_value = await User.getBalance(message.author.id);
+        } else if (!args[0] || isNaN(args[0]) || parseInt(args[0]) === 0) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
+        } else if (await User.getBalance(message.author.id) < parseInt(args[0])) {
+            return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('You dont have enough coins!')]});
+        } else {
+            bet_value = parseInt(args[0]);
+        }
 
         if (slotsRecently.has(message.author.id))
             return message.reply('This command has a 10 minutes cooldown.');
