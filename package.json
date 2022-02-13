@@ -1,7 +1,7 @@
 {
   "name": "js_bot",
-  "version": "2.7.0",
-  "description": "",
+  "version": "2.7.1",
+  "description": "Discord bot with currency, gambling functionalities and more",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -34,6 +34,6 @@
     "ytdl-core": "^4.9.2"
   },
   "repository": {
-    "url": "https://github.com/vandam71/el_boris"
+    "url": "https://github.com/UsayBoris/bot"
   }
 }

@@ -1,6 +1,5 @@
 const mongoose = require('./index');
 const logger = require('../logger');
-const Discord = require('discord.js');
 const Item = require('./item');
 
 const itemSchema = mongoose.Schema({
@@ -117,7 +116,6 @@ userSchema.methods.addExperience = async function (xp){
     let req_xp = 69 * (this.level + 1) * (1 + (this.level + 1));
     if (this.xp >= req_xp) {
         this.level += 1;
-        this.coins += this.level;
     }
 }
 

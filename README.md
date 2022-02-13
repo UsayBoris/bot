@@ -29,7 +29,7 @@
 - [x] Active Dice challenge check;
 - [x] Dice to deduct funds, and if timeout of decline give them back;
 - [x] Add experience drop to chest open;
-- [ ] Votekick from voice channel;
+- [ ] Vote kick from voice channel;
 - [x] Poll system
 - [ ] Teams
   - Create a team (with Boriscoins);
@@ -41,13 +41,12 @@
 - [x] Coin Flip;
 - [ ] Super Special Slots Machine;
 - [ ] Scratch Card;
-- [ ] Evaluate the need for Buy/Upgrade Cooldown;
+- [x] Evaluate the need for Buy/Upgrade Cooldown;
 - [ ] Probably inventory sorting;
 - [ ] Transactions to give xp;
+- [ ] Give Item command;
+- [ ] User lock;
 
-**Latest Version: 2.7.0**
-- Coin flip command;
-- Base upgrade rate changed to static config;
-- Chests now drop experience;
-- Poll command added, not fully functional;
-- Experience calculation now is User method;
+**Latest Version: 2.7.1**
+- Leveling up no longer gives a message or coins;
+- Die command;
