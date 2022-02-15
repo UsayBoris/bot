@@ -12,6 +12,9 @@ module.exports = {
         let bet_value;
         if (args[1] === 'allin') {
             bet_value = await User.getBalance(message.author.id);
+            if (bet_value === 0) {
+                return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription("Can't all in 0.")]});
+            }
         } else if (!args[1] || isNaN(args[1]) || parseInt(args[1]) === 0) {
             return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
         } else if (await User.getBalance(message.author.id) < parseInt(args[1])) {
@@ -25,7 +28,7 @@ module.exports = {
         flipRecently.add(message.author.id);
         setTimeout(() => {
             flipRecently.delete(message.author.id);
-        }, (1 * 1000));
+        }, (5 * 1000));
 
         let flipMessage = new Discord.MessageEmbed()
             .setColor('0xD8BFD8')
@@ -39,24 +42,24 @@ module.exports = {
                 if (coin === "heads") {
                     // Picked heads and won
                     await new Transaction(message.author.id, bet_value, 'Coinflip').process();
-                    flipMessage.setDescription('You flip a coin, and it lands on Heads. You won ' + bet_value + ".");
+                    flipMessage.setDescription('You flip a coin, and it lands on Heads. You won ' + bet_value + " <:boriscoin:798017751842291732>.");
                     return message.channel.send({embeds: [flipMessage]});
                 } else {
                     // Picked heads and lost
                     await new Transaction(message.author.id, -bet_value, 'Coinflip').process();
-                    flipMessage.setDescription('You flip a coin, and it lands on Tails. You lost ' + bet_value + ".");
+                    flipMessage.setDescription('You flip a coin, and it lands on Tails. You lost ' + bet_value + " <:boriscoin:798017751842291732>.");
                     return message.channel.send({embeds: [flipMessage]});
                 }
             case 'tails':
                 if (coin === "tails") {
                     // Picked tails and won
                     await new Transaction(message.author.id, bet_value, 'Coinflip').process();
-                    flipMessage.setDescription('You flip a coin, and it lands on Tails. You won ' + bet_value + ".");
+                    flipMessage.setDescription('You flip a coin, and it lands on Tails. You won ' + bet_value + " <:boriscoin:798017751842291732>.");
                     return message.channel.send({embeds: [flipMessage]});
                 } else {
                     // Picked tails and lost
                     await new Transaction(message.author.id, -bet_value, 'Coinflip').process();
-                    flipMessage.setDescription('You flip a coin, and it lands on Heads. You lost ' + bet_value + ".");
+                    flipMessage.setDescription('You flip a coin, and it lands on Heads. You lost ' + bet_value + " <:boriscoin:798017751842291732>.");
                     return message.channel.send({embeds: [flipMessage]});
                 }
         }

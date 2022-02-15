@@ -1,6 +1,6 @@
 {
   "name": "js_bot",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "description": "Discord bot with currency, gambling functionalities and more",
   "main": "index.js",
   "scripts": {

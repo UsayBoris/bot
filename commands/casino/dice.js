@@ -12,6 +12,9 @@ module.exports = {
         let bet_value;
         if (args[1] === 'allin') {
             bet_value = await User.getBalance(message.author.id);
+            if (bet_value === 0) {
+                return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription("Can't all in 0.")]});
+            }
         } else if (!args[1] || isNaN(args[1]) || parseInt(args[1]) === 0) {
             return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription('The value you inserted is invalid!')]});
         } else if (await User.getBalance(message.author.id) < parseInt(args[1])) {
