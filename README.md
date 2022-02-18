@@ -30,7 +30,7 @@
 - [x] Active Dice challenge check;
 - [x] Dice to deduct funds, and if timeout of decline give them back;
 - [x] Add experience drop to chest open;
-- [ ] Vote kick from voice channel;
+- [x] Vote kick from voice channel;
 - [x] Poll system
 - [ ] Teams
   - Create a team (with Boriscoins);
@@ -50,7 +50,7 @@
 - [ ] Fishing command (with sell after (+sell fish));
 - [ ] Quests (fish x times, mine x times, slots x times);
 
-**Latest Version: 2.7.3**
-- README update;
-- Fixed allin bug where you could bet 0;
-- Minor changes in Coin Flip;
+**Latest Version: 2.7.4**
+- Vote Kick from voice channel (start concept);
+- Fixed Coin flip roll bug;
+- Updated ping command to new Discordjs version;

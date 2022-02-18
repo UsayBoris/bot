@@ -38,6 +38,7 @@ module.exports = {
 
             // roll for a bonus item
             // if bonus item, add field to the message, otherwise, keep going
+            // rolls need to check prestige level (luck bonus)
             let bronze_roll = Math.floor(Math.random() * 100) + 1
             let gold_roll = Math.floor(Math.random() * 1000) + 1
 

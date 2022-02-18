@@ -7,7 +7,7 @@ module.exports = {
     execute: async function (message, client, args) {
         let embed = new Discord.MessageEmbed()
             .setAuthor(message.author.username, message.author.avatarURL())
-            .setDescription(`Pong! Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
+            .setDescription(`Pong! Latency is ${Date.now() - message.createdAt}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
 
         return message.channel.send({embeds: [embed]});
     },
