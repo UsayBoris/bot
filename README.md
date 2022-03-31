@@ -30,8 +30,8 @@
 - [x] Active Dice challenge check;
 - [x] Dice to deduct funds, and if timeout of decline give them back;
 - [x] Add experience drop to chest open;
-- [x] Vote kick from voice channel;
-- [x] Poll system
+- [ ] Vote kick from voice channel;
+- [ ] Poll system
 - [ ] Teams
   - Create a team (with Boriscoins);
   - Join a team;
@@ -50,7 +50,13 @@
 - [ ] Fishing command (with sell after (+sell fish));
 - [ ] Quests (fish x times, mine x times, slots x times);
 
-**Latest Version: 2.7.4**
-- Vote Kick from voice channel (start concept);
-- Fixed Coin flip roll bug;
-- Updated ping command to new Discordjs version;
+**AFTER 4.0**
+- Everything from this point on will be with Discord Buttons (https://discordjs.guide/interactions/buttons.html#building-and-sending-buttons);
+- Interactions update and slash commands;
+- [ ] Fishing command (with sell after (+sell fish));
+- [ ] Probably inventory sorting (or at least keyword filtering);
+- [ ] Scratch Card;
+- [ ] Mining blocks with bonus;
+
+**Latest Version: 2.7.5**
+- OP.GG stats Scrapper;
