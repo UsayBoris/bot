@@ -30,6 +30,18 @@ module.exports = {
                 // await Item.create({name: "Bronze Key", description: "Opens a Bronze chest", id: 801, price: 0, emote: ':bronze_key:842116583471710288', category: "untradeable"});
                 // await Item.create({name: "Gold Key", description: "Opens the Gold Chest", id: 802, price: 0, emote: ':gold_key:842116583471841280', category: "untradeable"});
                 break;
+            case 'mode':
+                switch (args[1]) {
+                    case 'on':
+                        client.devMode = true;
+                        message.channel.send('devMode On');
+                        break;
+                    case 'off':
+                        message.channel.send('devMode Off');
+                        client.devMode = false;
+                        break;
+                }
+                break;
         }
     },
 };

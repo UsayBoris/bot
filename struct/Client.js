@@ -12,9 +12,10 @@ module.exports = class extends Client {
                 Intents.FLAGS.GUILD_MESSAGE_REACTIONS]
         });
 
-
         // project wise variables
         this.activeDice = new Set();
+
+        this.devMode = false;
 
         this.config = config;
     }

@@ -48,7 +48,7 @@ module.exports = {
                         .setTitle("Slot Machine")
                         .setAuthor(message.author.username, message.author.avatarURL())
                         .setDescription(`• ${$}  ${$$}  ${$$$} •`)
-                        .addField('Jackpot!', "Big win! You won " + bet_value * 30 + ".")
+                        .addField('Jackpot!', "Big win! You won " + bet_value * 30 + " <:boriscoin:798017751842291732>.")
                         .setColor(0xAF873D)]
                 });
             } else {
@@ -58,7 +58,7 @@ module.exports = {
                         .setTitle("Slot Machine")
                         .setAuthor(message.author.username, message.author.avatarURL())
                         .setDescription(`• ${$}  ${$$}  ${$$$} •`)
-                        .addField('3 of a kind!', "You won " + bet_value * 10 + ".")
+                        .addField('3 of a kind!', "You won " + bet_value * 10 + " <:boriscoin:798017751842291732>.")
                         .setColor(0xAF873D)]
                 });
             }
@@ -69,7 +69,7 @@ module.exports = {
                     .setTitle("Slot Machine")
                     .setAuthor(message.author.username, message.author.avatarURL())
                     .setDescription(`• ${$}  ${$$}  ${$$$} •`)
-                    .addField('2 Jokers!', "You won " + bet_value * 4 + ".")
+                    .addField('2 Jokers!', "You won " + bet_value * 4 + " <:boriscoin:798017751842291732>.")
                     .setColor(0xAF873D)]
             });
         } else if ($ === '🎰' || $$ === '🎰' || $$$ === '🎰') {

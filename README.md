@@ -58,5 +58,6 @@
 - [ ] Scratch Card;
 - [ ] Mining blocks with bonus;
 
-**Latest Version: 2.7.5**
-- OP.GG stats Scrapper;
+**Latest Version: 2.7.6**
+- Dev Mode;
+- Cosmetics Fix;
