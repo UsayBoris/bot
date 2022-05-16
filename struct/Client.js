@@ -14,9 +14,14 @@ module.exports = class extends Client {
 
         // project wise variables
         this.activeDice = new Set();
+        this.pokedRecently = new Set();
+        this.minedRecently = new Set();
+        this.chestRecently = new Set();
 
+        // dev mode global flag
         this.devMode = false;
 
+        // bot configs
         this.config = config;
     }
 }

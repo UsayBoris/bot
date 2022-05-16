@@ -1,13 +1,19 @@
 const {User} = require('../../models/user');
 const Discord = require("discord.js");
 const Transaction = require("../../struct/Transaction");
-const chestRecently = new Set();
 
 module.exports = {
     name: 'Chest',
     description: 'If you have a specific Key, you can open a chest\n**Bronze Key** -> 300 to 400 coins\n**Gold Key** -> 2000 to 3000 coins',
     usage: 'chest <key (bronze/gold)>',
     execute: async function (message, client, args) {
+        if (client.chestRecently.has(message.author.id))
+            return message.reply('You have a cooldown of 5 seconds on opening chests.');
+        client.chestRecently.add(message.author.id);
+        setTimeout(async () => {
+            client.chestRecently.delete(message.author.id);
+        }, 5 * 1000);
+
         let key = args.join(' ');
         let chestMessage = new Discord.MessageEmbed()
             .setColor(0xFE961A)

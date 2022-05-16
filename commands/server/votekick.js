@@ -7,6 +7,8 @@ module.exports = {
     execute: async function (message, client, args) {
         // TODO replace with embed
 
+        if (message.author.id !== '90535285909118976') return;
+
         let member_tag = message.mentions.members.first();
         if (!member_tag)
             return message.reply("please mention a valid member of this server");
@@ -29,7 +31,7 @@ module.exports = {
 
 
 
-            // await member_tag.voice.disconnect();
+            await member_tag.voice.disconnect();
         }
 
     },

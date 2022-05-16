@@ -25,6 +25,8 @@
 - [x] Find a better buy (method to add something to the user inventory, because of mining rewards);
 - [x] User exists (Dice and Give);
 - [x] Allin keyword when balance is 0;
+- [ ] Space after bot prefix is working with commands
+  - "+ command" maybe it shouldn't? 
 
 **BEFORE 3.0**
 - [x] Active Dice challenge check;
@@ -58,6 +60,8 @@
 - [ ] Scratch Card;
 - [ ] Mining blocks with bonus;
 
-**Latest Version: 2.7.6**
-- Dev Mode;
-- Cosmetics Fix;
+**Latest Version: 2.7.7**
+- Poke command;
+- Changed locking sets to global variables;
+- Added 5 seconds chest cooldown;
+- Votekick in dev testing;

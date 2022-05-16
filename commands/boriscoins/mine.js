@@ -1,4 +1,3 @@
-const minedRecently = new Set();
 const Transaction = require('../../struct/Transaction');
 const {mining_cooldown} = require('../../config.json');
 const Discord = require('discord.js');
@@ -11,9 +10,9 @@ module.exports = {
     usage: 'mine',
     execute: async function (message, client, args) {
 
-        if (minedRecently.has(message.author.id))
+        if (client.minedRecently.has(message.author.id))
             return message.reply('you are still mining!');
-        minedRecently.add(message.author.id);
+        client.minedRecently.add(message.author.id);
 
         let perks = await User.getPerks(message.author.id);
 
@@ -31,7 +30,7 @@ module.exports = {
         let msg = await message.channel.send({embeds: [mineMessage]});
 
         setTimeout(async () => {
-            minedRecently.delete(message.author.id);
+            client.minedRecently.delete(message.author.id);
             let value = await new Transaction(message.author.id, Math.floor(Math.random() * 5) + 1 + luckValue, "Mining").process();
             mineMessage.setTitle('Mined!')
                 .setDescription(`you have mined <:boriscoin:798017751842291732> **${value}**`);
