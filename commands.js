@@ -19,6 +19,11 @@ logger.info(`Loaded ${Object.keys(commands).length} Commands`);
 
 async function commandHandler(message, client, prefix) {
     const args = message.content.slice(prefix.length).trim().split(/ +/g); //splits message content by space
+
+    // TODO fix the space after the prefix working, don't know why, but it does
+
+    console.log(message.content, args);
+
     const command = args.shift().toLowerCase();                                   //finds the first value (group or default)
 
     if (Object.keys(commands).includes(command)) {

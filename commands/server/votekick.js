@@ -22,17 +22,38 @@ module.exports = {
         // static, at least *two* members need to vote to kick beside the one that calls the vote
         let members_id = [];
         members.forEach(member => {
-            members_id.push(member.id);
+            if (!member.voice.deaf)
+                members_id.push(member.id);
         });
 
-        if (members_id.includes(member_tag.id)){
+        if (members_id.includes(member_tag.id)) {
             // the member is in the voice channel
             // create embed message and wait for reactions (from the ids that are on the channel)
 
+            const filter = (reaction, user) => {
+                return ['✔'].includes(reaction.emoji.name) && members_id.includes(user.id);
+            }
 
+            let embedMessage = new Discord.MessageEmbed()
+                .setColor(0x4F2A5D)
+                .setTitle('Vote Kick')
+                .setDescription(`Voting to kick **${member_tag.displayName}**.`);
 
-            await member_tag.voice.disconnect();
+            message.channel.send({embeds: [embedMessage]}).then(async vote_kick_message => {
+                await vote_kick_message.react('✔');
+
+                vote_kick_message.awaitReactions({filter, max: 1, time: 60000, errors: ['time']})
+                    .then(async collected => {
+                        // count how many reacts are received and if it's over the threshold do stuff
+                    });
+            });
+
+            // await member_tag.voice.disconnect();
         }
+
+
+        // count members
+        // if only two people
 
     },
 };

@@ -60,8 +60,5 @@
 - [ ] Scratch Card;
 - [ ] Mining blocks with bonus;
 
-**Latest Version: 2.7.7**
-- Poke command;
-- Changed locking sets to global variables;
-- Added 5 seconds chest cooldown;
-- Votekick in dev testing;
+**Latest Version: 2.7.8**
+- Hotfixing coinflip command;

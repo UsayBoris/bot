@@ -35,7 +35,7 @@ module.exports = {
             .setAuthor(message.author.username, message.author.avatarURL())
             .setTitle('Coin Flip 🪙');
 
-        let coin = ((Math.floor(Math.random()) === 0) ? 'heads' : 'tails');
+        let coin = ((Math.round(Math.random()) === 0) ? 'heads' : 'tails');
 
         switch (args[0]) {
             case 'heads':
