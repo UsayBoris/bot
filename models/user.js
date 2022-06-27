@@ -121,6 +121,11 @@ userSchema.methods.addExperience = async function (xp){
 
 const User = mongoose.model('User', userSchema);
 
+/**
+ * Function that checks if the user who sent the message already exists on the database.
+ * 
+ * @param {string} message - The message sent on discord 
+ */
 async function newMessageUser(message) {
     await User.findOne({id: message.author.id}).then(async user => {
 
