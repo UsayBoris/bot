@@ -2,7 +2,19 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const url = "https://euw.op.gg/summoners/euw/"
 
+
+/**
+ * A function that fetches data from a League of Legends profile.
+ * @description Scrapes a website containing League of Legends data and retrieves target information.
+ * @param {string} summoner 
+ * @returns {Object} Data obtained for the corresponding summoner
+ */
 const get_profile_stats = async (summoner) => {
+    /**
+     * Profile Stats
+     * @description Contains the fetched data
+     * @type {Object}
+     */
     const profile_stats = {};
     await axios(url + summoner)
         .then(response => {

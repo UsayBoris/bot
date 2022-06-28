@@ -82,7 +82,12 @@ client.on('messageCreate', async message => {
     logger.command(`User ${message.author.username} send a command to ${message.channel.name} in ${message.guild.name}`);
 });
 
-//new member added
+/**
+ * New user joined the server
+ * 
+ * @event Client#guildMemberAdd
+ * @description Sends a welcoming message for a new user.
+ */
 client.on('guildMemberAdd', async member => {
     logger.info(`New User ${member.user.username} has joined ${member.guild.name}`);
     await member.guild.channels.cache.findOne(c => c.name === "welcome").send(`${member.user.username} has joined this server`);

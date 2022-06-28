@@ -2,6 +2,14 @@ const mongoose = require('./index');
 const logger = require('../logger');
 const Item = require('./item');
 
+/**
+ * Item
+ * @type {Object} Item
+ * @property {string} name         - The item name
+ * @property {number} id           - The item ID
+ * @property {number} quantity     - The amount of copies
+ * @description Represents an Item as it is stored in the database
+ */
 const itemSchema = mongoose.Schema({
     name: {
         type: String,
@@ -18,6 +26,18 @@ const itemSchema = mongoose.Schema({
     }
 });
 
+/**
+ * User
+ * @type {Object} User
+ * @property {string} name           - The user name
+ * @property {number} id             - The user ID
+ * @property {number} azia           - The amount of tilt the user has
+ * @property {number} level          - The level of the user
+ * @property {number} xp             - The XP the user has
+ * @property {number} coins          - The total amount of coins owned
+ * @property {Item} inventory        - A list of items owned by the user
+ * @description Represents an Item as it is stored in the database
+ */
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -124,7 +144,7 @@ const User = mongoose.model('User', userSchema);
 /**
  * Function that checks if the user who sent the message already exists on the database.
  * 
- * @param {string} message - The message sent on discord 
+ * @param {Object} message - The message sent on discord 
  */
 async function newMessageUser(message) {
     await User.findOne({id: message.author.id}).then(async user => {
