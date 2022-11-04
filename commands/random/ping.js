@@ -5,7 +5,10 @@ module.exports = {
     description: 'Returns the Latency from the server and API',
     usage: 'ping',
     execute: async function (message, client, args) {
-        await message.channel.send(new Discord.MessageEmbed()
-            .setDescription(`Pong! Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`));
+        let embed = new Discord.MessageEmbed()
+            .setAuthor(message.author.username, message.author.avatarURL())
+            .setDescription(`Pong! Latency is ${Date.now() - message.createdAt}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
+
+        return message.channel.send({embeds: [embed]});
     },
 };

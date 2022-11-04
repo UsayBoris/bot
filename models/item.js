@@ -1,6 +1,6 @@
 const mongoose = require('./index');
 
-const Item = mongoose.model('Item', {
+const itemSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -17,7 +17,35 @@ const Item = mongoose.model('Item', {
     price: {
         type: Number,
         required: true
+    },
+    emote: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
     }
 });
+
+itemSchema.statics.findById = function (id) {
+    return this.findOne({id: id});
+};
+
+itemSchema.statics.findByName = function (name) {
+    return this.findOne({name: name});
+}
+
+itemSchema.statics.getItemString = async function (id, quantity) {
+    let item = await this.findById(id);
+    return quantity + ' <' + item.emote + '> ' + item.name + '\n';
+};
+
+itemSchema.statics.getCategory = async function (id) {
+    let item = await this.findById(id);
+    return item.category;
+}
+
+const Item = mongoose.model('Item', itemSchema);
 
 module.exports = Item;

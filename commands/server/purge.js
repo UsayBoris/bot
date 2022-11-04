@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
     name: 'Purge',
     description: 'Deletes a number of given messages',
-    usage: 'purge {number of messages}',
+    usage: 'purge <number of messages>',
     execute: async function (message, client, args) {
         const deleteCount = parseInt(args[0], 10);
 

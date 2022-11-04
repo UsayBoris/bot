@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
     name: 'Peek',
     description: 'Look at a user profile',
-    usage: 'peek {user tag}',
+    usage: 'peek <user tag>',
     execute: async function (message, client, args) {
         let member = message.mentions.members.first();
         let user = await User.findOne({id: member.user.id});
@@ -13,9 +13,10 @@ module.exports = {
         }
         const embed = new Discord.MessageEmbed()
             .setColor(0x00AE86)
+            .setAuthor(message.author.username, message.author.avatarURL())
             .setTitle(`${member.user.username} Profile`)
             .addField("Stats", `**Level: ${user.level}**\nAzia: **${user.azia}**`)
             .setThumbnail(member.user.avatarURL());
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 };

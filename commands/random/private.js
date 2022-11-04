@@ -4,26 +4,32 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'Private',
     description: 'Switch Private Mentions',
-    usage: 'private on/off',
+    usage: 'private <on/off>',
     execute: async function (message, client, args) {
         await User.findOne({id: message.author.id}).then(async user => {
             if (args[0] === 'on') {
                 user.private = false;
-                await message.author.send(new Discord.MessageEmbed()
+                let embed = new Discord.MessageEmbed()
                     .setColor("0xACA19D")
-                    .setTitle('You turned private messages on'));
+                    .setAuthor(message.author.username, message.author.avatarURL())
+                    .setTitle('You turned private messages on');
+                await message.channel.send({embeds: [embed]});
             }
             if (args[0] === 'off') {
                 user.private = true;
-                await message.author.send(new Discord.MessageEmbed()
+                let embed = new Discord.MessageEmbed()
                     .setColor("0xACA19D")
-                    .setTitle('You turned private messages off'));
+                    .setAuthor(message.author.username, message.author.avatarURL())
+                    .setTitle('You turned private messages off');
+                await message.channel.send({embeds: [embed]});
             } else {
-                await message.author.send(new Discord.MessageEmbed()
+                let embed = new Discord.MessageEmbed()
                     .setColor("0xACA19D")
-                    .setTitle('Not a valid option'));
+                    .setTitle('Not a valid option');
+                await message.channel.send({embeds: [embed]});
             }
             await user.save();
+
         });
     }
 };

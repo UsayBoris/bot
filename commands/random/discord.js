@@ -6,10 +6,12 @@ module.exports = {
     description: 'Get the invite for the official bot server',
     usage: 'discord',
     execute: async function (message, client, args, commands) {
-        return message.channel.send(new Discord.MessageEmbed()
+        let embed = new Discord.MessageEmbed()
             .setColor("0xACA19D")
             .setTitle('Discord server invite')
             .setThumbnail(client.user.avatarURL())
-            .addField('Link', invite));
+            .addField('Link', invite);
+
+        return message.channel.send({embeds: [embed]});
     }
 };

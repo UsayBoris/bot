@@ -1,9 +1,9 @@
 module.exports = {
     name: 'Kick',
     description: 'Kick someone for the given reason',
-    usage: 'kick {user tag} {\'Reason\'}',
+    usage: 'kick <user tag> <\'Reason\'>',
     execute: async function (message, client, args) {
-        if (!message.member.hasPermission('KICK_MEMBERS'))
+        if (!message.member.permissions.has('KICK_MEMBERS'))
             return message.reply("you don't have permissions to use this!");
 
         let member = message.mentions.members.first();

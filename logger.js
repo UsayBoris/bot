@@ -7,7 +7,8 @@ const myCustomLevels = {
         error: 2,
         debug: 3,
         data: 2,
-        command: 3
+        command: 3,
+        transaction: 2
     },
     colors: {
         info: 'blue',
@@ -15,7 +16,8 @@ const myCustomLevels = {
         error: 'red',
         debug: 'green',
         data: 'white',
-        command: 'brightMagenta'
+        command: 'brightMagenta',
+        transaction: "brightCyan"
     }
 }
 

@@ -2,22 +2,20 @@ require('dotenv').config();
 const ElBoris = require("./struct/Client");
 const client = new ElBoris();
 const {commandHandler} = require("./commands");
-const {update_user} = require('./models/user');
+const {newMessageUser} = require('./models/user');
 const Guild = require('./models/guild');
 const logger = require('./logger');
 
-//TODO pretty embed for everything that needs an embed
-
 //Bot startup message
-client.on('ready', () => {
+client.on('ready', async () => {
     logger.info(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds`)
-    client.user.setPresence({
-        activity: {
+    await client.user.setPresence({
+        activities: [{
             name: '+help',
             type: 'LISTENING'
-        },
+        }],
         status: 'online'
-    }).then();
+    });
 });
 
 //When the bot is added to a new server
@@ -32,17 +30,20 @@ client.on("guildDelete", guild => {
 });
 
 //Command handler
-client.on('message', async message => {
+client.on('messageCreate', async message => {
     if (message.author.bot) return;
+
+    if (client.devMode && message.author.id !== '90535285909118976') return;
+
+    // if (message.author.id === '398231924151418880' || message.author.id === '755848086823239700') return message.reply('"fdp"');
 
     if (message.content === '@everyone') {
         return message.reply('@everyone ping ping @everyone');
     }
 
-    await update_user(message);
+    await newMessageUser(message);
 
-    const guild = await Guild.findOne({id: message.guild.id});  //the guild should be created when it joins, so no fail check here
-    const prefix = guild['prefix'];
+    const prefix = await Guild.getPrefix(message.guild.id);
 
     if (!message.content.startsWith(prefix)) return;
 

@@ -1,8 +1,8 @@
 const mongoose = require('./index');
 const logger = require('../logger');
-const Discord = require('discord.js');
+const Item = require('./item');
 
-const User = mongoose.model('User', {
+const itemSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -12,10 +12,21 @@ const User = mongoose.model('User', {
         required: true,
         unique: true
     },
-    private: {
-        type: Boolean,
+    quantity: {
+        type: Number,
+        required: true
+    }
+});
+
+const userSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    id: {
+        type: Number,
         required: true,
-        default: false
+        unique: true
     },
     azia: {
         type: Number,
@@ -34,14 +45,83 @@ const User = mongoose.model('User', {
         default: 0
     },
     inventory: {
-        type: [Number]
-    },
-    perks: {
-        type: [Number]
+        type: [itemSchema]
     }
 });
 
-async function update_user(message) {
+userSchema.statics.findById = function (id) {
+    return this.findOne({id: id});
+};
+
+userSchema.statics.getPerks = async function (id) {
+    let user = await this.findById(id);
+    let perks = [];
+    for (const item of user.inventory) {
+        if (await Item.getCategory(item.id) === 'perk') {
+            perks.push({id: item.id, name: item.name, quantity: item.quantity})
+        }
+    }
+    return perks;
+};
+
+userSchema.statics.getBalance = async function (id) {
+    let user = await User.findById(id);
+    return user.coins;
+};
+
+userSchema.statics.checkInventory = async function (id, itemId) {
+    let user = await this.findById(id);
+    return user.inventory.find(o => o.id === itemId);
+};
+
+userSchema.methods.addItem = async function (name, id) {
+    let obj = this.inventory.find(x => x.name === name);
+    if (!obj) {
+        this.inventory.push({
+            name: name,
+            id: id,
+            quantity: 1
+        });
+    } else {
+        let index = this.inventory.indexOf(obj);
+        this.inventory[index] = {
+            name: obj.name,
+            id: obj.id,
+            quantity: obj.quantity + 1
+        };
+    }
+}
+
+userSchema.methods.removeItem = async function (name) {
+    let obj = this.inventory.find(x => x.name === name);
+    if (obj.quantity === 1) {
+        let index = this.inventory.indexOf(obj);
+        this.inventory.splice(index, 1);
+    } else {
+        let index = this.inventory.indexOf(obj);
+        this.inventory[index] = {
+            name: obj.name,
+            id: obj.id,
+            quantity: obj.quantity - 1
+        };
+    }
+}
+
+userSchema.methods.findItem = async function (name) {
+    return this.inventory.find(x => x.name === name)
+}
+
+userSchema.methods.addExperience = async function (xp){
+    this.xp += xp;
+    let req_xp = 69 * (this.level + 1) * (1 + (this.level + 1));
+    if (this.xp >= req_xp) {
+        this.level += 1;
+    }
+}
+
+const User = mongoose.model('User', userSchema);
+
+async function newMessageUser(message) {
     await User.findOne({id: message.author.id}).then(async user => {
 
         if (user === null) {
@@ -49,34 +129,11 @@ async function update_user(message) {
             return logger.warn('New User Created (first time talking in the presence of the bot)');
         }
 
+        user.addExperience(1);
         user.name = message.author.username;
-        user.xp += 1;
 
-        let req_xp = 69 * (user.level + 1) * (1 + (user.level + 1));
-
-        if (user.xp >= req_xp) {
-            user.coins += user.level;
-            user.level += 1;
-            if (!user.private) {
-                await message.author.send(new Discord.MessageEmbed()
-                    .setColor("0xACA19D")
-                    .setTitle('You Have leveled up')
-                    .setThumbnail(message.author.avatarURL())
-                    .setDescription(`Congratulation, you are now level ${user.level}! If you wish to disable these messages, type **+private on** in any discord server with this bot.`));
-            }
-        }
         user.save();
     });
 }
 
-async function find_all_users(sort_query) {
-    if (!sort_query) sort_query = 'xp';
-    let users = await User.find({}).sort([[sort_query, "desc"]]);
-    let result = []
-    for (let i = 0; i < 10; i++) {
-        result[i] = users[i];
-    }
-    return result;
-}
-
-module.exports = {User, update_user, find_all_users};
+module.exports = {User, newMessageUser};
